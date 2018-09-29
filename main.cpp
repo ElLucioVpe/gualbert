@@ -3,16 +3,11 @@
 int main()
 {
     ////Tablas
-    bool ricarddin;
     tabla tablas;
-    //tablas = new _tabla;
-    //tablas = new _tabla;
 
     muestroR(inicioTabla(&tablas));
-    muestroR(insertoTabla(&tablas,"Darin"));
-    muestroR(insertoTabla(&tablas,"Roshi"));
-    //muestroR(insertoTabla(tablas,"puertas"));
-
+    muestroR(insertoTabla(&tablas,"artistas"));
+    muestroR(insertoTabla(&tablas,"canciones"));
 
     //ricarddin=esVaciaTabla(tablas);
     muestroR(mostrarListaRet(tablas));

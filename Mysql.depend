@@ -9,3 +9,13 @@
 1538179227 source:/home/alien/Documents/ProgramaProyecto/Mysql/main.cpp
 	"header.h"
 
+1538246688 source:/home/luciano/git/gualbert/functions.cpp
+	"header.h"
+
+1538244681 /home/luciano/git/gualbert/header.h
+	<iostream>
+	<string>
+
+1538244681 source:/home/luciano/git/gualbert/main.cpp
+	"header.h"
+

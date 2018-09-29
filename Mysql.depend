@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1538179056 source:/home/alien/Documents/ProgramaProyecto/Mysql/functions.cpp
+	"header.h"
+
+1538178924 /home/alien/Documents/ProgramaProyecto/Mysql/header.h
+	<iostream>
+	<string>
+
+1538179227 source:/home/alien/Documents/ProgramaProyecto/Mysql/main.cpp
+	"header.h"
+

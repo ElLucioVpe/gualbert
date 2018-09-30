@@ -19,3 +19,13 @@
 1538244681 source:/home/luciano/git/gualbert/main.cpp
 	"header.h"
 
+1538330351 source:/home/alien/Documents/ProgramaProyecto/GualbertProy/gualbert/functions.cpp
+	"header.h"
+
+1538324665 /home/alien/Documents/ProgramaProyecto/GualbertProy/gualbert/header.h
+	<iostream>
+	<string>
+
+1538330404 source:/home/alien/Documents/ProgramaProyecto/GualbertProy/gualbert/main.cpp
+	"header.h"
+

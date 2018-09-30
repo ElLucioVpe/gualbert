@@ -2,9 +2,12 @@
 #include <string>
 using namespace std;
 
+
+
 enum _Retorno{
 
-    ok,error,noImplementada //solo puede retornar estos 3 res, como array
+ok,error,noImplementada //solo puede retornar estos 3 res, como array
+
 
 };
 typedef enum _Retorno tipoRet;
@@ -24,13 +27,14 @@ struct _columna{
 };typedef struct _columna *columna;
 
 struct _fila{
-    string dato;
+    string nombreCol;
 
     _fila *fila;
     columna colum;
 
 
 };typedef struct _fila *fila;
+
 
 
 
@@ -41,8 +45,12 @@ void muestroR(tipoRet resultado);
 tipoRet inicioTabla(tabla *tabl);
 void creoTabla(tabla **tabl);
 
+
 tipoRet insertoTabla(tabla *tabl,string nombre);
 tabla insertarTabla(tabla tabl, string name);
+
+tipoRet eliminoTabla(tabla *tabl,string nombre);
+tabla eliminarTabla(tabla tabl, string name);
 
 void mostrarListaRecur(tabla l);
 void mostrarLista(tabla l);

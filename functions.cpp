@@ -28,7 +28,7 @@ tipoRet insertoColumna(tabla *tabl, string name) {
     tabla newTab;
     newTab = *tabl;
 
-    if (!esVacia(tabl)) {
+    if (!esVacia(*tabl)) {
         newTab = insertarColumna(newTab, name);
     } else {
         return error;
@@ -50,10 +50,8 @@ tabla insertarColumna(tabla tabl, string name) {
         colAux = new _columna;
         colAux = tabl->columna;
 
-        while(!esVacia(colAux->sgtColumna)) {
-            colAux = colAux->sgtColumna;
-        }
-        colAux = newCol;
+        newCol->sgtColumna = colAux;
+        tabl->columna = newCol;
     }
 
     return tabl;
@@ -100,7 +98,7 @@ void muestroR(tipoRet resultado){
 }
 
 bool esVacia(tabla tabl) {
-    if(tabl == NULL){
+    if(tabl == NULL || tabl->nombre == ""){
         return true;
 
     }else{
@@ -110,7 +108,7 @@ bool esVacia(tabla tabl) {
 }
 
 bool esVacia(columna column) {
-    if(column == NULL){
+    if(column == NULL || column->nombreCol == ""){
         return true;
 
     }else{
@@ -140,12 +138,32 @@ tipoRet mostrarListaRet(tabla l){
 }
 
 void mostrarListaRecur(tabla l){
-    if (!esVacia(l)){
-    cout << l->nombre;
-    cout << endl;
-    l=l->ptrtabla;
+    columna col;
+    col = new _columna;
 
-    mostrarListaRecur(l); //recursiv
+    if (!esVacia(l)){
+
+    // Escribe nombre de la tabla
+        cout << endl;
+        cout << "-----------------" << endl;
+        cout << l->nombre << endl;
+        cout << "-----------------" << endl;
+
+    // Chequea cada columna
+        col = l->columna;
+        while(!esVacia(col)) {
+            cout << " | " << col->nombreCol << " | ";
+            col = col->sgtColumna;
+        }
+        cout << endl;
+        cout << "-----------------" << endl;
+
+    // Chequea la tabla siguiente
+        mostrarListaRecur(l->ptrtabla); //recursiv
+
+    // Finaliza
+        cout << "Fin" << endl;
+
     } else{
 
     }

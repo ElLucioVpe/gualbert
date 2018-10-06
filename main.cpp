@@ -19,8 +19,14 @@ int main()
     muestroR(insertoColumna(&tablas, "nombre"))*/
 
     muestroR(inicioTabla(&tablas));
-    muestroR(insertoTabla(&tablas,"hmm"));
-    muestroR(insertoColumna(&tablas, "hmm1"));
+    muestroR(insertoTabla(&tablas,"personas"));
+    muestroR(insertoColumna(&tablas, "ci"));
+    muestroR(insertoColumna(&tablas, "nombre"));
+    muestroR(insertoColumna(&tablas, "apellido"));
+
+
+    muestroR(mostrarListaRet(tablas));
+
 
 
     //cout << ricarddin;

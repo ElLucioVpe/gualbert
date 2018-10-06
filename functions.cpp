@@ -1,114 +1,154 @@
 #include "header.h"
 
-
-void richard(){
-
-        cout << "Hello world!" << endl;
-}
-
-
 //Inserto Tabla
 tipoRet insertoTabla(tabla *tabl,string nombre){
-tabla tablon;
-tablon=*tabl;
-tablon=insertarTabla(tablon,nombre);
+    tabla tablon;
+    tablon=*tabl;
+    tablon=insertarTabla(tablon,nombre);
 
-*tabl=tablon;
-return ok;
+    *tabl=tablon;
+    return ok;
 }
 
 tabla insertarTabla(tabla tabl, string name){
-//0 a null 1 a 0
-tabla nuevatabla;
-nuevatabla = new _tabla;
+    //0 a null 1 a 0
+    tabla nuevatabla;
+    nuevatabla = new _tabla;
 
-nuevatabla -> nombre=name;
-nuevatabla -> ptrtabla=tabl; //1 -> null
-tabl=nuevatabla; // l -->32
+    nuevatabla -> nombre=name;
+    nuevatabla -> ptrtabla=tabl; //1 -> null
+    tabl=nuevatabla; // l -->32
 
-return tabl;
+    return tabl;
 }
 
+//Inserto columna
+
+tipoRet insertoColumna(tabla *tabl, string name) {
+    tabla newTab;
+    newTab = *tabl;
+
+    if (!esVacia(tabl)) {
+        newTab = insertarColumna(newTab, name);
+    } else {
+        return error;
+    }
+
+    *tabl = newTab;
+    return ok;
+}
+
+tabla insertarColumna(tabla tabl, string name) {
+    columna newCol;
+    newCol = new _columna;
+    newCol->nombreCol = name;
+
+    if (esVacia(tabl->columna)) {
+        tabl->columna = newCol;
+    } else {
+        columna colAux;
+        colAux = new _columna;
+        colAux = tabl->columna;
+
+        while(!esVacia(colAux->sgtColumna)) {
+            colAux = colAux->sgtColumna;
+        }
+        colAux = newCol;
+    }
+
+    return tabl;
+}
 
 
 ///Inicializar tabla
 void creoTabla(tabla **tabl){
 
-tabla nuevatabla;
-nuevatabla = new _tabla;
+    tabla nuevatabla;
+    nuevatabla = new _tabla;
 
-nuevatabla -> ptrtabla=NULL; //1 -> null
-//tabl=nuevatabla; // l -->32
-
-//return tabl;
-
-
-**tabl = nuevatabla;
-//cout << "NEL";
+    nuevatabla -> ptrtabla=NULL; //1 -> null
+    **tabl = nuevatabla;
 }
-
 
 tipoRet inicioTabla(tabla *tabl){
 
-creoTabla(&tabl);
+    creoTabla(&tabl);
 
-return ok;
+    return ok;
 }
 
 
 ///Muestro Retorno
 void muestroR(tipoRet resultado){
 
-switch(resultado){
+    switch(resultado){
 
-case 0 :
-cout << "ok";
-break;
+    case 0 :
+    cout << "ok";
+    break;
 
-case 1:
-cout << "Error";
-break;
+    case 1:
+    cout << "Error";
+    break;
 
-case 2:
-cout << "No Implementado";
-break;
+    case 2:
+    cout << "No Implementado";
+    break;
 
-}
-
-}
-
-bool esVaciaTabla(tabla tabl){
-
-if(tabl == NULL){
-    return true;
-
-}else{
-     return false;
+    }
 
 }
+
+bool esVacia(tabla tabl) {
+    if(tabl == NULL){
+        return true;
+
+    }else{
+         return false;
+
+    }
+}
+
+bool esVacia(columna column) {
+    if(column == NULL){
+        return true;
+
+    }else{
+         return false;
+
+    }
+}
+
+bool esVacia(fila aux) {
+    if(aux == NULL){
+        return true;
+
+    }else{
+         return false;
+
+    }
 }
 
 tipoRet mostrarListaRet(tabla l){
-if(!esVaciaTabla(l)){
-    mostrarListaRecur(l);
-    return ok;
-}else{
-    return error;
-    cout << "Empty";
-}
+    if(!esVacia(l)){
+        mostrarListaRecur(l);
+        return ok;
+    }else{
+        return error;
+        cout << "Empty";
+    }
 }
 
 void mostrarListaRecur(tabla l){
-if (!esVaciaTabla(l)){
-cout << l->nombre;
-cout << endl;
-l=l->ptrtabla;
+    if (!esVacia(l)){
+    cout << l->nombre;
+    cout << endl;
+    l=l->ptrtabla;
 
-mostrarListaRecur(l); //recursiv
-} else{
+    mostrarListaRecur(l); //recursiv
+    } else{
 
-}
-
+    }
 }
 
 

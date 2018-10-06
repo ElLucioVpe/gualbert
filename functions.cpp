@@ -22,6 +22,7 @@ tabla insertarTabla(tabla tabl, string name){
     return tabl;
 }
 
+
 //Inserto columna
 
 tipoRet insertoColumna(tabla *tabl, string name) {
@@ -52,6 +53,45 @@ tabla insertarColumna(tabla tabl, string name) {
 
         newCol->sgtColumna = colAux;
         tabl->columna = newCol;
+    }
+
+    return tabl;
+}
+
+//Inserto Dato
+tipoRet insertoDato(tabla *tabl,string dato){
+    tabla tablon;
+    tablon=*tabl;
+    if(!esVacia(tablon->columna)) {
+        tablon=insertarDato(tablon,dato);
+    }
+
+    *tabl=tablon;
+    return ok;
+}
+
+tabla insertarDato(tabla tabl, string dato){
+
+    std::istringstream ss(dato);
+    std::string token;
+
+    while(std::getline(ss, token, ':')) {
+
+        columna col;
+        col = new _columna;
+        col = tabl->columna;
+
+        fila newDato;
+        newDato = new _fila;
+        newDato->dato = token;
+
+        if(esVacia(col->fila)) {
+            col->fila = newDato;
+        } else {
+            newDato->sgtFila = col->fila;
+            col->fila = newDato;
+        }
+        //std::cout << token << '\n';
     }
 
     return tabl;

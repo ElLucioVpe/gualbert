@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <sstream>
 using namespace std;
 
 
@@ -13,7 +14,6 @@ typedef enum _Retorno tipoRet;
 struct _fila{
     string dato;
     _fila *sgtFila;
-
 
 };typedef struct _fila *fila;
 
@@ -50,6 +50,9 @@ tabla eliminarTabla(tabla tabl, string name);
 
 tipoRet insertoColumna(tabla *tabl, string name);
 tabla insertarColumna(tabla tabl, string name);
+
+tipoRet insertoDato(tabla *tabl,string dato);
+tabla insertarDato(tabla tabl, string dato);
 
 void mostrarListaRecur(tabla l);
 void mostrarLista(tabla l);

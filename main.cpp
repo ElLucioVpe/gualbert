@@ -21,12 +21,17 @@ int main()
     muestroR(inicioTabla(&tablas));
     muestroR(insertoTabla(&tablas,"clientes"));
     muestroR(insertoTabla(&tablas,"personas"));
+
     muestroR(insertoColumna(&tablas, "ci"));
     muestroR(insertoColumna(&tablas, "nombre"));
     muestroR(insertoColumna(&tablas, "apellido"));
 
+    muestroR(insertoDato(&tablas, "1:2:3"));
 
     muestroR(mostrarListaRet(tablas));
+
+    cout << tablas->columna->fila->dato << endl;
+
 
 
 

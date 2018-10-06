@@ -19,6 +19,7 @@ int main()
     muestroR(insertoColumna(&tablas, "nombre"))*/
 
     muestroR(inicioTabla(&tablas));
+    muestroR(insertoTabla(&tablas,"clientes"));
     muestroR(insertoTabla(&tablas,"personas"));
     muestroR(insertoColumna(&tablas, "ci"));
     muestroR(insertoColumna(&tablas, "nombre"));

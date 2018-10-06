@@ -130,6 +130,8 @@ bool esVacia(fila aux) {
 tipoRet mostrarListaRet(tabla l){
     if(!esVacia(l)){
         mostrarListaRecur(l);
+        // Finaliza
+        cout << "Fin" << endl;
         return ok;
     }else{
         return error;
@@ -147,22 +149,26 @@ void mostrarListaRecur(tabla l){
         cout << endl;
         cout << "-----------------" << endl;
         cout << l->nombre << endl;
-        cout << "-----------------" << endl;
 
     // Chequea cada columna
         col = l->columna;
-        while(!esVacia(col)) {
-            cout << " | " << col->nombreCol << " | ";
-            col = col->sgtColumna;
+
+        if(!esVacia(l->columna)) {
+            while(!esVacia(col)) {
+                cout << col->nombreCol << " : ";
+                col = col->sgtColumna;
+            }
+
+            cout << endl;
+            cout << "-----------------" << endl;
+        } else {
+            cout << "No existen columnas en esta tabla" << endl;
+            cout << "-----------------" << endl;
+
         }
-        cout << endl;
-        cout << "-----------------" << endl;
 
     // Chequea la tabla siguiente
         mostrarListaRecur(l->ptrtabla); //recursiv
-
-    // Finaliza
-        cout << "Fin" << endl;
 
     } else{
 

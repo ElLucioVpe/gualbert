@@ -183,6 +183,9 @@ void mostrarListaRecur(tabla l){
     columna col;
     col = new _columna;
 
+    fila fil;
+    fil = new _fila;
+
     if (!esVacia(l)){
 
     // Escribe nombre de la tabla
@@ -199,6 +202,16 @@ void mostrarListaRecur(tabla l){
                 col = col->sgtColumna;
             }
 
+            while(!esVacia(col)) {
+                fil = col->fila;
+
+                if(!esVacia(fil)) {
+                    cout << fil->dato << " : ";
+                    fil = fil->sgtFila;
+                }
+
+                col = col->sgtColumna;
+            }
             cout << endl;
             cout << "-----------------" << endl;
         } else {

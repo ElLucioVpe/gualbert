@@ -289,7 +289,7 @@ tipoRet eliminoDato(tabla *tabl,string tablNom, string colNom, string filNom){
     tabla tablon;
     tablon=*tabl;
 
-    tablon=eliminarDatoReferencia(tablon,tablNom,colNom,filNom);
+    tablon=eliminarDato(tablon,tablNom,colNom,filNom);
 
     *tabl=tablon;
 

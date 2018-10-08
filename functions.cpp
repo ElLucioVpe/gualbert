@@ -201,16 +201,19 @@ void mostrarListaRecur(tabla l){
                 cout << col->nombreCol << " : ";
                 col = col->sgtColumna;
             }
+            cout << endl;
 
-            while(!esVacia(col)) {
-                fil = col->fila;
+        col = l->columna;
 
-                if(!esVacia(fil)) {
-                    cout << fil->dato << " : ";
+            while(!esVacia(col)) { //columna
+                fil = col->fila; //fila a la 1er fila de la col
+                  while(!esVacia(fil)){ //mientras sea diferente de nulla arranca a recorrer
+                    cout << fil->dato;
                     fil = fil->sgtFila;
+                    cout << " : ";
                 }
 
-                col = col->sgtColumna;
+                col = col->sgtColumna; //paso a otra col
             }
             cout << endl;
             cout << "-----------------" << endl;

@@ -20,6 +20,8 @@ int main()
 
     muestroR(inicioTabla(&tablas));
     muestroR(insertoTabla(&tablas,"clientes"));
+
+    //muestroR(insertoTabla(&tablas,"mascotas"));
     muestroR(insertoTabla(&tablas,"personas"));
 
     muestroR(insertoColumna(&tablas, "ci"));
@@ -27,12 +29,16 @@ int main()
     muestroR(insertoColumna(&tablas, "apellido"));
 
     muestroR(insertoDato(&tablas, "1:2:3"));
+    //muestroR(insertoDato(&tablas, "3:2:4"));
 
-    muestroR(eliminoDato(&tablas, "clientes","ci","1"));
+    muestroR(eliminoDato(&tablas, "personas","apellido","4"));
+
 
     muestroR(mostrarListaRet(tablas));
 
-    cout << tablas->columna->fila->dato << endl;
+    //cout << tablas->nombre;
+    //cout << tablas->columna->nombreCol << endl;
+    //cout << tablas->columna->fila->dato << endl;
 
 
 

@@ -313,23 +313,22 @@ tabla eliminarDato(tabla tabl,string tablNom, string colNom, string filNom){
     tablaAux=tabl;
 
     //Encontramos la tabla que el user nos indico
-   while(tablaAux->nombre!=tablNom){ //Basicamente en este while estoy arrastrando todos los auxiliares a la tabla correspondiente,porque tecnicamente aca son 3 listas separadas
-    fil=tablaAux->columna->fila;
-    col=tablaAux->columna;
+   while(tablaAux->nombre!=tablNom){
     tablaAux=tablaAux->ptrtabla;
-
-   }
-    //cout << tablaAux->nombre;
+    }
     //encontro la tabla deseada
     //arranca en esta colum de la tabla deseada
-
+    col=tablaAux->columna;
     //Recorre columns hasta encontrar de donde el user quiere eliminar el dato
    while(col->nombreCol!=colNom){
         col=col->sgtColumna;
 
    }
+
+    fil=col->fila;
     //Encontro la columna deseada
-    auxFIL=fil;//arrancamos aux en al misma posi para tener el de atras
+
+    auxFIL=NULL;//arrancamos aux en al misma posi para tener el de atras
 
     //Recorremos filas hasta encontrar la que quiere borrar el user
     while(fil->dato!=filNom){
@@ -338,10 +337,15 @@ tabla eliminarDato(tabla tabl,string tablNom, string colNom, string filNom){
 
     }
 
-    //Ya tenemos todo en un caso ideal
-    auxFIL->sgtFila=NULL;
+    if(auxFIL==NULL){//Entonces hay un solo dato
     delete fil;
 
+    }else{///hay mas
+    auxFIL->sgtFila=fil->sgtFila;
+    delete fil;
+
+    }
+    //Ya tenemos todo en un caso ideal
 
     return tabl;
 

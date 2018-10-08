@@ -20,14 +20,14 @@
 1538870024 source:/home/luciano/git/gualbert/main.cpp
 	"header.h"
 
-1538857210 source:/home/alien/Documents/ProgramaProyecto/GualbertProy/gualbert/functions.cpp
+1539036531 source:/home/alien/Documents/ProgramaProyecto/GualbertProy/gualbert/functions.cpp
 	"header.h"
 
-1539030185 /home/alien/Documents/ProgramaProyecto/GualbertProy/gualbert/header.h
+1539036357 /home/alien/Documents/ProgramaProyecto/GualbertProy/gualbert/header.h
 	<iostream>
 	<string>
 	<sstream>
 
-1539030185 source:/home/alien/Documents/ProgramaProyecto/GualbertProy/gualbert/main.cpp
+1539036370 source:/home/alien/Documents/ProgramaProyecto/GualbertProy/gualbert/main.cpp
 	"header.h"
 

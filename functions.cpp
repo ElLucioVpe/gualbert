@@ -282,3 +282,68 @@ tabla eliminarTabla(tabla tabl, string name){
     return tabl;
 }
 
+
+
+tipoRet eliminoDato(tabla *tabl,string tablNom, string colNom, string filNom){
+    //condis como que si tenes una sola column pregunte si queres borrar toda la tabla antes de seguir.
+    tabla tablon;
+    tablon=*tabl;
+
+    tablon=eliminarDatoReferencia(tablon,tablNom,colNom,filNom);
+
+    *tabl=tablon;
+
+    return ok;
+
+}
+
+
+tabla eliminarDato(tabla tabl,string tablNom, string colNom, string filNom){
+
+   columna col,auxCOL;
+   col = new _columna;
+   auxCOL = new _columna;
+
+    fila fil,auxFIL;
+    fil = new _fila;
+    auxFIL = new _fila;
+
+    tabla tablaAux;
+    tablaAux = new _tabla;
+    tablaAux=tabl;
+
+    //Encontramos la tabla que el user nos indico
+   while(tablaAux->nombre!=tablNom){ //Basicamente en este while estoy arrastrando todos los auxiliares a la tabla correspondiente,porque tecnicamente aca son 3 listas separadas
+    fil=tablaAux->columna->fila;
+    col=tablaAux->columna;
+    tablaAux=tablaAux->ptrtabla;
+
+   }
+    //cout << tablaAux->nombre;
+    //encontro la tabla deseada
+    //arranca en esta colum de la tabla deseada
+
+    //Recorre columns hasta encontrar de donde el user quiere eliminar el dato
+   while(col->nombreCol!=colNom){
+        col=col->sgtColumna;
+
+   }
+    //Encontro la columna deseada
+    auxFIL=fil;//arrancamos aux en al misma posi para tener el de atras
+
+    //Recorremos filas hasta encontrar la que quiere borrar el user
+    while(fil->dato!=filNom){
+        auxFIL=fil;
+        fil=fil->sgtFila;
+
+    }
+
+    //Ya tenemos todo en un caso ideal
+    auxFIL->sgtFila=NULL;
+    delete fil;
+
+
+    return tabl;
+
+}
+

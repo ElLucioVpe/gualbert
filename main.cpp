@@ -28,6 +28,8 @@ int main()
 
     muestroR(insertoDato(&tablas, "1:2:3"));
 
+    muestroR(eliminoDato(&tablas, "clientes","ci","1"));
+
     muestroR(mostrarListaRet(tablas));
 
     cout << tablas->columna->fila->dato << endl;

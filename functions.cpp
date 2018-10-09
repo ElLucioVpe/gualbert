@@ -252,16 +252,19 @@ void mostrarListaRecur(tabla l){
                 cout << col->nombreCol << " : ";
                 col = col->sgtColumna;
             }
+            cout << endl;
 
-            while(!esVacia(col)) {
-                fil = col->fila;
+        col = l->columna;
 
-                if(!esVacia(fil)) {
-                    cout << fil->dato << " : ";
+            while(!esVacia(col)) { //columna
+                fil = col->fila; //fila a la 1er fila de la col
+                  while(!esVacia(fil)){ //mientras sea diferente de nulla arranca a recorrer
+                    cout << fil->dato;
                     fil = fil->sgtFila;
+                    cout << " : ";
                 }
 
-                col = col->sgtColumna;
+                col = col->sgtColumna; //paso a otra col
             }
             cout << endl;
             cout << "-----------------" << endl;
@@ -328,5 +331,74 @@ tabla eliminarTabla(tabla tabl, string name){
     }
 
     return tabl;
+}
+
+
+
+tipoRet eliminoDato(tabla *tabl,string tablNom, string colNom, string filNom){
+    //condis como que si tenes una sola column pregunte si queres borrar toda la tabla antes de seguir.
+    tabla tablon;
+    tablon=*tabl;
+
+    tablon=eliminarDato(tablon,tablNom,colNom,filNom);
+
+    *tabl=tablon;
+
+    return ok;
+
+}
+
+
+tabla eliminarDato(tabla tabl,string tablNom, string colNom, string filNom){
+
+   columna col,auxCOL;
+   col = new _columna;
+   auxCOL = new _columna;
+
+    fila fil,auxFIL;
+    fil = new _fila;
+    auxFIL = new _fila;
+
+    tabla tablaAux;
+    tablaAux = new _tabla;
+    tablaAux=tabl;
+
+    //Encontramos la tabla que el user nos indico
+   while(tablaAux->nombre!=tablNom){
+    tablaAux=tablaAux->ptrtabla;
+    }
+    //encontro la tabla deseada
+    //arranca en esta colum de la tabla deseada
+    col=tablaAux->columna;
+    //Recorre columns hasta encontrar de donde el user quiere eliminar el dato
+   while(col->nombreCol!=colNom){
+        col=col->sgtColumna;
+
+   }
+
+    fil=col->fila;
+    //Encontro la columna deseada
+
+    auxFIL=NULL;//arrancamos aux en al misma posi para tener el de atras
+
+    //Recorremos filas hasta encontrar la que quiere borrar el user
+    while(fil->dato!=filNom){
+        auxFIL=fil;
+        fil=fil->sgtFila;
+
+    }
+
+    if(auxFIL==NULL){//Entonces hay un solo dato
+    delete fil;
+
+    }else{///hay mas
+    auxFIL->sgtFila=fil->sgtFila;
+    delete fil;
+
+    }
+    //Ya tenemos todo en un caso ideal
+
+    return tabl;
+
 }
 

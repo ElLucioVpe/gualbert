@@ -62,3 +62,8 @@ bool esVacia(columna colum);
 bool esVacia(fila aux);
 
 tipoRet mostrarListaRet(tabla l);
+
+
+tipoRet eliminoDato(tabla *tabl, string tablNom, string colNom, string filNom);
+tabla eliminarDato(tabla tabl, string tablNom, string colNom, string filNom);
+tabla eliminarDatoReferencia(tabla tabl,string tablNom, string colNom, string filNom);

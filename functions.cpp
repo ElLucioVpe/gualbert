@@ -1,60 +1,110 @@
 #include "header.h"
 
 //Inserto Tabla
-tipoRet insertoTabla(tabla *tabl,string nombre){
+tipoRet insertoTabla(tabla *tabl, string nombre){
+    tabla auxTable;
+    auxTable = *tabl;
+
+    while(!esVacia(auxTable)) {
+        if(auxTable->nombre == nombre) {
+            return error; // Ya existe una tabla con ese nombre
+        }
+        auxTable = auxTable->ptrtabla;
+    }
+
+    // Crea nueva tabla
     tabla tablon;
     tablon=*tabl;
     tablon=insertarTabla(tablon,nombre);
-
     *tabl=tablon;
+
     return ok;
 }
 
 tabla insertarTabla(tabla tabl, string name){
-    //0 a null 1 a 0
     tabla nuevatabla;
     nuevatabla = new _tabla;
+    nuevatabla->nombre=name;
+    nuevatabla->ptrtabla=NULL;
 
-    nuevatabla -> nombre=name;
-    nuevatabla -> ptrtabla=tabl; //1 -> null
-    tabl=nuevatabla; // l -->32
+    if(esVacia(tabl)) {
+        // Si es vacia la agrega  al principio
+        //nuevatabla->ptrtabla=tabl;
+        tabl=nuevatabla;
+    } else {
+        // Recorre la lista hasta llegar a la ultima tabla
+        tabla auxTable;
+        auxTable = tabl;
+
+        while(!esVacia(auxTable)) {
+            if(esVacia(auxTable->ptrtabla)) {
+                tabl->ptrtabla = nuevatabla; // Asigna la tabla al final
+            }
+            auxTable = auxTable->ptrtabla; // Sigue buscando
+        }
+    }
 
     return tabl;
 }
 
-
 //Inserto columna
+tipoRet insertoColumna(tabla *tabl, string nombreTabla, string nombreColumna){
+    tabla auxTable;
+    auxTable = *tabl;
 
-tipoRet insertoColumna(tabla *tabl, string name) {
-    tabla newTab;
-    newTab = *tabl;
 
-    if (!esVacia(*tabl)) {
-        newTab = insertarColumna(newTab, name);
+    if(!esVacia(auxTable)) {
+
+        while(!esVacia(auxTable)) {
+            if(auxTable->nombre == nombreTabla) {
+
+                columna auxCol;
+                auxCol = auxTable->columna;
+
+                while(!esVacia(auxCol)) {
+                    if(auxCol->nombreCol == nombreColumna) {
+                        return error; // Ya existe una columna con ese nombre
+                    }
+                    cout << auxCol->nombreCol << endl;
+                    auxCol = auxCol->sgtColumna;
+                }
+
+                // Crea nueva tabla
+                tabla tablon;
+                tablon=*tabl;
+                tablon=insertarColumna(tablon, auxTable, nombreColumna);
+
+                *tabl=tablon;
+                return ok;
+            }
+
+            auxTable = auxTable->ptrtabla;
+        }
+
+        return error; // No existe una tabla con el nombre dado
     } else {
-        return error;
+        return error; // La tabla es vacia
     }
-
-    *tabl = newTab;
-    return ok;
 }
 
-tabla insertarColumna(tabla tabl, string name) {
-    columna newCol;
-    newCol = new _columna;
-    newCol->nombreCol = name;
+tabla insertarColumna(tabla tabl, tabla auxTable, string nombreColumna) {
+    // Declaramos la nueva columna
+    columna newCol = new _columna;
+    newCol->nombreCol = nombreColumna;
 
-    if (esVacia(tabl->columna)) {
-        tabl->columna = newCol;
+    if(esVacia(auxTable->columna)) {
+        auxTable->columna = newCol;
     } else {
-        columna colAux;
-        colAux = new _columna;
-        colAux = tabl->columna;
+        columna newCol = auxTable->columna;
 
-        newCol->sgtColumna = colAux;
-        tabl->columna = newCol;
+        while(!esVacia(newCol)) {
+            if(esVacia(newCol->sgtColumna)) {
+                newCol->sgtColumna = newCol;
+                return tabl;
+            }
+            newCol = newCol->sgtColumna;
+        }
     }
-
     return tabl;
 }
 
@@ -62,6 +112,7 @@ tabla insertarColumna(tabla tabl, string name) {
 tipoRet insertoDato(tabla *tabl,string dato){
     tabla tablon;
     tablon=*tabl;
+
     if(!esVacia(tablon->columna)) {
         tablon=insertarDato(tablon,dato);
     }

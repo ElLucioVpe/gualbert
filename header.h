@@ -48,8 +48,8 @@ tabla insertarTabla(tabla tabl, string name);
 tipoRet eliminoTabla(tabla *tabl,string nombre);
 tabla eliminarTabla(tabla tabl, string name);
 
-tipoRet insertoColumna(tabla *tabl, string name);
-tabla insertarColumna(tabla tabl, string name);
+tipoRet insertoColumna(tabla *tabl, string tabla, string columna);
+tabla insertarColumna(tabla tabl, tabla auxTable, string columna);
 
 tipoRet insertoDato(tabla *tabl,string dato);
 tabla insertarDato(tabla tabl, string dato);

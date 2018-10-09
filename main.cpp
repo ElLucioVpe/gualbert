@@ -21,10 +21,10 @@ int main()
 
     muestroR(inicioTabla(&tablas));
     muestroR(insertoTabla(&tablas,"clientes"));
-
-    //muestroR(insertoTabla(&tablas,"mascotas"));
     muestroR(insertoTabla(&tablas,"personas"));
-    muestroR(insertoColumna(&tablas, "personas", "ci"));
+    muestroR(insertoTabla(&tablas,"mascotas"));
+
+    /*muestroR(insertoColumna(&tablas, "personas", "ci"));
     muestroR(insertoColumna(&tablas, "personas", "nombre"));
     //muestroR(insertoColumna(&tablas, "personas", "apellido"));
 
@@ -33,7 +33,7 @@ int main()
     muestroR(insertoDato(&tablas, "1:2:3"));
     //muestroR(insertoDato(&tablas, "3:2:4"));
 
-    muestroR(eliminoDato(&tablas, "personas","apellido","4"));
+    muestroR(eliminoDato(&tablas, "personas","apellido","4"));*/
 
 
     muestroR(mostrarListaRet(tablas));

@@ -31,14 +31,17 @@ tabla insertarTabla(tabla tabl, string name){
         // Si es vacia la agrega  al principio
         //nuevatabla->ptrtabla=tabl;
         tabl=nuevatabla;
+                cout << "/OK/";
     } else {
         // Recorre la lista hasta llegar a la ultima tabla
+        cout << "OK";
         tabla auxTable;
         auxTable = tabl;
 
         while(!esVacia(auxTable)) {
             if(esVacia(auxTable->ptrtabla)) {
-                tabl->ptrtabla = nuevatabla; // Asigna la tabla al final
+                auxTable->ptrtabla = nuevatabla; // Asigna la tabla al final
+                break;
             }
             auxTable = auxTable->ptrtabla; // Sigue buscando
         }

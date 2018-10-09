@@ -98,14 +98,14 @@ tabla insertarColumna(tabla tabl, tabla auxTable, string nombreColumna) {
     if(esVacia(auxTable->columna)) {
         auxTable->columna = newCol;
     } else {
-        columna newCol = auxTable->columna;
+        columna auxCol = auxTable->columna;
 
-        while(!esVacia(newCol)) {
-            if(esVacia(newCol->sgtColumna)) {
-                newCol->sgtColumna = newCol;
+        while(!esVacia(auxCol)) {
+            if(esVacia(auxCol->sgtColumna)) {
+                auxCol->sgtColumna = newCol;
                 return tabl;
             }
-            newCol = newCol->sgtColumna;
+            auxCol = auxCol->sgtColumna;
         }
     }
     return tabl;

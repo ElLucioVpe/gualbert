@@ -30,7 +30,7 @@ int main()
 
     muestroR(insertoDato(&tablas,"personas", "1:2:3"));
     muestroR(insertoDato(&tablas,"personas", "4:5:6"));
-    //muestroR(insertoDato(&tablas, "3:2:4"));
+    muestroR(insertoDato(&tablas,"personas", "7:8:9"));
     //muestroR(eliminoDato(&tablas, "personas","apellido","4"));
 
 
@@ -41,6 +41,13 @@ int main()
     //cout << tablas->nombre;
     //cout << tablas->columna->nombreCol << endl;
     cout << tablas->ptrtabla->columna->fila->dato << endl;
+    cout << tablas->ptrtabla->columna->fila->sgtFila->dato << endl;
+    cout << tablas->ptrtabla->columna->fila->sgtFila->sgtFila->dato << endl;
+
+    cout << tablas->ptrtabla->columna->sgtColumna->fila->dato << endl;
+
+
+
 
 
     //cout << ricarddin;

@@ -139,27 +139,35 @@ tabla insertarDato(tabla tabl, tabla tablaInsertarDato, string dato){
     std::string token;
 
     while(!esVacia(col)) {
-
         while(std::getline(ss, token, ':')) {
 
             fila newDato;
             newDato = new _fila;
             newDato->dato = token;
 
-            //cout << col->nombreCol << " // " << token << endl;
+            fila fil;
+            fil = new _fila;
+            fil = col->fila;
+
+            cout << col->nombreCol << " // " << token << endl;
 
             if(esVacia(col->fila)) {
                 col->fila = newDato;
+                return tabl;
             } else {
-                newDato->sgtFila = col->fila;
-                col->fila = newDato;
+                //newDato->sgtFila = col->fila;
+                while(!esVacia(fil)) {
+                    if(esVacia(fil->sgtFila)) {
+                        fil->sgtFila = newDato;
+                        return tabl;
+                    }
+                    fil = fil->sgtFila;
+                }
             }
-
             col = col->sgtColumna;
         }
 
     }
-    return tabl;
 }
 
 ///Inicializar tabla

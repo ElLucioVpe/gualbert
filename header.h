@@ -51,8 +51,8 @@ tabla eliminarTabla(tabla tabl, string name);
 tipoRet insertoColumna(tabla *tabl, string tabla, string columna);
 tabla insertarColumna(tabla tabl, tabla auxTable, string columna);
 
-tipoRet insertoDato(tabla *tabl,string dato);
-tabla insertarDato(tabla tabl, string dato);
+tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato);
+tabla insertarDato(tabla tabl, tabla tablaInsertarDato, string dato);
 
 void mostrarListaRecur(tabla l);
 void mostrarLista(tabla l);

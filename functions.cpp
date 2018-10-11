@@ -31,10 +31,8 @@ tabla insertarTabla(tabla tabl, string name){
         // Si es vacia la agrega  al principio
         //nuevatabla->ptrtabla=tabl;
         tabl=nuevatabla;
-                cout << "/OK/";
     } else {
         // Recorre la lista hasta llegar a la ultima tabla
-        cout << "OK";
         tabla auxTable;
         auxTable = tabl;
 
@@ -68,7 +66,6 @@ tipoRet insertoColumna(tabla *tabl, string nombreTabla, string nombreColumna){
                     if(auxCol->nombreCol == nombreColumna) {
                         return error; // Ya existe una columna con ese nombre
                     }
-                    cout << auxCol->nombreCol << endl;
                     auxCol = auxCol->sgtColumna;
                 }
 
@@ -112,45 +109,58 @@ tabla insertarColumna(tabla tabl, tabla auxTable, string nombreColumna) {
 }
 
 //Inserto Dato
-tipoRet insertoDato(tabla *tabl,string dato){
+tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
     tabla tablon;
     tablon=*tabl;
 
-    if(!esVacia(tablon->columna)) {
-        tablon=insertarDato(tablon,dato);
-    }
+    tabla auxTable;
+    auxTable = *tabl;
 
-    *tabl=tablon;
-    return ok;
+    while(!esVacia(auxTable)){
+        if(auxTable->nombre == nombreTabla) {
+            tablon=insertarDato(tablon, auxTable, dato);
+            *tabl=tablon;
+            return ok;
+        }
+        auxTable = auxTable->ptrtabla;
+    }
+    return error;
 }
 
-tabla insertarDato(tabla tabl, string dato){
+tabla insertarDato(tabla tabl, tabla tablaInsertarDato, string dato){
+    tabla tablaAux;
+    tablaAux = tablaInsertarDato;
+
+    columna col;
+    col = new _columna;
+    col = tablaAux->columna;
 
     std::istringstream ss(dato);
     std::string token;
 
-    while(std::getline(ss, token, ':')) {
+    while(!esVacia(col)) {
 
-        columna col;
-        col = new _columna;
-        col = tabl->columna;
+        while(std::getline(ss, token, ':')) {
 
-        fila newDato;
-        newDato = new _fila;
-        newDato->dato = token;
+            fila newDato;
+            newDato = new _fila;
+            newDato->dato = token;
 
-        if(esVacia(col->fila)) {
-            col->fila = newDato;
-        } else {
-            newDato->sgtFila = col->fila;
-            col->fila = newDato;
+            //cout << col->nombreCol << " // " << token << endl;
+
+            if(esVacia(col->fila)) {
+                col->fila = newDato;
+            } else {
+                newDato->sgtFila = col->fila;
+                col->fila = newDato;
+            }
+
+            col = col->sgtColumna;
         }
-        //std::cout << token << '\n';
-    }
 
+    }
     return tabl;
 }
-
 
 ///Inicializar tabla
 void creoTabla(tabla **tabl){
@@ -257,7 +267,7 @@ void mostrarListaRecur(tabla l){
             }
             cout << endl;
 
-        col = l->columna;
+            col = l->columna;
 
             while(!esVacia(col)) { //columna
                 fil = col->fila; //fila a la 1er fila de la col

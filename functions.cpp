@@ -138,36 +138,40 @@ tabla insertarDato(tabla tabl, tabla tablaInsertarDato, string dato){
     std::istringstream ss(dato);
     std::string token;
 
+    // Empieza a recorrer columnas
     while(!esVacia(col)) {
+        // Empieza a recorrer datos
         while(std::getline(ss, token, ':')) {
 
-            fila newDato;
+            fila newDato; // Genera nueva fila
             newDato = new _fila;
             newDato->dato = token;
 
-            fila fil;
+            fila fil; // Asigna fil a la columna
             fil = new _fila;
             fil = col->fila;
 
-            cout << col->nombreCol << " // " << token << endl;
+            //cout << col->nombreCol << " // " << token << endl;
 
-            if(esVacia(col->fila)) {
+            if(esVacia(fil)) {
                 col->fila = newDato;
-                return tabl;
             } else {
                 //newDato->sgtFila = col->fila;
                 while(!esVacia(fil)) {
                     if(esVacia(fil->sgtFila)) {
                         fil->sgtFila = newDato;
-                        return tabl;
+                        break;
                     }
                     fil = fil->sgtFila;
                 }
             }
+
             col = col->sgtColumna;
         }
+            return tabl;
 
     }
+
 }
 
 ///Inicializar tabla
@@ -230,7 +234,7 @@ bool esVacia(columna column) {
 }
 
 bool esVacia(fila aux) {
-    if(aux == NULL){
+    if(aux == NULL || aux->dato == ""){
         return true;
 
     }else{
@@ -269,6 +273,7 @@ void mostrarListaRecur(tabla l){
         col = l->columna;
 
         if(!esVacia(l->columna)) {
+            // Muestra el nombre de las columnas
             while(!esVacia(col)) {
                 cout << col->nombreCol << " : ";
                 col = col->sgtColumna;
@@ -276,17 +281,44 @@ void mostrarListaRecur(tabla l){
             cout << endl;
 
             col = l->columna;
+            fila ultimaFila;
+            int i = 0;
 
-            while(!esVacia(col)) { //columna
-                fil = col->fila; //fila a la 1er fila de la col
-                  while(!esVacia(fil)){ //mientras sea diferente de nulla arranca a recorrer
-                    cout << fil->dato;
-                    fil = fil->sgtFila;
-                    cout << " : ";
-                }
-
-                col = col->sgtColumna; //paso a otra col
+            // Recorre la primer fila
+            while(!esVacia(col)) {
+                fila fil = col->fila;
+                cout << fil->dato;
+                ultimaFila = fil;
+                col = col->sgtColumna;
             }
+            i++;
+            cout << endl;
+
+            // Recorre las filas siguientes
+            col = l->columna;
+            while(!esVacia(ultimaFila->sgtFila)) { // Recorre hasta que el siguiente de alguna columna sea NULL
+                cout << "IMPORTANTE" << i << endl;
+                /*col = l->columna;
+
+                while(!esVacia(col)) { // Recorre todas las filas de esa columna
+
+                    int contar = 0;
+                    fila fil = col->fila;
+
+                    while(contar<i) {
+                        fil = fil->sgtFila;
+                        contar++;
+                    }
+
+                    cout << fil->dato;
+                    i++;
+                    ultimaFila = fil;
+                    col = col->sgtColumna;
+                }
+                cout << endl;*/
+
+            }
+
             cout << endl;
             cout << "-----------------" << endl;
         } else {

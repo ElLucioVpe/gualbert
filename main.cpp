@@ -28,9 +28,9 @@ int main()
     muestroR(insertoColumna(&tablas, "personas", "nombre"));
     muestroR(insertoColumna(&tablas, "personas", "apellido"));
 
-    muestroR(insertoDato(&tablas,"personas", "1:2:3"));
-    muestroR(insertoDato(&tablas,"personas", "4:5:6"));
-    muestroR(insertoDato(&tablas,"personas", "7:8:9"));
+    muestroR(insertoDato(&tablas,"personas", "1:Martin:Perdomo"));
+    muestroR(insertoDato(&tablas,"personas", "4:Diego:Olivera"));
+    muestroR(insertoDato(&tablas,"personas", "7:Lautaro:KASjkdsjk"));
     //muestroR(eliminoDato(&tablas, "personas","apellido","4"));
 
 
@@ -45,8 +45,11 @@ int main()
     cout << tablas->ptrtabla->columna->fila->sgtFila->sgtFila->dato << endl;
 
     cout << tablas->ptrtabla->columna->sgtColumna->fila->dato << endl;
+    cout << tablas->ptrtabla->columna->sgtColumna->fila->sgtFila->dato << endl;
+    cout << tablas->ptrtabla->columna->sgtColumna->fila->sgtFila->sgtFila->dato << endl;
 
-
+    cout << tablas->ptrtabla->columna->sgtColumna->sgtColumna->fila->dato << endl;
+    cout << tablas->ptrtabla->columna->sgtColumna->sgtColumna->fila->sgtFila->dato << endl;
 
 
 

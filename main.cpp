@@ -40,6 +40,7 @@ int main()
     //cout << tablas->nombre << endl;
     //cout << tablas->nombre;
     //cout << tablas->columna->nombreCol << endl;
+    /*
     cout << tablas->ptrtabla->columna->fila->dato << endl;
     cout << tablas->ptrtabla->columna->fila->sgtFila->dato << endl;
     cout << tablas->ptrtabla->columna->fila->sgtFila->sgtFila->dato << endl;
@@ -49,7 +50,7 @@ int main()
     cout << tablas->ptrtabla->columna->sgtColumna->fila->sgtFila->sgtFila->dato << endl;
 
     cout << tablas->ptrtabla->columna->sgtColumna->sgtColumna->fila->dato << endl;
-    cout << tablas->ptrtabla->columna->sgtColumna->sgtColumna->fila->sgtFila->dato << endl;
+    cout << tablas->ptrtabla->columna->sgtColumna->sgtColumna->fila->sgtFila->dato << endl;*/
 
 
 

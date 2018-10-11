@@ -281,41 +281,31 @@ void mostrarListaRecur(tabla l){
             cout << endl;
 
             col = l->columna;
-            fila ultimaFila;
+            fila ultimaFila = col->fila;
             int i = 0;
-
-            // Recorre la primer fila
-            while(!esVacia(col)) {
-                fila fil = col->fila;
-                cout << fil->dato;
-                ultimaFila = fil;
-                col = col->sgtColumna;
-            }
-            i++;
-            cout << endl;
 
             // Recorre las filas siguientes
             col = l->columna;
             while(!esVacia(ultimaFila->sgtFila)) { // Recorre hasta que el siguiente de alguna columna sea NULL
-                cout << "IMPORTANTE" << i << endl;
-                /*col = l->columna;
+                //cout << "IMPORTANTE" << i << endl;
+                col = l->columna;
 
-                while(!esVacia(col)) { // Recorre todas las filas de esa columna
+                while(!esVacia(col)) { // Recorre todas las columnas
 
                     int contar = 0;
                     fila fil = col->fila;
 
-                    while(contar<i) {
+                    while(contar<i) { // Recorre todas las filas
                         fil = fil->sgtFila;
                         contar++;
                     }
 
                     cout << fil->dato;
-                    i++;
                     ultimaFila = fil;
                     col = col->sgtColumna;
                 }
-                cout << endl;*/
+                i++;
+                cout << endl;
 
             }
 

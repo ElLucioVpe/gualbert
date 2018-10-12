@@ -381,35 +381,47 @@ tabla eliminarTabla(tabla tabl, string name){
 tipoRet eliminoDato(tabla *tabl,string tablNom, string colNom, string filNom){
     //condis como que si tenes una sola column pregunte si queres borrar toda la tabla antes de seguir.
     tabla tablon;
-    tablon=*tabl;
+    tablon=new _tabla;
+    tablon=*tabl;//tablon es modificado con la intencion de solo buscar datos
 
-    tablon=eliminarDato(tablon,tablNom,colNom,filNom);
+    tabla TablaBorrar;
+    TablaBorrar = new _tabla;
 
-    *tabl=tablon;
+    TablaBorrar=*tabl;
+    int i;
+
+    i=buscoDato(tablon,tablNom,colNom,filNom);//Busco la pos del dato
+
+    //Func ELIMINO
+    TablaBorrar=eliminarDato(TablaBorrar,i,tablNom);
+
+    *tabl=TablaBorrar;
 
     return ok;
 
 }
 
 
-tabla eliminarDato(tabla tabl,string tablNom, string colNom, string filNom){
+int buscoDato(tabla tabl,string tablNom, string colNom, string filNom){ //EncontramosDato por= buscamos una tabla, una column y un dato. retorna posi de esa fila (dato)
 
-   columna col,auxCOL;
+   columna col;
    col = new _columna;
-   auxCOL = new _columna;
 
-    fila fil,auxFIL;
+    int i=0;
+
+    fila fil;
     fil = new _fila;
-    auxFIL = new _fila;
 
     tabla tablaAux;
     tablaAux = new _tabla;
     tablaAux=tabl;
 
+
     //Encontramos la tabla que el user nos indico
    while(tablaAux->nombre!=tablNom){
     tablaAux=tablaAux->ptrtabla;
     }
+
     //encontro la tabla deseada
     //arranca en esta colum de la tabla deseada
     col=tablaAux->columna;
@@ -418,30 +430,71 @@ tabla eliminarDato(tabla tabl,string tablNom, string colNom, string filNom){
         col=col->sgtColumna;
 
    }
-
-    fil=col->fila;
     //Encontro la columna deseada
-
-    auxFIL=NULL;//arrancamos aux en al misma posi para tener el de atras
+    fil=col->fila;
 
     //Recorremos filas hasta encontrar la que quiere borrar el user
     while(fil->dato!=filNom){
-        auxFIL=fil;
         fil=fil->sgtFila;
-
+        i++;
     }
 
-    if(auxFIL==NULL){//Entonces hay un solo dato
-    delete fil;
+    return i;
 
-    }else{///hay mas
-    auxFIL->sgtFila=fil->sgtFila;
-    delete fil;
+}
 
+
+tabla eliminarDato(tabla tabl, int i, string tablNom){
+columna Cols = new _columna;
+fila filita = new _fila;
+fila auxFIL = new _fila;
+
+tabla tablaAux = new _tabla;
+tablaAux=tabl;
+int cantFil=0;
+
+
+    //Encontramos la tabla que el user nos indico
+    while(tablaAux->nombre!=tablNom){
+    tablaAux=tablaAux->ptrtabla;
     }
+    //queremos eliminar todas las filas corresp a todas las columns de una tabla!
+    Cols=tablaAux->columna; //tenemos la primera column de la tabla, TIME TO DELETE!
+
+    ///hay mas
+    //cout << Cols->nombreCol;
+    //cout <<endl;
+
+    //cout << filita->dato;
+    //cout <<endl;
+
+        while(Cols!=NULL){
+              filita=Cols->fila;
+                auxFIL=NULL;//arrancamos aux en al misma posi para tener el de atras
+
+            while(cantFil<i){
+            auxFIL=filita;
+            filita=filita->sgtFila;
+            cantFil++;
+            }
+       if(i==0){ //En el caso de que la fila que queremos eliminar sea la primera
+        //cout << cantFil;
+        Cols->fila=filita->sgtFila;
+        //cout << Cols->fila->dato;
+        delete filita;
+
+        }else{ //En el caso de que sea cualquier otra
+            auxFIL->sgtFila=filita->sgtFila;
+           delete filita;
+
+           }
+
+        cantFil=0;
+        Cols=Cols->sgtColumna;
+
+      }
     //Ya tenemos todo en un caso ideal
-
-    return tabl;
+return tabl;
 
 }
 

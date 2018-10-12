@@ -65,5 +65,6 @@ tipoRet mostrarListaRet(tabla l);
 
 
 tipoRet eliminoDato(tabla *tabl, string tablNom, string colNom, string filNom);
-tabla eliminarDato(tabla tabl, string tablNom, string colNom, string filNom);
-tabla eliminarDatoReferencia(tabla tabl,string tablNom, string colNom, string filNom);
+int buscoDato(tabla tabl, string tablNom, string colNom, string filNom);
+//tabla eliminarDatoReferencia(tabla tabl,string tablNom, string colNom, string filNom);
+tabla eliminarDato(tabla tabl, int i, string tablNom);

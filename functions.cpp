@@ -146,6 +146,7 @@ tabla insertarDato(tabla tabl, tabla tablaInsertarDato, string dato){
             fila newDato; // Genera nueva fila
             newDato = new _fila;
             newDato->dato = token;
+            newDato->sgtFila=NULL;
 
             fila fil; // Asigna fil a la columna
             fil = new _fila;
@@ -286,9 +287,9 @@ void mostrarListaRecur(tabla l){
 
             // Recorre las filas siguientes
             col = l->columna;
-            while(!esVacia(ultimaFila->sgtFila)) { // Recorre hasta que el siguiente de alguna columna sea NULL
+            while(!esVacia(ultimaFila->sgtFila)) { // Recorre hasta que el siguiente de alguna columna sea NULL -BEBETO si hace eso y queda uno solo nunca entra
                 //cout << "IMPORTANTE" << i << endl;
-                col = l->columna;
+            col = l->columna;
 
                 while(!esVacia(col)) { // Recorre todas las columnas
 
@@ -308,6 +309,20 @@ void mostrarListaRecur(tabla l){
                 cout << endl;
 
             }
+
+            if((i==0)&&(!esVacia(ultimaFila))){ //Hay una sola fila. nunca entro al while de arriba por eso esta i en 0
+
+            col = l->columna;
+
+            while(!esVacia(col)) {//REcorre Columns
+            fila fil = col->fila;//Toma primer fila de column
+            cout << fil->dato;
+            col = col->sgtColumna;
+
+            }
+
+            }
+
 
             cout << endl;
             cout << "-----------------" << endl;
@@ -391,11 +406,16 @@ tipoRet eliminoDato(tabla *tabl,string tablNom, string colNom, string filNom){
     int i;
 
     i=buscoDato(tablon,tablNom,colNom,filNom);//Busco la pos del dato
-
+    if(i==-1){
+    //no existe el dato
+    cout << "No existe ahre";
+    //return error
+    }else{
     //Func ELIMINO
     TablaBorrar=eliminarDato(TablaBorrar,i,tablNom);
 
     *tabl=TablaBorrar;
+    }
 
     return ok;
 
@@ -434,11 +454,14 @@ int buscoDato(tabla tabl,string tablNom, string colNom, string filNom){ //Encont
     fil=col->fila;
 
     //Recorremos filas hasta encontrar la que quiere borrar el user
-    while(fil->dato!=filNom){
+    while((fil->dato!=filNom)&&(fil!=NULL)){
         fil=fil->sgtFila;
         i++;
     }
 
+    if(fil==NULL){
+    i=-1;
+    }
     return i;
 
 }
@@ -458,34 +481,42 @@ int cantFil=0;
     while(tablaAux->nombre!=tablNom){
     tablaAux=tablaAux->ptrtabla;
     }
+
     //queremos eliminar todas las filas corresp a todas las columns de una tabla!
     Cols=tablaAux->columna; //tenemos la primera column de la tabla, TIME TO DELETE!
 
-    ///hay mas
-    //cout << Cols->nombreCol;
-    //cout <<endl;
-
-    //cout << filita->dato;
-    //cout <<endl;
-
         while(Cols!=NULL){
-              filita=Cols->fila;
-                auxFIL=NULL;//arrancamos aux en al misma posi para tener el de atras
+             filita=Cols->fila; //filita aca carga
+             auxFIL=NULL;
+           // auxFIL=NULL;//arrancamos aux en al misma posi para tener el de atras
 
             while(cantFil<i){
             auxFIL=filita;
             filita=filita->sgtFila;
             cantFil++;
             }
-       if(i==0){ //En el caso de que la fila que queremos eliminar sea la primera
-        //cout << cantFil;
-        Cols->fila=filita->sgtFila;
-        //cout << Cols->fila->dato;
-        delete filita;
 
-        }else{ //En el caso de que sea cualquier otra
-            auxFIL->sgtFila=filita->sgtFila;
-           delete filita;
+       if(i==0){ //En el caso de que la fila que queremos eliminar sea la primera o la unica
+
+       if(filita->sgtFila==NULL){//es la unica
+        Cols->fila->sgtFila=NULL;
+        delete filita;
+        cout << "PRIMER IF";
+       }
+       else{ //es la primera pero no la unica
+        Cols->fila=Cols->fila->sgtFila;
+        //cout<< Cols->fila->dato; //ACA ESTA HACIENDO EL COUT perfecto, tira el dato que tiene que tirar que seria la segunda fila ya que la idea es eliminar la primera.
+        //cout << filita->dato; //ACA hace el cout como corresponde pero cuando lo pasa en  mostrar lo deja vacios wtf
+        delete filita;
+        cout << "SEGUNDO ELSE";
+        }
+
+
+        }
+        else{ //En el caso de que sea cualquier otra
+        auxFIL->sgtFila=filita->sgtFila;
+        delete filita;
+        cout<<"ULTIMO ELSE";
 
            }
 
@@ -493,6 +524,7 @@ int cantFil=0;
         Cols=Cols->sgtColumna;
 
       }
+
     //Ya tenemos todo en un caso ideal
 return tabl;
 

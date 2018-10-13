@@ -499,7 +499,7 @@ tipoRet eliminoDato(tabla *tabl,string tablNom, string colNom, string filNom){
     i=buscoDato(tablon,tablNom,colNom,filNom);//Busco la pos del dato
     if(i==-1){
         //no existe el dato
-        cout << "No existe ahre";
+        cout << "En la fila " << colNom << " No existe ningun dato llamado " << filNom;
         //return error
     }else{
         //Func ELIMINO
@@ -545,7 +545,7 @@ int buscoDato(tabla tabl,string tablNom, string colNom, string filNom){ //Encont
     fil=col->fila;
 
     //Recorremos filas hasta encontrar la que quiere borrar el user
-    while((fil->dato!=filNom)&&(fil!=NULL)){
+    while((fil!=NULL)&&(fil->dato!=filNom)){ //Muy importante, al trabajar con el Fil cuando es nulo el while o if tiene que tener la pregunta de si es nulo como primer operador
         fil=fil->sgtFila;
         i++;
     }
@@ -638,16 +638,18 @@ tipoRet eliminoColumna(tabla *tabl,string tablNom, string colNom){
     if(i==-1){
     //no existe el dato
     cout << "Columna no encontrada";
-    //return error
+    return error;
+
     }else if(i==-2){
     //es el primero y hay mas, entonces es el PK
     cout << "Esta deseando Eliminar la PK";
-    //return error
+    return error;
+
     }else{
     //Func ELIMINO
-    ColumnaBorrar=eliminarColumna(ColumnaBorrar,i,tablNom); //ColumnaBorrar es las tablas
+   ColumnaBorrar=eliminarColumna(ColumnaBorrar,i,tablNom); //ColumnaBorrar es las tablas
 
-    *tabl=ColumnaBorrar;
+   *tabl=ColumnaBorrar;
     }
 
     return ok;
@@ -675,9 +677,12 @@ int buscoColumna(tabla tabl,string tablNom, string colNom){ //EncontramosColumna
     //arranca en esta colum de la tabla deseada
     col=tablaAux->columna;
     //Recorre columns hasta encontrar de donde el user quiere eliminar el dato
-   while((col->nombreCol!=colNom)&&(col!=NULL)){
+   while(col->nombreCol!=colNom){
         col=col->sgtColumna;
         i++;
+        if(col==NULL){
+            break;
+        }
    }
 
     if(col==NULL){ //col llego a null lo que quiere decir que no la encotro
@@ -730,7 +735,6 @@ tabla eliminarColumna(tabla tabl, int i, string tablNom){
 
           //  }
             else{ //En el caso de que sea cualquier otra
-            // cout<<"ULTIMO ELSE";
 
                 auxCol->sgtColumna=Cols->sgtColumna;
                 delete Cols;

@@ -39,7 +39,8 @@ int main()
    // muestroR(insertoDato(&tablas,"personas", "8:Luis:OJILI"));
 
 
-    //muestroR(eliminoDato(&tablas, "personas","ci","1"));
+    muestroR(eliminoDato(&tablas, "personas","ci","69"));
+    muestroR(eliminoDato(&tablas, "personas","ci","4"));
     //muestroR(eliminoColumna(&tablas, "personas","nombre"));
     muestroR(eliminoColumna(&tablas, "personas","nombre"));
    // muestroR(eliminoDato(&tablas, "personas","ci","8"));

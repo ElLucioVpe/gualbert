@@ -468,65 +468,65 @@ int buscoDato(tabla tabl,string tablNom, string colNom, string filNom){ //Encont
 
 
 tabla eliminarDato(tabla tabl, int i, string tablNom){
-columna Cols = new _columna;
-fila filita = new _fila;
-fila auxFIL = new _fila;
+    columna Cols = new _columna;
+    fila filita = new _fila;
+    fila auxFIL = new _fila;
 
-tabla tablaAux = new _tabla;
-tablaAux=tabl;
-int cantFil=0;
+    tabla tablaAux = new _tabla;
+    tablaAux=tabl;
+    int cantFil=0;
 
 
-    //Encontramos la tabla que el user nos indico
-    while(tablaAux->nombre!=tablNom){
-    tablaAux=tablaAux->ptrtabla;
-    }
+        //Encontramos la tabla que el user nos indico
+        while(tablaAux->nombre!=tablNom){
+            tablaAux=tablaAux->ptrtabla;
+        }
 
-    //queremos eliminar todas las filas corresp a todas las columns de una tabla!
-    Cols=tablaAux->columna; //tenemos la primera column de la tabla, TIME TO DELETE!
+        //queremos eliminar todas las filas corresp a todas las columns de una tabla!
+        Cols=tablaAux->columna; //tenemos la primera column de la tabla, TIME TO DELETE!
 
-        while(Cols!=NULL){
-             filita=Cols->fila; //filita aca carga
-             auxFIL=NULL;
-           // auxFIL=NULL;//arrancamos aux en al misma posi para tener el de atras
+            while(Cols!=NULL){
+                 filita=Cols->fila; //filita aca carga
+                 auxFIL=NULL;
+               // auxFIL=NULL;//arrancamos aux en al misma posi para tener el de atras
 
-            while(cantFil<i){
-            auxFIL=filita;
-            filita=filita->sgtFila;
-            cantFil++;
+                while(cantFil<i){
+                    auxFIL=filita;
+                    filita=filita->sgtFila;
+                    cantFil++;
+                }
+
+           if(i==0){ //En el caso de que la fila que queremos eliminar sea la primera o la unica
+
+               if(filita->sgtFila==NULL){//es la unica
+                    Cols->fila->sgtFila=NULL;
+                    delete filita;
+                    cout << "PRIMER IF";
+               }
+               else{ //es la primera pero no la unica
+                    Cols->fila=Cols->fila->sgtFila;
+                    //cout<< Cols->fila->dato; //ACA ESTA HACIENDO EL COUT perfecto, tira el dato que tiene que tirar que seria la segunda fila ya que la idea es eliminar la primera.
+                    //cout << filita->dato; //ACA hace el cout como corresponde pero cuando lo pasa en  mostrar lo deja vacios wtf
+                    delete filita;
+                    cout << "SEGUNDO ELSE";
+                }
+
+
+            }
+            else{ //En el caso de que sea cualquier otra
+                auxFIL->sgtFila=filita->sgtFila;
+                delete filita;
+                cout<<"ULTIMO ELSE";
+
             }
 
-       if(i==0){ //En el caso de que la fila que queremos eliminar sea la primera o la unica
+                cantFil=0;
+                Cols=Cols->sgtColumna;
 
-       if(filita->sgtFila==NULL){//es la unica
-        Cols->fila->sgtFila=NULL;
-        delete filita;
-        cout << "PRIMER IF";
-       }
-       else{ //es la primera pero no la unica
-        Cols->fila=Cols->fila->sgtFila;
-        //cout<< Cols->fila->dato; //ACA ESTA HACIENDO EL COUT perfecto, tira el dato que tiene que tirar que seria la segunda fila ya que la idea es eliminar la primera.
-        //cout << filita->dato; //ACA hace el cout como corresponde pero cuando lo pasa en  mostrar lo deja vacios wtf
-        delete filita;
-        cout << "SEGUNDO ELSE";
-        }
+          }
 
-
-        }
-        else{ //En el caso de que sea cualquier otra
-        auxFIL->sgtFila=filita->sgtFila;
-        delete filita;
-        cout<<"ULTIMO ELSE";
-
-           }
-
-        cantFil=0;
-        Cols=Cols->sgtColumna;
-
-      }
-
-    //Ya tenemos todo en un caso ideal
-return tabl;
+        //Ya tenemos todo en un caso ideal
+    return tabl;
 
 }
 

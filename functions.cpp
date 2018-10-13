@@ -391,7 +391,98 @@ tabla eliminarTabla(tabla tabl, string name){
     return tabl;
 }
 
+tipoRet actualizoDatos(tabla *tabl, string tablNom, string condicionCol, string condicionDato, string nuevoDatoCol, string nuevoDato) {
+    tabla tablon;
+    tabla auxTable;
+    tablon = *tabl;
+    auxTable = *tabl;
 
+   if(tablNom == "" || condicionCol == "" || condicionCol == "") {
+        return error;
+    } else {
+        while(!esVacia(auxTable)) {
+            if(auxTable->nombre == tablNom) {
+                tablon = actualizarDatos(*tabl, auxTable, condicionCol, condicionDato, nuevoDatoCol, nuevoDato);
+                *tabl=tablon;
+                return ok;
+            }
+            auxTable = auxTable->ptrtabla;
+        }
+
+        return error;
+    }
+}
+
+tabla actualizarDatos(tabla tabl, tabla auxTabla, string condicionCol, string condicionDato, string nuevoDatoCol, string nuevoDato){ //update (Personas,Nombre=”Pepe”,CI,1555000);
+    columna auxCol;
+    fila auxFila;
+    int nivel = 0;
+
+    if(!esVacia(auxTabla->columna)) {
+        auxCol = auxTabla->columna;
+    } else {
+        return tabl; // La tabla no tiene columnas
+    }
+
+    // Empieza a buscar fila con el dato condicion
+    while(!esVacia(auxCol)) { // Recorre columnas
+
+        if(auxCol->nombreCol == condicionCol) {
+
+            auxFila = auxCol->fila;
+            while(!esVacia(auxFila)) { // Recorre filas
+
+                if(auxFila->dato == condicionDato) {
+                    // Si encuentra dato condicion, busca columnas para actualizar datos
+                    //cout << auxCol->nombreCol;
+                    //cout << "ENCONTRODATO";
+                    int contar = 0;
+                    auxCol = auxTabla->columna;
+                    auxFila = auxCol->fila;
+
+                    while(!esVacia(auxCol)) {
+                                            //cout << "NOMBRECOL " << auxCol->nombreCol << " = " << nuevoDatoCol << endl;
+
+                       if(auxCol->nombreCol == nuevoDatoCol) {
+                            //cout << "ESTAENTRANDO" << auxCol->nombreCol << endl;
+                            auxFila = auxCol->fila;
+                            cout << nivel << endl;
+
+                            // Busca filas de esa columna en el mismo nivel donde encontro los datos de la condicion
+                            while(contar < nivel) {
+                                auxFila = auxFila->sgtFila;
+                                contar++;
+                            }
+
+                            if(contar == nivel) {
+                                auxFila = auxCol->fila;
+
+                                auxFila->dato = nuevoDato; // Reemplaza dato
+
+                                return tabl;
+                            }
+                        }
+
+                        auxCol = auxCol->sgtColumna;
+                    }
+
+                    return tabl; // No encuentra columna que cumpla con la condicion
+
+                }
+
+                nivel++; // Almacena el nivel de filas que va recorriendo
+                auxFila = auxFila->sgtFila;
+            }
+
+            return tabl; // No encuentra dato que cumpla con la condicion
+        }
+
+        auxCol = auxCol->sgtColumna;
+    }
+
+    return tabl; // No encuentra columna que cumpla condicion*/
+
+}
 
 tipoRet eliminoDato(tabla *tabl,string tablNom, string colNom, string filNom){
     //condis como que si tenes una sola column pregunte si queres borrar toda la tabla antes de seguir.
@@ -407,14 +498,14 @@ tipoRet eliminoDato(tabla *tabl,string tablNom, string colNom, string filNom){
 
     i=buscoDato(tablon,tablNom,colNom,filNom);//Busco la pos del dato
     if(i==-1){
-    //no existe el dato
-    cout << "No existe ahre";
-    //return error
+        //no existe el dato
+        cout << "No existe ahre";
+        //return error
     }else{
-    //Func ELIMINO
-    TablaBorrar=eliminarDato(TablaBorrar,i,tablNom);
+        //Func ELIMINO
+        TablaBorrar=eliminarDato(TablaBorrar,i,tablNom);
 
-    *tabl=TablaBorrar;
+        *tabl=TablaBorrar;
     }
 
     return ok;
@@ -460,7 +551,7 @@ int buscoDato(tabla tabl,string tablNom, string colNom, string filNom){ //Encont
     }
 
     if(fil==NULL){
-    i=-1;
+        i=-1;
     }
     return i;
 
@@ -501,14 +592,14 @@ tabla eliminarDato(tabla tabl, int i, string tablNom){
                if(filita->sgtFila==NULL){//es la unica
                     Cols->fila->sgtFila=NULL;
                     delete filita;
-                    cout << "PRIMER IF";
+                    //cout << "PRIMER IF";
                }
                else{ //es la primera pero no la unica
                     Cols->fila=Cols->fila->sgtFila;
                     //cout<< Cols->fila->dato; //ACA ESTA HACIENDO EL COUT perfecto, tira el dato que tiene que tirar que seria la segunda fila ya que la idea es eliminar la primera.
                     //cout << filita->dato; //ACA hace el cout como corresponde pero cuando lo pasa en  mostrar lo deja vacios wtf
                     delete filita;
-                    cout << "SEGUNDO ELSE";
+                    //cout << "SEGUNDO ELSE";
                 }
 
 
@@ -516,7 +607,7 @@ tabla eliminarDato(tabla tabl, int i, string tablNom){
             else{ //En el caso de que sea cualquier otra
                 auxFIL->sgtFila=filita->sgtFila;
                 delete filita;
-                cout<<"ULTIMO ELSE";
+                //cout<<"ULTIMO ELSE";
 
             }
 

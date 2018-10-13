@@ -33,8 +33,6 @@ struct _tabla{
 
 
 
-
-
 ////////////////////Functs
 void richard();
 void muestroR(tipoRet resultado);
@@ -53,6 +51,9 @@ tabla insertarColumna(tabla tabl, tabla auxTable, string columna);
 
 tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato);
 tabla insertarDato(tabla tabl, tabla tablaInsertarDato, string dato);
+
+tipoRet actualizoDatos(tabla *tabl, string tablNom, string condicionCol, string condicionDato, string nuevoDatoCol, string nuevoDato);
+tabla actualizarDatos(tabla tabl, tabla auxTabla, string condicionCol, string condicionDato, string nuevoDatoCol, string nuevoDato);
 
 void mostrarListaRecur(tabla l);
 void mostrarLista(tabla l);

@@ -69,3 +69,9 @@ tipoRet eliminoDato(tabla *tabl, string tablNom, string colNom, string filNom);
 int buscoDato(tabla tabl, string tablNom, string colNom, string filNom);
 //tabla eliminarDatoReferencia(tabla tabl,string tablNom, string colNom, string filNom);
 tabla eliminarDato(tabla tabl, int i, string tablNom);
+
+
+tipoRet eliminoColumna(tabla *tabl,string tablNom, string colNom);
+int buscoColumna(tabla tabl,string tablNom, string colNom);
+tabla eliminarColumna(tabla tabl, int i, string tablNom);
+fila vaciarFilas(fila fil);

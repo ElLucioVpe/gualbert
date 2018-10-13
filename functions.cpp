@@ -592,14 +592,12 @@ tabla eliminarDato(tabla tabl, int i, string tablNom){
                if(filita->sgtFila==NULL){//es la unica
                     Cols->fila->sgtFila=NULL;
                     delete filita;
-                    //cout << "PRIMER IF";
                }
                else{ //es la primera pero no la unica
                     Cols->fila=Cols->fila->sgtFila;
                     //cout<< Cols->fila->dato; //ACA ESTA HACIENDO EL COUT perfecto, tira el dato que tiene que tirar que seria la segunda fila ya que la idea es eliminar la primera.
                     //cout << filita->dato; //ACA hace el cout como corresponde pero cuando lo pasa en  mostrar lo deja vacios wtf
                     delete filita;
-                    //cout << "SEGUNDO ELSE";
                 }
 
 
@@ -607,7 +605,6 @@ tabla eliminarDato(tabla tabl, int i, string tablNom){
             else{ //En el caso de que sea cualquier otra
                 auxFIL->sgtFila=filita->sgtFila;
                 delete filita;
-                //cout<<"ULTIMO ELSE";
 
             }
 
@@ -620,4 +617,145 @@ tabla eliminarDato(tabla tabl, int i, string tablNom){
     return tabl;
 
 }
+
+
+//Elimino Columna
+
+tipoRet eliminoColumna(tabla *tabl,string tablNom, string colNom){
+    //condis como que si tenes una sola column pregunte si queres borrar toda la tabla antes de seguir.
+    tabla tablon;
+    tablon=new _tabla;
+    tablon=*tabl; //tablon es modificado con la intencion de solo buscar Columns
+
+    tabla ColumnaBorrar;
+    ColumnaBorrar = new _tabla;
+
+    ColumnaBorrar=*tabl;
+    int i;
+
+    i=buscoColumna(tablon,tablNom,colNom);//Busco la pos del Columna
+
+    if(i==-1){
+    //no existe el dato
+    cout << "Columna no encontrada";
+    //return error
+    }else if(i==-2){
+    //es el primero y hay mas, entonces es el PK
+    cout << "Esta deseando Eliminar la PK";
+    //return error
+    }else{
+    //Func ELIMINO
+    ColumnaBorrar=eliminarColumna(ColumnaBorrar,i,tablNom); //ColumnaBorrar es las tablas
+
+    *tabl=ColumnaBorrar;
+    }
+
+    return ok;
+
+}
+
+int buscoColumna(tabla tabl,string tablNom, string colNom){ //EncontramosColumna por= buscamos una tabla, una column. retorna posi de esa column
+
+   columna col;
+   col = new _columna;
+
+    int i=0;
+
+    tabla tablaAux;
+    tablaAux = new _tabla;
+    tablaAux=tabl;
+
+
+    //Encontramos la tabla que el user nos indico
+   while(tablaAux->nombre!=tablNom){
+    tablaAux=tablaAux->ptrtabla;
+    }
+
+    //encontro la tabla deseada
+    //arranca en esta colum de la tabla deseada
+    col=tablaAux->columna;
+    //Recorre columns hasta encontrar de donde el user quiere eliminar el dato
+   while((col->nombreCol!=colNom)&&(col!=NULL)){
+        col=col->sgtColumna;
+        i++;
+   }
+
+    if(col==NULL){ //col llego a null lo que quiere decir que no la encotro
+    i=-1;
+    }else if((i==0)&&(col->sgtColumna!=NULL)&&(col!=NULL)) //condicion triple, es la primer column, la siguiente existe, y la acutal no es nula(para evitar que sea i = 0 por inexistencia)
+    {
+    i=-2; //la column que desean borrar es pk, y hay otras no es unica
+
+    }
+
+    return i;
+
+}
+
+
+tabla eliminarColumna(tabla tabl, int i, string tablNom){
+    columna Cols = new _columna;
+    columna auxCol = new _columna;
+
+    tabla tablaAux = new _tabla;
+    tablaAux=tabl;
+
+    int cantCol=0;
+
+
+        //Encontramos la tabla que el user nos indico
+        while(tablaAux->nombre!=tablNom){
+            tablaAux=tablaAux->ptrtabla;
+        }
+
+
+        Cols=tablaAux->columna; //tenemos la primera column de la tabla, TIME TO DELETE!
+
+            while(cantCol<i){
+                auxCol=Cols;
+                Cols=Cols->sgtColumna;
+
+                cantCol++;
+                }
+
+            if (Cols->fila!=NULL){ //Llamamos a una func que borra todas las filas de la columna
+            Cols->fila=vaciarFilas(Cols->fila);
+            }
+
+           if(i==0){ //En el coaso de que la columna sea la unica
+
+                    delete Cols ;
+                    Cols=NULL;
+               }
+
+          //  }
+            else{ //En el caso de que sea cualquier otra
+            // cout<<"ULTIMO ELSE";
+
+                auxCol->sgtColumna=Cols->sgtColumna;
+                delete Cols;
+
+            }
+
+        //Ya tenemos todo en un caso ideal
+    return tabl;
+
+}
+
+
+fila vaciarFilas(fila fil){
+
+    if(fil!=NULL){
+
+        return vaciarFilas(fil->sgtFila);
+
+    }else{
+
+    delete (fil);
+}
+
+    return fil;//Podria ser Return NULL tambien
+
+}
+
 

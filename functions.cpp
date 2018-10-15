@@ -5,20 +5,25 @@ tipoRet insertoTabla(tabla *tabl, string nombre){
     tabla auxTable;
     auxTable = *tabl;
 
-    while(!esVacia(auxTable)) {
-        if(auxTable->nombre == nombre) {
-            return error; // Ya existe una tabla con ese nombre
+    if(nombre != "") {
+        while(!esVacia(auxTable)) {
+            if(auxTable->nombre == nombre) {
+                return error; // Ya existe una tabla con ese nombre
+            }
+            auxTable = auxTable->ptrtabla;
         }
-        auxTable = auxTable->ptrtabla;
+
+        // Crea nueva tabla
+        tabla tablon;
+        tablon=*tabl;
+        tablon=insertarTabla(tablon,nombre);
+        *tabl=tablon;
+
+        return ok;
+    } else {
+        return error;
     }
 
-    // Crea nueva tabla
-    tabla tablon;
-    tablon=*tabl;
-    tablon=insertarTabla(tablon,nombre);
-    *tabl=tablon;
-
-    return ok;
 }
 
 tabla insertarTabla(tabla tabl, string name){

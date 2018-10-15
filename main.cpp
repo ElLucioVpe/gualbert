@@ -22,7 +22,7 @@ int main()
     muestroR(inicioTabla(&tablas));
     muestroR(insertoTabla(&tablas,"clientes"));
     muestroR(insertoTabla(&tablas,"personas"));
-    muestroR(insertoTabla(&tablas,"mascotas"));
+    muestroR(insertoTabla(&tablas,"mascotas));
 
     muestroR(insertoColumna(&tablas, "personas", "ci"));
     muestroR(insertoColumna(&tablas, "personas", "nombre"));

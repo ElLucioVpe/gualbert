@@ -77,7 +77,7 @@ tipoRet insertoColumna(tabla *tabl, string nombreTabla, string nombreColumna){
                     auxFila = auxCol->fila;
 
                     if(!esVacia(auxCol->fila)) {
-                        return error; // La tabla tiene por log menos una tupla
+                        return error; // La tabla tiene por lo menos una tupla
                     }
                 }
 
@@ -130,6 +130,11 @@ tabla insertarColumna(tabla tabl, tabla auxTable, string nombreColumna) {
 
 //Inserto Dato
 tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
+
+    if(nombreTabla == "" || dato == "") {
+        return error;
+    }
+
     tabla tablon;
     tablon=*tabl;
 
@@ -143,21 +148,21 @@ tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
     while(!esVacia(auxTable)){
         if(auxTable->nombre == nombreTabla) {
 
-        if(std::getline(ss, token, ':')) {
-            primaryKey = token;
-        }
+            if(std::getline(ss, token, ':')) {
+                primaryKey = token;
+            }
 
-        if(!verificoDuplicadoFila(tabl, nombreTabla, primaryKey)) {
-            tablon=insertarDato(tablon, auxTable, dato);
-            *tabl=tablon;
-            return ok;
-        } else {
-            return error;
+            if(!verificoDuplicadoFila(tabl, nombreTabla, primaryKey)) {
+                tablon=insertarDato(tablon, auxTable, dato);
+                *tabl=tablon;
+                return ok;
+            } else {
+                return error;
+            }
         }
-    }
         auxTable = auxTable->ptrtabla;
     }
-    return error;
+    return error; // No se encontro la tabla
 }
 
 tabla insertarDato(tabla tabl, tabla tablaInsertarDato, string dato){
@@ -669,6 +674,10 @@ tabla eliminarDato(tabla tabl, int i, string tablNom){
 //Elimino Columna
 
 tipoRet eliminoColumna(tabla *tabl,string tablNom, string colNom){
+    if(tablNom == "", colNom == "") {
+        return error; // No se especifica nombre de tabla o columna
+    }
+
     //condis como que si tenes una sola column pregunte si queres borrar toda la tabla antes de seguir.
     tabla tablon;
     tablon=new _tabla;

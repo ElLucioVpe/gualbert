@@ -13,7 +13,6 @@ int main()
     muestroR(insertoColumna(&tablas, "personas", "ci"));
     muestroR(insertoColumna(&tablas, "personas", "nombre"));
     muestroR(insertoColumna(&tablas, "personas", "apellido"));
-        //muestroR(insertoColumna(&tablas, "personas", "correo"));
 
     //muestroR(insertoDato(&tablas,"personas", "1:Martin:Perdomo"));
     muestroR(insertoDato(&tablas,"personas", "1:Martin:Perdomo"));
@@ -21,12 +20,11 @@ int main()
     muestroR(insertoDato(&tablas,"personas", "7:Lautaro:KASjkdsjk"));
     muestroR(insertoDato(&tablas,"personas", "4:Nicolas:Varela"));
 
-    muestroR(actualizoDatos(&tablas, "personas", "ci", "1", "ci", "69"));
-    //muestroR(eliminoTabla(&tablas, "personas"));
-  //  muestroR(insertoDato(&tablas,"personas", "8:SOldado:KASjkdsjk"));
-  //  muestroR(insertoDato(&tablas,"personas", "9:Zi:Rica"));
- //   muestroR(insertoDato(&tablas,"personas", "710:Robert:ole"));
-   // muestroR(insertoDato(&tablas,"personas", "8:Luis:OJILI"));
+    //muestroR(insertoColumna(&tablas, "personas", "correo"));
+
+    //muestroR(actualizoDatos(&tablas, "personas", "ci", "1", "ci", "69"));
+
+    //muestroR(eliminoTabla(&tablas, "mascotas"));
 
 
     //muestroR(eliminoDato(&tablas, "personas","ci","69"));

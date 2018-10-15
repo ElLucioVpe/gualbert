@@ -363,16 +363,32 @@ void mostrarListaRecur(tabla l){
 
 tipoRet eliminoTabla(tabla *tabl,string nombre){
 
-    //if tiene columnas pasar a eliminar las col primero
-    tabla tablon;
-    tablon=*tabl;
-    if (!esVacia(tablon)){
-        tablon=eliminarTabla(tablon,nombre);
-        *tabl=tablon;
-        return ok;
-    }else{
+    if(nombre != "") {
+        //if tiene columnas pasar a eliminar las col primero
+        tabla auxTable;
+        tabla tablon;
+        auxTable=*tabl;
+        tablon=*tabl;
+
+        if (!esVacia(tablon)){
+
+            while(!esVacia(auxTable)) {
+                if(auxTable->nombre == nombre) {
+                    tablon=eliminarTabla(tablon,nombre);
+                    *tabl=tablon;
+                    return ok;
+                }
+                auxTable = auxTable->ptrtabla;
+            }
+
+            return error; // No existe la tabla :(
+        }else{
+            return error;
+        }
+    } else {
         return error;
     }
+
 }
 
 tabla eliminarTabla(tabla tabl, string name){
@@ -394,8 +410,6 @@ tabla eliminarTabla(tabla tabl, string name){
 
     //Casos cuando salga del while
     if(BorrarTabl==NULL){  // significa que recorrio toda la lista y cuando entro al while al final BorrarTabl es igual a null/ apunta al putero sig del ultimo nodo entonces NULL
-        cout << "El elemento no existe";
-
     } else if(anterior==NULL) { // Si entra aca significa que no entro al while porque el elemento que buscamos es el primero en la lista, entonces  tabl apunta al sig nodo y deleteamos el primer nodo que esta en BorrarTabl.
         tabl = tabl->ptrtabla;
         delete BorrarTabl;
@@ -464,7 +478,7 @@ tabla actualizarDatos(tabla tabl, tabla auxTabla, string condicionCol, string co
                        if(auxCol->nombreCol == nuevoDatoCol) {
                             //cout << "ESTAENTRANDO" << auxCol->nombreCol << endl;
                             auxFila = auxCol->fila;
-                            cout << nivel << endl;
+                            //cout << nivel << endl;
 
                             // Busca filas de esa columna en el mismo nivel donde encontro los datos de la condicion
                             while(contar < nivel) {

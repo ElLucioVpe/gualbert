@@ -8,21 +8,10 @@ int main()
     //tablas = new _tabla;
     //tablas = new _tabla;
 
-
-    /*muestroR(inicioTabla(&tablas));
-    muestroR(insertoTabla(&tablas,"Darin"));
-    muestroR(insertoTabla(&tablas,"Roshi"));
-    muestroR(eliminoTabla(&tablas,"Roshi"));
-    //muestroR(insertoTabla(tablas,"puertas"));
-
-    //ricarddin=esVaciaTabla(tablas);
-    muestroR(mostrarListaRet(tablas));
-    muestroR(insertoColumna(&tablas, "nombre"))*/
-
     muestroR(inicioTabla(&tablas));
     muestroR(insertoTabla(&tablas,"clientes"));
     muestroR(insertoTabla(&tablas,"personas"));
-    muestroR(insertoTabla(&tablas,"mascotas));
+    muestroR(insertoTabla(&tablas,"mascotas"));
 
     muestroR(insertoColumna(&tablas, "personas", "ci"));
     muestroR(insertoColumna(&tablas, "personas", "nombre"));
@@ -35,6 +24,7 @@ int main()
     muestroR(insertoDato(&tablas,"personas", "4:Nicolas:Varela"));
 
     muestroR(actualizoDatos(&tablas, "personas", "ci", "1", "ci", "69"));
+    muestroR(eliminoTabla(&tablas, "personas"));
   //  muestroR(insertoDato(&tablas,"personas", "8:SOldado:KASjkdsjk"));
   //  muestroR(insertoDato(&tablas,"personas", "9:Zi:Rica"));
  //   muestroR(insertoDato(&tablas,"personas", "710:Robert:ole"));
@@ -52,7 +42,7 @@ int main()
     muestroR(mostrarListaRet(tablas));
     cout << endl;
 
-    cout << verificoDuplicadoFila(&tablas, "personas", "69") << endl;
+    //cout << verificoDuplicadoFila(&tablas, "personas", "69") << endl;
 
     //cout << tablas->nombre << endl;
     //cout << tablas->nombre;

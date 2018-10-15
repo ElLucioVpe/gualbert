@@ -62,6 +62,7 @@ bool esVacia(tabla tabl);
 bool esVacia(columna colum);
 bool esVacia(fila aux);
 
+
 tipoRet mostrarListaRet(tabla l);
 
 
@@ -75,3 +76,5 @@ tipoRet eliminoColumna(tabla *tabl,string tablNom, string colNom);
 int buscoColumna(tabla tabl,string tablNom, string colNom);
 tabla eliminarColumna(tabla tabl, int i, string tablNom);
 fila vaciarFilas(fila fil);
+
+bool verificoDuplicadoFila(tabla *tabl, string nombreTabla, string primaryKey);

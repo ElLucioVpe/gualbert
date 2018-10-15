@@ -32,6 +32,8 @@ int main()
     muestroR(insertoDato(&tablas,"personas", "1:Martin:Perdomo"));
     muestroR(insertoDato(&tablas,"personas", "4:Diego:Olivera"));
     muestroR(insertoDato(&tablas,"personas", "7:Lautaro:KASjkdsjk"));
+    muestroR(insertoDato(&tablas,"personas", "4:Nicolas:Varela"));
+
     muestroR(actualizoDatos(&tablas, "personas", "ci", "1", "ci", "69"));
   //  muestroR(insertoDato(&tablas,"personas", "8:SOldado:KASjkdsjk"));
   //  muestroR(insertoDato(&tablas,"personas", "9:Zi:Rica"));
@@ -39,16 +41,18 @@ int main()
    // muestroR(insertoDato(&tablas,"personas", "8:Luis:OJILI"));
 
 
-    muestroR(eliminoDato(&tablas, "personas","ci","69"));
-    muestroR(eliminoDato(&tablas, "personas","ci","4"));
+    //muestroR(eliminoDato(&tablas, "personas","ci","69"));
+    //muestroR(eliminoDato(&tablas, "personas","ci","4"));
     //muestroR(eliminoColumna(&tablas, "personas","nombre"));
-    muestroR(eliminoColumna(&tablas, "personas","nombre"));
+    //muestroR(eliminoColumna(&tablas, "personas","nombre"));
    // muestroR(eliminoDato(&tablas, "personas","ci","8"));
     //muestroR(eliminoDato(&tablas, "personas","ci","9"));
 
 
     muestroR(mostrarListaRet(tablas));
     cout << endl;
+
+    cout << verificoDuplicadoFila(&tablas, "personas", "69") << endl;
 
     //cout << tablas->nombre << endl;
     //cout << tablas->nombre;

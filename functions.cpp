@@ -116,12 +116,25 @@ tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
     tabla auxTable;
     auxTable = *tabl;
 
+    string primaryKey;
+    std::istringstream ss(dato);
+    std::string token;
+
     while(!esVacia(auxTable)){
         if(auxTable->nombre == nombreTabla) {
+
+        if(std::getline(ss, token, ':')) {
+            primaryKey = token;
+        }
+
+        if(!verificoDuplicadoFila(tabl, nombreTabla, primaryKey)) {
             tablon=insertarDato(tablon, auxTable, dato);
             *tabl=tablon;
             return ok;
+        } else {
+            return error;
         }
+    }
         auxTable = auxTable->ptrtabla;
     }
     return error;
@@ -762,4 +775,41 @@ fila vaciarFilas(fila fil){
 
 }
 
+bool verificoDuplicadoFila(tabla *tabl, string nombreTabla, string primaryKey) {
+    tabla auxTabla;
+    auxTabla = *tabl;
 
+    // Recorre tablas
+    while(!esVacia(auxTabla)) {
+
+        // Existe una tabla con nombre igual a nombreTabla
+        if(auxTabla->nombre == nombreTabla) {
+            columna auxCol;
+            auxCol = auxTabla->columna;
+
+            // Recorre la primera columna
+            if(!esVacia(auxCol)) {
+
+                fila auxFila;
+                auxFila = auxCol->fila;
+
+                // Recorre filas
+                while(!esVacia(auxFila)) {
+                    if(auxFila->dato == primaryKey) {
+                        return true;
+                    }
+
+                    auxFila = auxFila->sgtFila;
+                }
+
+                auxCol = auxCol->sgtColumna;
+            } else {
+                return false;
+            }
+        }
+
+        auxTabla = auxTabla->ptrtabla;
+
+    }
+    return false;
+}

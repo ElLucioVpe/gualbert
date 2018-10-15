@@ -58,15 +58,30 @@ tipoRet insertoColumna(tabla *tabl, string nombreTabla, string nombreColumna){
     tabla auxTable;
     auxTable = *tabl;
 
+    if(nombreColumna == "" || nombreTabla == "") {
+        return error;
+    }
 
     if(!esVacia(auxTable)) {
 
         while(!esVacia(auxTable)) {
+
             if(auxTable->nombre == nombreTabla) {
 
                 columna auxCol;
                 auxCol = auxTable->columna;
 
+                // Chequea que la primera fila de la primera columna (si existe) no sea vacia
+                if(!esVacia(auxCol)) {
+                    fila auxFila;
+                    auxFila = auxCol->fila;
+
+                    if(!esVacia(auxCol->fila)) {
+                        return error; // La tabla tiene por log menos una tupla
+                    }
+                }
+
+                // Verifica que no exista columna con ese nombre
                 while(!esVacia(auxCol)) {
                     if(auxCol->nombreCol == nombreColumna) {
                         return error; // Ya existe una columna con ese nombre

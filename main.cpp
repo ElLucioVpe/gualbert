@@ -3,10 +3,7 @@
 int main()
 {
     ////Tablas
-   // bool ricarddin;
     tabla tablas; //creo una variable de tipo tabla llamada talbas que ya es puntero a la struct _tablas
-    //tablas = new _tabla;
-    //tablas = new _tabla;
 
     muestroR(inicioTabla(&tablas));
     muestroR(insertoTabla(&tablas,"clientes"));
@@ -16,6 +13,7 @@ int main()
     muestroR(insertoColumna(&tablas, "personas", "ci"));
     muestroR(insertoColumna(&tablas, "personas", "nombre"));
     muestroR(insertoColumna(&tablas, "personas", "apellido"));
+        //muestroR(insertoColumna(&tablas, "personas", "correo"));
 
     //muestroR(insertoDato(&tablas,"personas", "1:Martin:Perdomo"));
     muestroR(insertoDato(&tablas,"personas", "1:Martin:Perdomo"));
@@ -24,7 +22,7 @@ int main()
     muestroR(insertoDato(&tablas,"personas", "4:Nicolas:Varela"));
 
     muestroR(actualizoDatos(&tablas, "personas", "ci", "1", "ci", "69"));
-    muestroR(eliminoTabla(&tablas, "personas"));
+    //muestroR(eliminoTabla(&tablas, "personas"));
   //  muestroR(insertoDato(&tablas,"personas", "8:SOldado:KASjkdsjk"));
   //  muestroR(insertoDato(&tablas,"personas", "9:Zi:Rica"));
  //   muestroR(insertoDato(&tablas,"personas", "710:Robert:ole"));
@@ -42,30 +40,5 @@ int main()
     muestroR(mostrarListaRet(tablas));
     cout << endl;
 
-    //cout << verificoDuplicadoFila(&tablas, "personas", "69") << endl;
-
-    //cout << tablas->nombre << endl;
-    //cout << tablas->nombre;
-    //cout << tablas->columna->nombreCol << endl;
-    /*
-    cout << tablas->ptrtabla->columna->fila->dato << endl;
-    cout << tablas->ptrtabla->columna->fila->sgtFila->dato << endl;
-    cout << tablas->ptrtabla->columna->fila->sgtFila->sgtFila->dato << endl;
-
-    cout << tablas->ptrtabla->columna->sgtColumna->fila->dato << endl;
-    cout << tablas->ptrtabla->columna->sgtColumna->fila->sgtFila->dato << endl;
-    cout << tablas->ptrtabla->columna->sgtColumna->fila->sgtFila->sgtFila->dato << endl;
-
-    cout << tablas->ptrtabla->columna->sgtColumna->sgtColumna->fila->dato << endl;
-    cout << tablas->ptrtabla->columna->sgtColumna->sgtColumna->fila->sgtFila->dato << endl;*/
-
-
-
-    //cout << ricarddin;
-
-
-    //richard();
-
-    ////Columnas
     return 0;
 }

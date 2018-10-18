@@ -165,7 +165,6 @@ tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
                 primaryKey = token;
             }
 
-<<<<<<< HEAD
             if(!verificoDuplicadoFila(tabl, nombreTabla, primaryKey)) {
                 tablon=insertarDato(tablon, auxTable, dato);
                 *tabl=tablon;
@@ -173,7 +172,6 @@ tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
             } else {
                 return error;
             }
-=======
         if(!verificoDuplicadoFila(tabl, nombreTabla, primaryKey)) {
 
                 if(numCols==numDats){
@@ -189,15 +187,10 @@ tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
         } else {
             cout << "Pk multiplicada";
             return error;
->>>>>>> 28c17b562bc77701a069b6a8f429b60410e84f3c
         }
         auxTable = auxTable->ptrtabla;
     }
-<<<<<<< HEAD
     return error; // No se encontro la tabla
-=======
-    return error; //raro este error
->>>>>>> 28c17b562bc77701a069b6a8f429b60410e84f3c
 }
 
 tabla insertarDato(tabla tabl, tabla tablaInsertarDato, string dato){

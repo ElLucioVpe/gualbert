@@ -78,3 +78,5 @@ tabla eliminarColumna(tabla tabl, int i, string tablNom);
 fila vaciarFilas(fila fil);
 
 bool verificoDuplicadoFila(tabla *tabl, string nombreTabla, string primaryKey);
+
+int cuentoColumnas(string nombreTabla, tabla tabl);

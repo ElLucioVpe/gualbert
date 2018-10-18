@@ -138,12 +138,25 @@ tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
     tabla tablon;
     tablon=*tabl;
 
+    int numDats=0;
+    int numCols=0;
+
     tabla auxTable;
     auxTable = *tabl;
 
     string primaryKey;
     std::istringstream ss(dato);
     std::string token;
+
+    std::istringstream dd(dato);
+    std::string tokenx;
+
+    //Verifico numero de datos que se quieren insertar
+     while(std::getline(dd, tokenx, ':')) {
+           numDats++;
+        }
+        numCols=cuentoColumnas(nombreTabla,auxTable);
+    ////
 
     while(!esVacia(auxTable)){
         if(auxTable->nombre == nombreTabla) {
@@ -159,10 +172,26 @@ tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
             } else {
                 return error;
             }
+        if(!verificoDuplicadoFila(tabl, nombreTabla, primaryKey)) {
+
+                if(numCols==numDats){
+                    tablon=insertarDato(tablon, auxTable, dato);
+                   *tabl=tablon;
+                   return ok;
+                }
+                else {
+                cout << "No tiene el mismo numero de tuplas que de columnas";
+                return error;
+               }
+
+        } else {
+            cout << "Pk multiplicada";
+            return error;
         }
         auxTable = auxTable->ptrtabla;
     }
     return error; // No se encontro la tabla
+    return error; //raro este error
 }
 
 tabla insertarDato(tabla tabl, tabla tablaInsertarDato, string dato){
@@ -325,6 +354,10 @@ void mostrarListaRecur(tabla l){
 
             // Recorre las filas siguientes
             col = l->columna;
+            if(ultimaFila==NULL){
+            cout << "No hay Datos";
+            }else{
+
             while(!esVacia(ultimaFila->sgtFila)) { // Recorre hasta que el siguiente de alguna columna sea NULL -BEBETO si hace eso y queda uno solo nunca entra
                 //cout << "IMPORTANTE" << i << endl;
             col = l->columna;
@@ -359,6 +392,7 @@ void mostrarListaRecur(tabla l){
 
             }
 
+            }
             }
 
 
@@ -855,4 +889,27 @@ bool verificoDuplicadoFila(tabla *tabl, string nombreTabla, string primaryKey) {
 
     }
     return false;
+}
+
+
+int cuentoColumnas(string nombreTabla,tabla tabl){ // cuento columns en una tabla
+int i=0;
+tabla tablAux;
+tablAux = new _tabla;
+tablAux = tabl;
+
+columna colum;
+colum = new _columna;
+
+    while(tablAux->nombre!=nombreTabla){
+    tablAux= tablAux->ptrtabla;
+    }
+colum=tablAux->columna;
+
+    while(colum!=NULL){
+    i++;
+    colum=colum->sgtColumna;
+    }
+
+return i;
 }

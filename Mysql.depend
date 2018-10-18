@@ -22,36 +22,36 @@
 1539298531 source:/home/luciano/git/gualbert/main.cpp
 	"header.h"
 
-1539473215 source:/home/alien/Documents/ProgramaProyecto/GualbertProy/gualbert/functions.cpp
+1539742180 source:/home/alien/Documents/ProgramaProyecto/GualbertProy/gualbert/functions.cpp
 	"header.h"
 
-1539470584 /home/alien/Documents/ProgramaProyecto/GualbertProy/gualbert/header.h
+1539742025 /home/alien/Documents/ProgramaProyecto/GualbertProy/gualbert/header.h
 	<iostream>
 	<string>
 	<sstream>
 
-1539472663 source:/home/alien/Documents/ProgramaProyecto/GualbertProy/gualbert/main.cpp
+1539740642 source:/home/alien/Documents/ProgramaProyecto/GualbertProy/gualbert/main.cpp
 	"header.h"
 
-1539463544 source:/mnt/c/Users/lucia/git/gualbert/main.cpp
+1539627247 source:/mnt/c/Users/lucia/git/gualbert/main.cpp
 	"header.h"
-
-1539462356 /mnt/c/Users/lucia/git/gualbert/header.h
-	<iostream>
-	<string>
-	<sstream>
-
-1539464582 source:/mnt/c/Users/lucia/git/gualbert/functions.cpp
 	"header.h"
-
-1539630420 source:/mnt/c/Users/lucia/git/gualbert/functions.cpp
+	"header.h"
 	"header.h"
 
 1539619426 /mnt/c/Users/lucia/git/gualbert/header.h
 	<iostream>
 	<string>
 	<sstream>
+	<iostream>
+	<string>
+	<sstream>
 
+<<<<<<< HEAD
 1539631580 source:/mnt/c/Users/lucia/git/gualbert/main.cpp
+=======
+1539630420 source:/mnt/c/Users/lucia/git/gualbert/functions.cpp
+	"header.h"
+>>>>>>> 28c17b562bc77701a069b6a8f429b60410e84f3c
 	"header.h"
 

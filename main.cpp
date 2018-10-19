@@ -16,7 +16,14 @@ int main()
 
     do {
         cout << "mahSQL> ";
-        cin >> orden;
+
+        std::string orden;
+        std::getline(std::cin, orden);
+
+        if (orden.empty())    // line is empty, empty the queue to the console
+        {
+            cout << orden;
+        }
 
         varCount = 0;
         std::istringstream dd(orden);
@@ -25,7 +32,6 @@ int main()
         //Verifico numero de datos que se quieren insertar
          while(std::getline(dd, token, '(')) {
             if(orden.empty()) {
-                cout << "xd";
                 break;
             }
 
@@ -99,40 +105,39 @@ int main()
             cout << "- printDataTable(nombreTabla)" << endl;
             cout << "- mostrarTablas()" << endl;
             cout << endl;
+        } else {
+
+            //cout << orden << endl;
+
+            if(orden == "iniciarTabla") {
+                muestroR(inicioTabla(&tabl));
+            } else if (orden == "insertarTabla") {
+                //cout << var1 << endl;
+                muestroR(insertoTabla(&tabl,var1));
+            } else if (orden == "agregarColumna") {
+                muestroR(insertoColumna(&tabl, var1, var2));
+            } else if (orden == "eliminoColumna") { ////////////////
+                muestroR(eliminoColumna(&tabl, var1, var2));
+            }  else if (orden == "insertoDato") {
+                muestroR(insertoDato(&tabl, var1, var2));
+            } else if (orden == "eliminoDato") {
+                muestroR(eliminoDato(&tabl, var1, var2, var3));
+            } else if (orden == "actualizoDatos") {
+                muestroR(actualizoDatos(&tabl, var1, var2, var3, var4, var5));
+            } else if (orden == "printDataTable") {
+                cout << "Placeholder" << endl;
+            } else if (orden == "mostrarTablas") {
+                muestroR(mostrarListaRet(tabl));
+            }
+
+            //cout << "ORDEN: " << orden << " VAR1: " << var1 << " VAR2: " << var2 << " VAR3: " << var3 << " VAR4: " << var4 << " VAR5: " << var5 << endl;
+            var1 = "";
+            var2 = "";
+            var3 = "";
+            var4 = "";
+            var5 = "";
 
         }
-
-        //cout << orden << endl;
-
-        if(orden == "iniciarTabla") {
-            muestroR(inicioTabla(&tabl));
-        } else if (orden == "insertarTabla") {
-            //cout << var1 << endl;
-            muestroR(insertoTabla(&tabl,var1));
-        } else if (orden == "agregarColumna") {
-            muestroR(insertoColumna(&tabl, var1, var2));
-        } else if (orden == "eliminoColumna") { ////////////////
-            muestroR(eliminoColumna(&tabl, var1, var2));
-        }  else if (orden == "insertoDato") {
-            muestroR(insertoDato(&tabl, var1, var2));
-        } else if (orden == "eliminoDato") {
-            muestroR(eliminoDato(&tabl, var1, var2, var3));
-        } else if (orden == "actualizoDatos") {
-            muestroR(actualizoDatos(&tabl, var1, var2, var3, var4, var5));
-        } else if (orden == "printDataTable") {
-            cout << "Placeholder" << endl;
-        } else if (orden == "mostrarTablas") {
-            muestroR(mostrarListaRet(tabl));
-        }
-
-        //cout << "ORDEN: " << orden << " VAR1: " << var1 << " VAR2: " << var2 << " VAR3: " << var3 << " VAR4: " << var4 << " VAR5: " << var5 << endl;
-        var1 = "";
-        var2 = "";
-        var3 = "";
-        var4 = "";
-        var5 = "";
-
-
     } while (orden != "salir");
 
     cout << "Hasta luego!" << endl;

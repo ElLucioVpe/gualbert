@@ -55,15 +55,15 @@
 1539630420 17b562bc77701a069b6a8f429b60410e84f3c
 	"header.h"
 
-1539905337 source:/mnt/c/Users/lucia/git/gualbert/functions.cpp
+1539978918 source:/mnt/c/Users/lucia/git/gualbert/functions.cpp
 	"header.h"
 
-1539974036 /mnt/c/Users/lucia/git/gualbert/header.h
+1539978858 /mnt/c/Users/lucia/git/gualbert/header.h
 	<iostream>
 	<stdlib.h>
 	<string>
 	<sstream>
 
-1539974163 source:/mnt/c/Users/lucia/git/gualbert/main.cpp
+1539974702 source:/mnt/c/Users/lucia/git/gualbert/main.cpp
 	"header.h"
 

@@ -74,8 +74,6 @@ tipoRet eliminoDato(tabla *tabl, string tablNom, string colNom, string filNom);
 int buscoDato(tabla tabl, string tablNom, string colNom, string filNom);
 //tabla eliminarDatoReferencia(tabla tabl,string tablNom, string colNom, string filNom);
 tabla eliminarDato(tabla tabl, int i, string tablNom);
-
-
 tipoRet eliminoColumna(tabla *tabl,string tablNom, string colNom);
 int buscoColumna(tabla tabl,string tablNom, string colNom);
 tabla eliminarColumna(tabla tabl, int i, string tablNom);
@@ -84,3 +82,7 @@ fila vaciarFilas(fila fil);
 bool verificoDuplicadoFila(tabla *tabl, string nombreTabla, string primaryKey);
 
 int cuentoColumnas(string nombreTabla, tabla tabl);
+
+tipoRet eliminoDatoTupla(tabla *tabl, string nombreTabla, string condicion);
+tabla eliminarDatoTupla(tabla tabl, tabla tablaAux, string columna, string dato);
+

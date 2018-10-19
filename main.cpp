@@ -101,6 +101,7 @@ int main()
             cout << "- eliminoColumna(nombreTabla,nombreColumna)" << endl;
             cout << "- insertoDato(nombreTabla,dato1:dato2)" << endl;
             cout << "- eliminoDato(nombreTabla,nombreColumna,datoFila)" << endl;
+            cout << "- eliminoDatoTupla(nombreTabla,nombreColumna,condicion)" << endl;
             cout << "- actualizoDatos(nombreTabla,condicionColumna,condicionDato,nuevoDatoCol,nuevoDato)" << endl;
             cout << "- printDataTable(nombreTabla)" << endl;
             cout << "- mostrarTablas()" << endl;
@@ -126,8 +127,12 @@ int main()
                 muestroR(actualizoDatos(&tabl, var1, var2, var3, var4, var5));
             } else if (orden == "printDataTable") {
                 cout << "Placeholder" << endl;
+            } else if (orden == "eliminoDatoTupla") {
+                muestroR(eliminoDatoTupla(&tabl, var1, var2));
             } else if (orden == "mostrarTablas") {
                 muestroR(mostrarListaRet(tabl));
+            } else {
+                cout << "Comando no valido. Puede escribir ayuda para repasar los comandos basicos." << endl;
             }
 
             //cout << "ORDEN: " << orden << " VAR1: " << var1 << " VAR2: " << var2 << " VAR3: " << var3 << " VAR4: " << var4 << " VAR5: " << var5 << endl;

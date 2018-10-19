@@ -515,7 +515,6 @@ tabla actualizarDatos(tabla tabl, tabla auxTabla, string condicionCol, string co
                     auxFila = auxCol->fila;
 
                     while(!esVacia(auxCol)) {
-                                            //cout << "NOMBRECOL " << auxCol->nombreCol << " = " << nuevoDatoCol << endl;
 
                        if(auxCol->nombreCol == nuevoDatoCol) {
                             //cout << "ESTAENTRANDO" << auxCol->nombreCol << endl;
@@ -530,7 +529,6 @@ tabla actualizarDatos(tabla tabl, tabla auxTabla, string condicionCol, string co
 
                             if(contar == nivel) {
                                 auxFila = auxCol->fila;
-
                                 auxFila->dato = nuevoDato; // Reemplaza dato
 
                                 return tabl;
@@ -554,7 +552,7 @@ tabla actualizarDatos(tabla tabl, tabla auxTabla, string condicionCol, string co
         auxCol = auxCol->sgtColumna;
     }
 
-    return tabl; // No encuentra columna que cumpla condicion*/
+    return tabl; // No encuentra columna que cumpla condicion
 
 }
 
@@ -896,4 +894,161 @@ colum=tablAux->columna;
     }
 
 return i;
+}
+
+tipoRet eliminoDatoTupla(tabla *tabl, string nombreTabla, string condicion) {
+    tabla tabAux = *tabl;
+    cout << condicion << endl;
+
+    // Encuentra comparador
+
+    if(nombreTabla == "" || condicion == "") {
+        return error; // Tabla no especificada
+    } else {
+
+        while(!esVacia(tabAux)) {
+
+            if(tabAux->nombre == nombreTabla) {
+
+                //Obtiene columna y datos de usuario
+                string col;
+                string dato;
+                char comp;
+                bool finRcorrido = false;
+
+                std::istringstream dd(condicion);
+                std::string token;
+
+                while(std::getline(dd, token, '=')) {
+                    if(finRcorrido == false) {
+                        col = token;
+                        finRcorrido = true;
+                    } else {
+                        dato = token;
+                    }
+                 }
+
+                // Recorre columnas
+
+                columna colAux;
+                colAux = tabAux->columna;
+
+                while(!esVacia(colAux)) {
+                    if(colAux->nombreCol == col) {
+                        // Encuentra comparador
+
+                        if(condicion.find('=')) {
+                            comp = '=';
+                        } else if (condicion.find('>')) {
+                            comp = '>';
+                        } else if (condicion.find('>')) {
+                            comp = '<';
+                        } else {
+                            return error;
+                        }
+
+                        tabla tabRes = new _tabla;
+                        tabRes = eliminarDatoTupla(*tabl, tabAux, col, dato, comp);
+                        *tabl = tabRes;
+                    }
+
+                    colAux = colAux->sgtColumna;
+                }
+
+                return error; // Columna no existe
+
+            }
+
+            tabAux = tabAux->ptrtabla;
+        }
+
+        return error; // Tabla no existe
+    }
+}
+
+tabla eliminarDatoTupla(tabla tabl, tabla tablaAux, string col, string dato, char comp) {
+    /*columna colAux = tablaAux->columna;
+
+    while(!esVacia(colAux)) {
+        bool elimina = false;
+
+        // Recorre columnas
+        if(colAux->nombreCol == col) {
+            cout << "Hasta aca llega " << colAux->nombreCol << endl;
+            int level = 0;
+            fila filAux = colAux->fila;
+
+            while(!esVacia(filAux)) {
+                //cout << "- level " << level << " dato " << filAux->dato << endl;
+                if(comp == '=') {
+                    if(filAux->dato == dato) {
+                        elimina = true;
+                    }
+                } else if (comp == '>') {
+                    if(filAux->dato > dato) {
+                        elimina = true;
+                    }
+                } else if (comp == '<') {
+                    if(filAux->dato < dato) {
+                        elimina = true;
+                    }
+                }
+
+                if(elimina == true) {
+
+                    columna delCol;
+                    delCol = tablaAux->columna;
+
+                    while(!esVacia(delCol)) {
+                        //cout << "empieza proceso de eliminar kappa" << delCol->nombreCol << endl;
+
+                        fila delFil;
+                        delFil = delCol->fila;
+                        int contar = 0;
+
+                        while(!esVacia(delFil)) {
+                            cout << "+ level " << level << " contar " << contar << " dato " << delFil->dato << endl;
+
+                            if(contar < level) {
+                                contar++;
+                            } else if (contar == level) {
+                                if(!esVacia(delFil->sgtFila->sgtFila)){
+                                    delFil->sgtFila = delFil->sgtFila->sgtFila;
+                                } else if (contar == 0) {
+                                    if(!esVacia(delFil->sgtFila)) {
+                                        cout << "opcion1" << endl; // Esta dando error aca xd
+                                        delFil = delFil->sgtFila;
+                                        colAux = tablaAux->columna;
+                                        filAux = colAux->fila;
+                                        break;
+                                    } else {
+                                        cout << "opcion2" << endl;
+                                        delFil = NULL;
+                                        break;
+                                    }
+                                } else {
+                                    cout << "opcion3" << endl;
+                                    delFil->sgtFila = NULL;
+                                }
+                                break;
+                            }
+
+                            //contar = 0;
+                            delFil = delFil->sgtFila;
+                        }
+
+                        delCol = delCol->sgtColumna;
+                    }
+                    mostrarListaRet(tabl);
+                }
+
+                filAux = filAux->sgtFila;
+                level++;
+            }
+        }
+
+        colAux = colAux->sgtColumna;
+    }
+
+    return tabl;*/
 }

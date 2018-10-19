@@ -1,6 +1,10 @@
 #include <iostream>
+#include <stdlib.h>
 #include <string>
 #include <sstream>
+
+#define LARGOCADENA 20
+
 using namespace std;
 
 

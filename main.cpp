@@ -2,49 +2,114 @@
 
 int main()
 {
-    ////Tablas
-    tabla tablas; //creo una variable de tipo tabla llamada talbas que ya es puntero a la struct _tablas
 
-    muestroR(inicioTabla(&tablas));
-    muestroR(insertoTabla(&tablas,"clientes"));
-    muestroR(insertoTabla(&tablas,"personas"));
-    muestroR(insertoTabla(&tablas,"mascotas"));
-    muestroR(insertoTabla(&tablas,"mascotas"));
+    string orden;
 
-    muestroR(insertoColumna(&tablas, "personas", "ci"));
-    muestroR(insertoColumna(&tablas, "personas", "nombre"));
-    muestroR(insertoColumna(&tablas, "personas", "apellido"));
+    int varCount = 0;
+    string var1;
+    string var2;
+    string var3;
+    string var4;
+    string var5;
 
-    muestroR(insertoDato(&tablas,"personas", "1:Martin:Perdomo"));
-    muestroR(insertoDato(&tablas,"personas", "4:Martin:Perdomo"));
-    muestroR(insertoDato(&tablas,"personas", "4:Diego:Olivera"));
-   // muestroR(insertoDato(&tablas,"personas", "7:Lautaro:KASjkdsjk"));
-   // muestroR(insertoDato(&tablas,"personas", "4:Nicolas:Varela"));
+    tabla tabl = new _tabla;
 
-    //muestroR(insertoColumna(&tablas, "personas", "correo"));
+    do {
+        cout << "mahSQL> ";
+        cin >> orden;
 
-    //muestroR(actualizoDatos(&tablas, "personas", "ci", "1", "ci", "69"));
+        varCount = 0;
+        std::istringstream dd(orden);
+        std::string token;
 
-    //muestroR(eliminoTabla(&tablas, "mascotas"));
+        //Verifico numero de datos que se quieren insertar
+         while(std::getline(dd, token, '(')) {
+            if(orden.empty()) {
+                cout << "xd";
+                break;
+            }
 
-   // muestroR(actualizoDatos(&tablas, "personas", "ci", "1", "ci", "69"));
-    //muestroR(eliminoTabla(&tablas, "personas"));
-  //  muestroR(insertoDato(&tablas,"personas", "8:SOldado:KASjkdsjk"));
-  //  muestroR(insertoDato(&tablas,"personas", "9:Zi:Rica"));
- //   muestroR(insertoDato(&tablas,"personas", "710:Robert:ole"));
-   // muestroR(insertoDato(&tablas,"personas", "8:Luis:OJILI"));
- // muestroR(insertoColumna(&tablas, "personas", "mascotas"));
+            std::istringstream dd(token);
+            std::string token2;
+            if(varCount == 0) {
+                orden = token;
+                varCount++;
+            } else {
+                //cout << "token1: " << token << endl;
+                while(std::getline(dd, token2, ',')) {
 
-    //muestroR(eliminoDato(&tablas, "personas","ci","69"));
-    //muestroR(eliminoDato(&tablas, "personas","ci","4"));
-    //muestroR(eliminoColumna(&tablas, "personas","nombre"));
-    //muestroR(eliminoColumna(&tablas, "personas","nombre"));
-   // muestroR(eliminoDato(&tablas, "personas","ci","8"));
-    //muestroR(eliminoDato(&tablas, "personas","ci","9"));
+                    //cout << "token2: " << token2 << "lvl: " << varCount << endl;
+
+                    switch (varCount) {
+                        case 1:
+                            var1 = token2;
+                            break;
+                        case 2:
+                            var2 = token2;
+                            break;
+                        case 3:
+                            var3 = token2;
+                            break;
+                        case 4:
+                            var4 = token2;
+                            break;
+                        case 5:
+                            var5 = token2.substr(0, token2.size()-1);
+                            break;
+                    }
+                    varCount++;
+                }
+            }
+        }
+
+        varCount--;
+        //cout << "level: " << varCount << endl;
+        if(varCount != 5) {
+            switch(varCount) {
+                case 1:
+                    var1 = var1.substr(0, var1.size()-1);
+                    break;
+                case 2:
+                    var2 = var2.substr(0, var2.size()-1);
+                    break;
+                case 3:
+                    var3 = var3.substr(0, var3.size()-1);
+                    break;
+                case 4:
+                    var4 = var4.substr(0, var4.size()-1);
+                    break;
+            }
+        }
+
+        //cout << orden << endl;
+
+        if(orden == "iniciarTabla") {
+            muestroR(inicioTabla(&tabl));
+        } else if (orden == "insertarTabla") {
+            //cout << var1 << endl;
+            muestroR(insertoTabla(&tabl,var1));
+        } else if (orden == "agregarColumna") {
+            muestroR(insertoColumna(&tabl, var1, var2));
+        } else if (orden == "eliminoColumna") { ////////////////
+            muestroR(eliminoColumna(&tabl, var1, var2));
+        }  else if (orden == "insertoDato") {
+            muestroR(insertoDato(&tabl, var1, var2));
+        } else if (orden == "eliminoDato") {
+            muestroR(eliminoDato(&tabl, var1, var2, var3));
+        } else if (orden == "actualizoDatos") {
+            muestroR(actualizoDatos(&tabl, var1, var2, var3, var4, var5));
+        }
+
+        //cout << "ORDEN: " << orden << " VAR1: " << var1 << " VAR2: " << var2 << " VAR3: " << var3 << " VAR4: " << var4 << " VAR5: " << var5 << endl;
+        var1 = "";
+        var2 = "";
+        var3 = "";
+        var4 = "";
+        var5 = "";
 
 
-    muestroR(mostrarListaRet(tablas));
-    cout << endl;
+    } while (orden != "Salir");
 
+    cout << "Bye!" << endl;
     return 0;
 }

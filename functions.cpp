@@ -149,8 +149,8 @@ tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
     //Verifico numero de datos que se quieren insertar
      while(std::getline(dd, tokenx, ':')) {
            numDats++;
-        }
-        numCols=cuentoColumnas(nombreTabla,auxTable);
+    }
+    numCols=cuentoColumnas(nombreTabla,auxTable);
     ////
 
     while(!esVacia(auxTable)){
@@ -254,15 +254,15 @@ void muestroR(tipoRet resultado){
     switch(resultado){
 
     case 0 :
-    cout << "ok";
+    cout << "ok" << endl;
     break;
 
     case 1:
-    cout << "Error";
+    cout << "Error" << endl;
     break;
 
     case 2:
-    cout << "No Implementado";
+    cout << "No Implementado" << endl;
     break;
 
     }

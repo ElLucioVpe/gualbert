@@ -82,7 +82,24 @@ int main()
         }
 
         if(orden == "ayuda") {
-            cout << "AIUDAAAAAAAAAAA" << endl;
+            cout << endl;
+            cout << "-------------------------------------" << endl;
+            cout << "mahSQL by Luis Pagola y Luciano Porta" << endl;
+            cout << "-------------------------------------" << endl;
+            cout << endl;
+            cout << "Funciones disponibles:" << endl;
+            cout << endl;
+            cout << "- iniciarTabla()" << endl;
+            cout << "- insertarTabla(nombreTabla)" << endl;
+            cout << "- agregarColumna(nombreTabla,nombreColumna)" << endl;
+            cout << "- eliminoColumna(nombreTabla,nombreColumna)" << endl;
+            cout << "- insertoDato(nombreTabla,dato1:dato2)" << endl;
+            cout << "- eliminoDato(nombreTabla,nombreColumna,datoFila)" << endl;
+            cout << "- actualizoDatos(nombreTabla,condicionColumna,condicionDato,nuevoDatoCol,nuevoDato)" << endl;
+            cout << "- printDataTable(nombreTabla)" << endl;
+            cout << "- mostrarTablas()" << endl;
+            cout << endl;
+
         }
 
         //cout << orden << endl;
@@ -116,8 +133,8 @@ int main()
         var5 = "";
 
 
-    } while (orden != "Salir");
+    } while (orden != "salir");
 
-    cout << "Bye!" << endl;
+    cout << "Hasta luego!" << endl;
     return 0;
 }

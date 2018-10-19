@@ -81,6 +81,10 @@ int main()
             }
         }
 
+        if(orden == "ayuda") {
+            cout << "AIUDAAAAAAAAAAA" << endl;
+        }
+
         //cout << orden << endl;
 
         if(orden == "iniciarTabla") {
@@ -98,6 +102,10 @@ int main()
             muestroR(eliminoDato(&tabl, var1, var2, var3));
         } else if (orden == "actualizoDatos") {
             muestroR(actualizoDatos(&tabl, var1, var2, var3, var4, var5));
+        } else if (orden == "printDataTable") {
+            cout << "Placeholder" << endl;
+        } else if (orden == "mostrarTablas") {
+            muestroR(mostrarListaRet(tabl));
         }
 
         //cout << "ORDEN: " << orden << " VAR1: " << var1 << " VAR2: " << var2 << " VAR3: " << var3 << " VAR4: " << var4 << " VAR5: " << var5 << endl;

@@ -14,6 +14,23 @@ int main()
 
     tabla tabl = new _tabla;
 
+    ///Probar FUNCS
+    muestroR(inicioTabla(&tabl));
+    muestroR(insertoTabla(&tabl,"clientes"));
+    muestroR(insertoColumna(&tabl, "clientes", "ci"));
+    muestroR(insertoColumna(&tabl, "clientes", "Nombre"));
+    muestroR(insertoColumna(&tabl, "clientes", "Apellido"));
+    muestroR(insertoDato(&tabl,"clientes", "4:Marcelo:RICA"));
+    muestroR(insertoDato(&tabl,"clientes", "1:Agachate:NoSE"));
+    muestroR(insertoDato(&tabl,"clientes", "5:rita:SISI"));
+    muestroR(insertoDato(&tabl,"clientes", "3:Conocelo:SISI"));
+    muestroR(insertoDato(&tabl,"clientes", "7:Conocelo:SISI"));
+    muestroR(insertoDato(&tabl,"clientes", "8:Conocelo:SISI"));
+    muestroR(insertoDato(&tabl,"clientes", "2:Conocelo:SISI"));
+    muestroR(muestroTabla(tabl,"clientes"));
+
+    ///
+
     do {
         cout << "mahSQL> ";
 

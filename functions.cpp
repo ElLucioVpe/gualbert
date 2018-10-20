@@ -1052,3 +1052,192 @@ tabla eliminarDatoTupla(tabla tabl, tabla tablaAux, string col, string dato, cha
 
     return tabl;*/
 }
+
+tipoRet muestroTabla(tabla l, string nomtabl){
+    if(!esVacia(l)){
+        mostrarTabla(l,nomtabl);
+        // Finaliza
+        cout << "Fin" << endl;
+        return ok;
+    }else{
+        return error;
+        cout << "Empty";
+    }
+}
+
+///Mostrar y Reacomodar tabla UNA TABLA
+void mostrarTabla(tabla l,string nomTabl){
+    tabla tabl;
+    tabl = new _tabla;
+    tabl=l;
+
+    int pos[100]; //Es para guarda posis de intercambio
+    int i= 0;
+    int n = 0;
+    int POSIS=0;
+
+    fila filaspk;
+
+    columna col;
+    col = new _columna;
+
+     columna columnita;
+     columnita = new _columna;
+
+    columna col2;
+    col2 = new _columna;
+
+    columna colV; //Column Visual
+    colV = new _columna;
+
+    columna colVer;
+
+    fila filPK;
+    filPK = new _fila;
+    fila filpp;
+    filpp = new _fila;
+
+    fila filver;
+
+
+    fila pivot;
+    string auxS;
+    fila actual;
+
+    if (!esVacia(l)){
+
+    while((!esVacia(tabl))&&(tabl->nombre!=nomTabl)){
+    tabl= tabl->ptrtabla;
+
+   }
+
+       if(tabl==NULL){
+        cout << "Tabla no encontrada";
+
+       }else{
+    // Escribe nombre de la tabla
+    //    cout << endl;
+    cout << "-----------------" << endl;
+    cout << tabl->nombre << endl;
+
+    // Chequea cada columna
+        col = tabl->columna;
+        colV = tabl->columna;
+        colVer= tabl->columna;
+        columnita = tabl->columna;
+
+       // Muestra el nombre de las columnas
+            while(!esVacia(colV)) {
+                cout << colV->nombreCol << " : ";
+                colV = colV->sgtColumna;
+            }
+            cout << endl;
+
+
+            ///ORDENA SOLO LAS PK POR ORDEN ASC Y GUARDA POSIS DE CAMBIO
+                    filPK = col->fila;
+                    pivot = filPK;
+                    actual=NULL;
+
+                    while (pivot!=NULL){
+
+                    actual = pivot->sgtFila;
+
+                    while(actual!=NULL){
+
+                        if(pivot->dato > actual->dato){
+                            auxS=pivot->dato;
+                            pivot->dato=actual->dato;
+                            actual->dato=auxS;
+                        }
+                        actual=actual->sgtFila;
+                    }
+                        pivot=pivot->sgtFila;
+
+                    }
+
+
+                    ///GUARDA COGOTE , ACA RE ASIGNA TODAS LAS FILAS PARA RESPETAR EL ORDEN CONSEGUIDO POR LAS PKS
+
+                    while (columnita!=NULL){
+                    i=-1;
+                    n=0;
+
+                    filaspk = columnita->fila;
+                    fila fills;
+                    fills = new _fila;
+
+                    fills=filPK;
+                    fila fillsAnt=fills;
+
+                    fills=fills->sgtFila;
+
+                    string auxS2;
+                        while(n!=0){
+
+
+
+                          while(n!=POSIS){
+                        fillsAnt=fills;
+                        fills=fills->sgtFila;
+
+
+                        auxS2= fillsAnt->dato;
+                        fillsAnt->dato= fills->dato;
+                        fills->dato=auxS2;
+
+                        n++;
+                    }
+
+                    filPK=filPK->sgtFila;
+                    n=EncontrarPosOrd(filPK,columnita->fila);
+                 }
+
+                    columnita=columnita->sgtColumna;
+
+
+                }
+                    ///
+                             //Ahora mostramos los datos de la tabla ordenados de forma ascenciente por la pk
+                    while (colVer!=NULL){
+                    filver=colVer->fila;
+
+                        while(filver!=NULL) {
+                       cout << filver->dato << " : ";
+                        filver = filver->sgtFila;
+                        }
+
+                    colVer=colVer->sgtColumna;
+                    }
+
+                   // Muestra el nombre de las columnas
+
+              //  while (col!=NULL){
+               // OrdenarColumnas(col,pos);
+              //  col=col->sgtColumna;
+             //   cout << endl;
+             //   }
+          }
+
+          }
+
+          }
+///ACA TERMINA
+
+///ENCONTRAR POS.
+int EncontrarPosOrd(fila filpk,fila des){
+ int n=0;
+ int i = 0;
+                if (filpk==NULL){
+                return 0;
+                }else{
+                 while(des->dato!=filpk->dato){
+                    des = des->sgtFila;
+                    i++;
+                }
+
+
+        return i;
+
+    }
+    }

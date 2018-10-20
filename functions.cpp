@@ -898,7 +898,19 @@ return i;
 
 tipoRet eliminoDatoTupla(tabla *tabl, string nombreTabla, string condicion) {
     tabla tabAux = *tabl;
-    cout << condicion << endl;
+    char comp;
+    //cout << condicion.find('=') << endl;
+
+    // Encuentra comparador
+    if(condicion.find('=') != std::string::npos) {
+        comp = '=';
+    } else if (condicion.find('>') != std::string::npos) {
+        comp = '>';
+    } else if (condicion.find('<') != std::string::npos) {
+        comp = '<';
+    } else {
+        return error;
+    }
 
     // Encuentra comparador
 
@@ -913,13 +925,12 @@ tipoRet eliminoDatoTupla(tabla *tabl, string nombreTabla, string condicion) {
                 //Obtiene columna y datos de usuario
                 string col;
                 string dato;
-                char comp;
                 bool finRcorrido = false;
 
                 std::istringstream dd(condicion);
                 std::string token;
 
-                while(std::getline(dd, token, '=')) {
+                while(std::getline(dd, token, comp)) {
                     if(finRcorrido == false) {
                         col = token;
                         finRcorrido = true;
@@ -935,21 +946,11 @@ tipoRet eliminoDatoTupla(tabla *tabl, string nombreTabla, string condicion) {
 
                 while(!esVacia(colAux)) {
                     if(colAux->nombreCol == col) {
-                        // Encuentra comparador
-
-                        if(condicion.find('=')) {
-                            comp = '=';
-                        } else if (condicion.find('>')) {
-                            comp = '>';
-                        } else if (condicion.find('>')) {
-                            comp = '<';
-                        } else {
-                            return error;
-                        }
-
+                        cout << comp << "KJDFJKSDFAKJDAFKJ" << endl;
                         tabla tabRes = new _tabla;
                         tabRes = eliminarDatoTupla(*tabl, tabAux, col, dato, comp);
                         *tabl = tabRes;
+                        return ok;
                     }
 
                     colAux = colAux->sgtColumna;
@@ -967,25 +968,39 @@ tipoRet eliminoDatoTupla(tabla *tabl, string nombreTabla, string condicion) {
 }
 
 tabla eliminarDatoTupla(tabla tabl, tabla tablaAux, string col, string dato, char comp) {
-    /*columna colAux = tablaAux->columna;
+    columna colAux = tablaAux->columna;
 
     while(!esVacia(colAux)) {
         bool elimina = false;
 
         // Recorre columnas
         if(colAux->nombreCol == col) {
-            cout << "Hasta aca llega " << colAux->nombreCol << endl;
             int level = 0;
             fila filAux = colAux->fila;
 
             while(!esVacia(filAux)) {
-                //cout << "- level " << level << " dato " << filAux->dato << endl;
+                if(colAux->fila == filAux) {
+                    level = 0;
+                }
+
+                elimina = false;
+                cout << "- level " << level << " dato " << filAux->dato << endl;
                 if(comp == '=') {
                     if(filAux->dato == dato) {
+                        cout << "habeer " << filAux->dato << " == " << dato << endl;
                         elimina = true;
                     }
                 } else if (comp == '>') {
-                    if(filAux->dato > dato) {
+                    int datoInt;
+                    int datoFilInt;
+                    std::istringstream ss(dato);
+                    ss >> datoInt;
+
+                    string datoString = filAux->dato;
+                    std::istringstream ss2(datoString);
+                    ss2 >> datoFilInt;
+
+                    if(datoFilInt > datoInt) {
                         elimina = true;
                     }
                 } else if (comp == '<') {
@@ -995,12 +1010,12 @@ tabla eliminarDatoTupla(tabla tabl, tabla tablaAux, string col, string dato, cha
                 }
 
                 if(elimina == true) {
+                    cout << "Va a eliminar " << filAux->dato << endl;
 
                     columna delCol;
                     delCol = tablaAux->columna;
 
                     while(!esVacia(delCol)) {
-                        //cout << "empieza proceso de eliminar kappa" << delCol->nombreCol << endl;
 
                         fila delFil;
                         delFil = delCol->fila;
@@ -1012,46 +1027,74 @@ tabla eliminarDatoTupla(tabla tabl, tabla tablaAux, string col, string dato, cha
                             if(contar < level) {
                                 contar++;
                             } else if (contar == level) {
-                                if(!esVacia(delFil->sgtFila->sgtFila)){
-                                    delFil->sgtFila = delFil->sgtFila->sgtFila;
+                                cout << "XDD" << endl;
+
+                                if(!esVacia(delFil->sgtFila)){
+                                    if(!esVacia(delFil->sgtFila->sgtFila) && contar > 0) {
+                                        cout << "opcion4" << endl;
+                                        // OP2: si existe un dato siguiente al que se va a eliminar
+                                        delFil->sgtFila = delFil->sgtFila->sgtFila;
+                                        break;
+                                    } else if (contar == 0) {
+                                        // Si la fila esta al principio
+                                        if(esVacia(delFil->sgtFila)) {
+                                            // Se va a eliminar el unico item
+                                            cout << "opcion1" << endl;
+                                            delCol->fila = NULL;
+                                            break;
+                                        } else {
+                                            // Se va a eliminar el primer item
+                                            cout << "opcion2" << endl;
+                                            delCol->fila = delFil->sgtFila;
+                                            break;
+                                        }
+                                    }
                                 } else if (contar == 0) {
-                                    if(!esVacia(delFil->sgtFila)) {
-                                        cout << "opcion1" << endl; // Esta dando error aca xd
-                                        delFil = delFil->sgtFila;
-                                        colAux = tablaAux->columna;
-                                        filAux = colAux->fila;
+                                    cout << "JFJKDSK" << endl;
+
+                                    // Si la fila esta al principio
+                                    if(esVacia(delFil->sgtFila)) {
+                                        // Se va a eliminar el unico item
+                                        cout << "opcion1" << endl;
+                                        delCol->fila = NULL;
                                         break;
                                     } else {
+                                        // Se va a eliminar el primer item
                                         cout << "opcion2" << endl;
-                                        delFil = NULL;
+                                        delCol->fila = delFil->sgtFila;
                                         break;
                                     }
                                 } else {
-                                    cout << "opcion3" << endl;
-                                    delFil->sgtFila = NULL;
+                                    // Si la fila a eliminar esta al final
+                                    cout << "opcion3 va a eliminar columna " << delFil->dato << endl;
+                                    delete(delFil);
+                                    break;
                                 }
                                 break;
+                            } else {
+                                cout << "Error mistico del universo tramboliko" << endl;
                             }
 
-                            //contar = 0;
                             delFil = delFil->sgtFila;
                         }
 
                         delCol = delCol->sgtColumna;
                     }
-                    mostrarListaRet(tabl);
+                    //mostrarListaRet(tabl);
                 }
 
                 filAux = filAux->sgtFila;
                 level++;
             }
-        }
+            return tabl;
 
+        }
         colAux = colAux->sgtColumna;
     }
 
-    return tabl;*/
 }
+
+
 ///Una sola y ordenada no como la otra func que muestra todo
 tipoRet muestroTabla(tabla l, string nomtabl){
     if(!esVacia(l)){

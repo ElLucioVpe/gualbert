@@ -3,7 +3,7 @@
 int main()
 {
 
-    string orden;
+    string entradaUsuario;
 
     int varCount = 0;
     string var1;
@@ -15,7 +15,7 @@ int main()
     tabla tabl = new _tabla;
 
     ///Probar FUNCS
-    muestroR(inicioTabla(&tabl));
+    /*muestroR(inicioTabla(&tabl));
     muestroR(insertoTabla(&tabl,"clientes"));
     muestroR(insertoColumna(&tabl, "clientes", "ci"));
     muestroR(insertoColumna(&tabl, "clientes", "Nombre"));
@@ -27,140 +27,141 @@ int main()
     muestroR(insertoDato(&tabl,"clientes", "7:siete:SISI"));
     muestroR(insertoDato(&tabl,"clientes", "8:ocho:SISI"));
     muestroR(insertoDato(&tabl,"clientes", "2:dos:SISI"));
-    muestroR(muestroTabla(tabl,"clientes"));
+    muestroR(muestroTabla(tabl,"clientes"));*/
 
     ///
 
     do {
         cout << "mahSQL> ";
 
-        std::string orden;
-        std::getline(std::cin, orden);
+        string orden;
+        std::getline(std::cin, entradaUsuario);
 
-        if (orden.empty())    // line is empty, empty the queue to the console
+        if (entradaUsuario.empty())
         {
-            cout << orden;
-        }
-
-        varCount = 0;
-        std::istringstream dd(orden);
-        std::string token;
-
-        //Verifico numero de datos que se quieren insertar
-         while(std::getline(dd, token, '(')) {
-            if(orden.empty()) {
-                break;
-            }
-
-            std::istringstream dd(token);
-            std::string token2;
-            if(varCount == 0) {
-                orden = token;
-                varCount++;
-            } else {
-                //cout << "token1: " << token << endl;
-                while(std::getline(dd, token2, ',')) {
-
-                    //cout << "token2: " << token2 << "lvl: " << varCount << endl;
-
-                    switch (varCount) {
-                        case 1:
-                            var1 = token2;
-                            break;
-                        case 2:
-                            var2 = token2;
-                            break;
-                        case 3:
-                            var3 = token2;
-                            break;
-                        case 4:
-                            var4 = token2;
-                            break;
-                        case 5:
-                            var5 = token2.substr(0, token2.size()-1);
-                            break;
-                    }
-                    varCount++;
-                }
-            }
-        }
-
-        varCount--;
-        //cout << "level: " << varCount << endl;
-        if(varCount != 5) {
-            switch(varCount) {
-                case 1:
-                    var1 = var1.substr(0, var1.size()-1);
-                    break;
-                case 2:
-                    var2 = var2.substr(0, var2.size()-1);
-                    break;
-                case 3:
-                    var3 = var3.substr(0, var3.size()-1);
-                    break;
-                case 4:
-                    var4 = var4.substr(0, var4.size()-1);
-                    break;
-            }
-        }
-
-        if(orden == "ayuda") {
-            cout << endl;
-            cout << "-------------------------------------" << endl;
-            cout << "mahSQL by Luis Pagola y Luciano Porta" << endl;
-            cout << "-------------------------------------" << endl;
-            cout << endl;
-            cout << "Funciones disponibles:" << endl;
-            cout << endl;
-            cout << "- iniciarTabla()" << endl;
-            cout << "- insertarTabla(nombreTabla)" << endl;
-            cout << "- agregarColumna(nombreTabla,nombreColumna)" << endl;
-            cout << "- eliminoColumna(nombreTabla,nombreColumna)" << endl;
-            cout << "- insertoDato(nombreTabla,dato1:dato2)" << endl;
-            cout << "- eliminoDato(nombreTabla,nombreColumna,datoFila)" << endl;
-            cout << "- eliminoDatoTupla(nombreTabla,nombreColumna,condicion)" << endl;
-            cout << "- actualizoDatos(nombreTabla,condicionColumna,condicionDato,nuevoDatoCol,nuevoDato)" << endl;
-            cout << "- printDataTable(nombreTabla)" << endl;
-            cout << "- mostrarTablas()" << endl;
-            cout << endl;
+            cout << entradaUsuario;
+        } else if (entradaUsuario == "salir") {
+            break;
         } else {
 
-            //cout << orden << endl;
+            varCount = 0;
+            std::istringstream dd(entradaUsuario);
+            std::string token;
 
-            if(orden == "iniciarTabla") {
-                muestroR(inicioTabla(&tabl));
-            } else if (orden == "insertarTabla") {
-                //cout << var1 << endl;
-                muestroR(insertoTabla(&tabl,var1));
-            } else if (orden == "agregarColumna") {
-                muestroR(insertoColumna(&tabl, var1, var2));
-            } else if (orden == "eliminoColumna") { ////////////////
-                muestroR(eliminoColumna(&tabl, var1, var2));
-            }  else if (orden == "insertoDato") {
-                muestroR(insertoDato(&tabl, var1, var2));
-            } else if (orden == "eliminoDato") {
-                muestroR(eliminoDato(&tabl, var1, var2, var3));
-            } else if (orden == "actualizoDatos") {
-                muestroR(actualizoDatos(&tabl, var1, var2, var3, var4, var5));
-            } else if (orden == "printDataTable") {
-                cout << "Placeholder" << endl;
-            } else if (orden == "eliminoDatoTupla") {
-                muestroR(eliminoDatoTupla(&tabl, var1, var2));
-            } else if (orden == "mostrarTablas") {
-                muestroR(mostrarListaRet(tabl));
-            } else {
-                cout << "Comando no valido. Puede escribir ayuda para repasar los comandos basicos." << endl;
+            //Verifico numero de datos que se quieren insertar
+             while(std::getline(dd, token, '(')) {
+
+                std::istringstream dd(token);
+                std::string token2;
+                if(varCount == 0) {
+                    orden = token;
+                    varCount++;
+                } else {
+                    //cout << "token1: " << token << endl;
+                    while(std::getline(dd, token2, ',')) {
+
+                        //cout << "token2: " << token2 << "lvl: " << varCount << endl;
+
+                        switch (varCount) {
+                            case 1:
+                                var1 = token2;
+                                break;
+                            case 2:
+                                var2 = token2;
+                                break;
+                            case 3:
+                                var3 = token2;
+                                break;
+                            case 4:
+                                var4 = token2;
+                                break;
+                            case 5:
+                                var5 = token2.substr(0, token2.size()-1);
+                                break;
+                        }
+                        varCount++;
+                    }
+                }
             }
 
-            //cout << "ORDEN: " << orden << " VAR1: " << var1 << " VAR2: " << var2 << " VAR3: " << var3 << " VAR4: " << var4 << " VAR5: " << var5 << endl;
-            var1 = "";
-            var2 = "";
-            var3 = "";
-            var4 = "";
-            var5 = "";
+            varCount--;
+            //cout << "level: " << varCount << endl;
+            if(varCount != 5) {
+                switch(varCount) {
+                    case 1:
+                        var1 = var1.substr(0, var1.size()-1);
+                        break;
+                    case 2:
+                        var2 = var2.substr(0, var2.size()-1);
+                        break;
+                    case 3:
+                        var3 = var3.substr(0, var3.size()-1);
+                        break;
+                    case 4:
+                        var4 = var4.substr(0, var4.size()-1);
+                        break;
+                }
+            }
 
+            if(orden == "ayuda") {
+                cout << endl;
+                cout << "-------------------------------------" << endl;
+                cout << "mahSQL by Luis Pagola y Luciano Porta" << endl;
+                cout << "-------------------------------------" << endl;
+                cout << endl;
+                cout << "Funciones disponibles:" << endl;
+                cout << endl;
+                cout << "- iniciarTabla()" << endl;
+                cout << "- insertarTabla(nombreTabla)" << endl;
+                cout << "- agregarColumna(nombreTabla,nombreColumna)" << endl;
+                cout << "- eliminoColumna(nombreTabla,nombreColumna)" << endl;
+                cout << "- insertoDato(nombreTabla,dato1:dato2)" << endl;
+                cout << "- eliminoDato(nombreTabla,columna=condicion)" << endl;
+                cout << "     eliminoDato puede comparar =, > o <." << endl;
+                cout << "- eliminoDatoTupla(nombreTabla,nombreColumna,condicion)" << endl;
+                cout << "- actualizoDatos(nombreTabla,condicionColumna,condicionDato,nuevoDatoCol,nuevoDato)" << endl;
+                cout << "- printDataTable(nombreTabla)" << endl;
+                cout << "- mostrarTablas()" << endl;
+                cout << endl;
+            } else {
+
+                //cout << orden << endl;
+
+                if(orden == "iniciarTabla") {
+                    muestroR(inicioTabla(&tabl));
+                } else if (orden == "insertarTabla") {
+                    muestroR(insertoTabla(&tabl,var1));
+                } else if (orden == "agregarColumna") {
+                    muestroR(insertoColumna(&tabl, var1, var2));
+                } else if (orden == "eliminoColumna") {
+                    muestroR(eliminoColumna(&tabl, var1, var2));
+                }  else if (orden == "insertoDato") {
+                    muestroR(insertoDato(&tabl, var1, var2));
+                } else if (orden == "eliminoDato") {
+                    muestroR(eliminoDato(&tabl, var1, var2, var3));
+                } else if (orden == "actualizoDatos") {
+                    muestroR(actualizoDatos(&tabl, var1, var2, var3, var4, var5));
+                } else if (orden == "printDataTable") {
+                    cout << "Placeholder" << endl;
+                } else if (orden == "eliminoDatoTupla") {
+                    muestroR(eliminoDatoTupla(&tabl, var1, var2));
+                } else if (orden == "mostrarTablas") {
+                    muestroR(mostrarListaRet(tabl));
+                } else {
+                    cout << "Comando no valido. Puede escribir ayuda para repasar los comandos basicos." << endl;
+                }
+
+                //cout << "ORDEN: " << orden << " VAR1: " << var1 << " VAR2: " << var2 << " VAR3: " << var3 << " VAR4: " << var4 << " VAR5: " << var5 << endl;
+                var1 = "";
+                var2 = "";
+                var3 = "";
+                var4 = "";
+                var5 = "";
+
+                //cout << orden << endl;
+            }
         }
-    } while (orden != "salir");
+    } while (entradaUsuario != "salir");
 
     cout << "Hasta luego!" << endl;
     return 0;

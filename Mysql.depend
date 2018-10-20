@@ -61,15 +61,15 @@
 1539630420 17b562bc77701a069b6a8f429b60410e84f3c
 	"header.h"
 
-1540000904 source:/mnt/c/ProyectoC++MySQL/gualbert/functions.cpp
+1540070067 source:/mnt/c/ProyectoC++MySQL/gualbert/functions.cpp
 	"header.h"
 
-1540000975 /mnt/c/ProyectoC++MySQL/gualbert/header.h
+1540061183 /mnt/c/ProyectoC++MySQL/gualbert/header.h
 	<iostream>
 	<stdlib.h>
 	<string>
 	<sstream>
 
-1540000303 source:/mnt/c/ProyectoC++MySQL/gualbert/main.cpp
+1540070102 source:/mnt/c/ProyectoC++MySQL/gualbert/main.cpp
 	"header.h"
 

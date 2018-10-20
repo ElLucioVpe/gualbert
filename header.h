@@ -87,5 +87,4 @@ tipoRet eliminoDatoTupla(tabla *tabl, string nombreTabla, string condicion);
 tabla eliminarDatoTupla(tabla tabl, tabla tablaAux, string col, string dato, char comp);
 
 void mostrarTabla(tabla l,string nomTabl);
-int EncontrarPosOrd(fila filpk,fila des);
 tipoRet muestroTabla(tabla l, string nomtabl);

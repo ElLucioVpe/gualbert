@@ -1052,7 +1052,7 @@ tabla eliminarDatoTupla(tabla tabl, tabla tablaAux, string col, string dato, cha
 
     return tabl;*/
 }
-
+///Una sola y ordenada no como la otra func que muestra todo
 tipoRet muestroTabla(tabla l, string nomtabl){
     if(!esVacia(l)){
         mostrarTabla(l,nomtabl);
@@ -1072,7 +1072,7 @@ void mostrarTabla(tabla l,string nomTabl){
     tabl=l;
 
     int pos[100]; //Es para guarda posis de intercambio
-    int i= 0;
+    int i= 1;
     int n = 0;
     int POSIS=0;
 
@@ -1115,8 +1115,7 @@ void mostrarTabla(tabla l,string nomTabl){
         cout << "Tabla no encontrada";
 
        }else{
-    // Escribe nombre de la tabla
-    //    cout << endl;
+    /// Escribe nombre de la tabla
     cout << "-----------------" << endl;
     cout << tabl->nombre << endl;
 
@@ -1126,7 +1125,9 @@ void mostrarTabla(tabla l,string nomTabl){
         colVer= tabl->columna;
         columnita = tabl->columna;
 
-       // Muestra el nombre de las columnas
+        filaspk=tabl->columna->fila;
+
+       /// Muestra el nombre de las columnas
             while(!esVacia(colV)) {
                 cout << colV->nombreCol << " : ";
                 colV = colV->sgtColumna;
@@ -1134,110 +1135,85 @@ void mostrarTabla(tabla l,string nomTabl){
             cout << endl;
 
 
-            ///ORDENA SOLO LAS PK POR ORDEN ASC Y GUARDA POSIS DE CAMBIO
+            ///CONSIGO LAS POSIS CORRECTAS, y LAS CARGO EN UN ARRAY
                     filPK = col->fila;
                     pivot = filPK;
                     actual=NULL;
 
                     while (pivot!=NULL){
 
-                    actual = pivot->sgtFila;
+                    actual = columnita->fila;
 
                     while(actual!=NULL){
 
                         if(pivot->dato > actual->dato){
-                            auxS=pivot->dato;
-                            pivot->dato=actual->dato;
-                            actual->dato=auxS;
+                            i++;
                         }
-                        actual=actual->sgtFila;
+
+                       actual=actual->sgtFila;
                     }
-                        pivot=pivot->sgtFila;
-
+                    pos[n]=i;
+                    i=1;
+                    n++;
+                    pivot=pivot->sgtFila;
                     }
+            ///
 
-
-                    ///GUARDA COGOTE , ACA RE ASIGNA TODAS LAS FILAS PARA RESPETAR EL ORDEN CONSEGUIDO POR LAS PKS
-
-                    while (columnita!=NULL){
-                    i=-1;
+                    ///SE COUTEAN RESPETANDO EL ORDEN
                     n=0;
+                    int j = 1;
+                    columna colChan;
+                    fila filChan;
+                    fila filChanAux;
+                    colChan=tabl->columna;
+                    filChan=colChan->fila;
+                    filChanAux=colChan->fila;
+                    int enc=0;
 
-                    filaspk = columnita->fila;
-                    fila fills;
-                    fills = new _fila;
+                        while(colChan!=NULL){    ///Recorremos COlumna por columna
+                        filChan=colChan->fila;   ///Primer fila de la columna
 
-                    fills=filPK;
-                    fila fillsAnt=fills;
+                               while(filChan!=NULL){ ///Mientras la fila no sea nula
 
-                    fills=fills->sgtFila;
+                                    if(pos[n]==j){ ///Si J corresponde con la pos significa que es la priemra voy cambiando pos hasta encontrar el que corresponde a la pos J que sera 1 2 3 4 etc
 
-                    string auxS2;
-                        while(n!=0){
+                                    cout<<filChan->dato << " : " ;
+                                    n=0;
+                                    j++;
+                                    filChan=colChan->fila;
+                                    enc=1;
 
-
-
-                          while(n!=POSIS){
-                        fillsAnt=fills;
-                        fills=fills->sgtFila;
+                                    }
 
 
-                        auxS2= fillsAnt->dato;
-                        fillsAnt->dato= fills->dato;
-                        fills->dato=auxS2;
+                                    //cout << j;
 
-                        n++;
+                                    if(enc==1){ //SI lo que esta dentro de pos n es mas grande que j, se paso.. arranquemos otra vez
+
+                                    filChan=colChan->fila;
+                                    enc=0;
+
+                                    }
+
+                                    else{
+
+                                    filChan=filChan->sgtFila; //Adelanta uno
+                                    n++;
+
+                                }
+
+                            }
+
+                        cout << endl;
+                        n=0;
+                        j=1;
+                        colChan=colChan->sgtColumna;
                     }
-
-                    filPK=filPK->sgtFila;
-                    n=EncontrarPosOrd(filPK,columnita->fila);
-                 }
-
-                    columnita=columnita->sgtColumna;
-
-
-                }
                     ///
-                             //Ahora mostramos los datos de la tabla ordenados de forma ascenciente por la pk
-                    while (colVer!=NULL){
-                    filver=colVer->fila;
 
-                        while(filver!=NULL) {
-                       cout << filver->dato << " : ";
-                        filver = filver->sgtFila;
-                        }
-
-                    colVer=colVer->sgtColumna;
-                    }
-
-                   // Muestra el nombre de las columnas
-
-              //  while (col!=NULL){
-               // OrdenarColumnas(col,pos);
-              //  col=col->sgtColumna;
-             //   cout << endl;
-             //   }
           }
 
           }
 
           }
 ///ACA TERMINA
-
-///ENCONTRAR POS.
-int EncontrarPosOrd(fila filpk,fila des){
- int n=0;
- int i = 0;
-                if (filpk==NULL){
-                return 0;
-                }else{
-                 while(des->dato!=filpk->dato){
-                    des = des->sgtFila;
-                    i++;
-                }
-
-
-        return i;
-
-    }
-    }

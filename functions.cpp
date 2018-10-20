@@ -946,7 +946,7 @@ tipoRet eliminoDatoTupla(tabla *tabl, string nombreTabla, string condicion) {
 
                 while(!esVacia(colAux)) {
                     if(colAux->nombreCol == col) {
-                        cout << comp << "KJDFJKSDFAKJDAFKJ" << endl;
+                        //cout << comp << "KJDFJKSDFAKJDAFKJ" << endl;
                         tabla tabRes = new _tabla;
                         tabRes = eliminarDatoTupla(*tabl, tabAux, col, dato, comp);
                         *tabl = tabRes;
@@ -984,10 +984,10 @@ tabla eliminarDatoTupla(tabla tabl, tabla tablaAux, string col, string dato, cha
                 }
 
                 elimina = false;
-                cout << "- level " << level << " dato " << filAux->dato << endl;
+                //cout << "- level " << level << " dato " << filAux->dato << endl;
                 if(comp == '=') {
                     if(filAux->dato == dato) {
-                        cout << "habeer " << filAux->dato << " == " << dato << endl;
+                        //cout << "habeer " << filAux->dato << " == " << dato << endl;
                         elimina = true;
                     }
                 } else if (comp == '>') {
@@ -1010,7 +1010,7 @@ tabla eliminarDatoTupla(tabla tabl, tabla tablaAux, string col, string dato, cha
                 }
 
                 if(elimina == true) {
-                    cout << "Va a eliminar " << filAux->dato << endl;
+                    //cout << "Va a eliminar " << filAux->dato << endl;
 
                     columna delCol;
                     delCol = tablaAux->columna;
@@ -1022,16 +1022,16 @@ tabla eliminarDatoTupla(tabla tabl, tabla tablaAux, string col, string dato, cha
                         int contar = 0;
 
                         while(!esVacia(delFil)) {
-                            cout << "+ level " << level << " contar " << contar << " dato " << delFil->dato << endl;
+                            //cout << "+ level " << level << " contar " << contar << " dato " << delFil->dato << endl;
 
                             if(contar < level) {
                                 contar++;
                             } else if (contar == level) {
-                                cout << "XDD" << endl;
+                                //cout << "XDD" << endl;
 
                                 if(!esVacia(delFil->sgtFila)){
                                     if(!esVacia(delFil->sgtFila->sgtFila) && contar > 0) {
-                                        cout << "opcion4" << endl;
+                                        //cout << "opcion4" << endl;
                                         // OP2: si existe un dato siguiente al que se va a eliminar
                                         delFil->sgtFila = delFil->sgtFila->sgtFila;
                                         break;
@@ -1039,34 +1039,34 @@ tabla eliminarDatoTupla(tabla tabl, tabla tablaAux, string col, string dato, cha
                                         // Si la fila esta al principio
                                         if(esVacia(delFil->sgtFila)) {
                                             // Se va a eliminar el unico item
-                                            cout << "opcion1" << endl;
+                                            //cout << "opcion1" << endl;
                                             delCol->fila = NULL;
                                             break;
                                         } else {
                                             // Se va a eliminar el primer item
-                                            cout << "opcion2" << endl;
+                                            //cout << "opcion2" << endl;
                                             delCol->fila = delFil->sgtFila;
                                             break;
                                         }
                                     }
                                 } else if (contar == 0) {
-                                    cout << "JFJKDSK" << endl;
+                                    //cout << "JFJKDSK" << endl;
 
                                     // Si la fila esta al principio
                                     if(esVacia(delFil->sgtFila)) {
                                         // Se va a eliminar el unico item
-                                        cout << "opcion1" << endl;
+                                        //cout << "opcion1" << endl;
                                         delCol->fila = NULL;
                                         break;
                                     } else {
                                         // Se va a eliminar el primer item
-                                        cout << "opcion2" << endl;
+                                        //cout << "opcion2" << endl;
                                         delCol->fila = delFil->sgtFila;
                                         break;
                                     }
                                 } else {
                                     // Si la fila a eliminar esta al final
-                                    cout << "opcion3 va a eliminar columna " << delFil->dato << endl;
+                                    //cout << "opcion3 va a eliminar columna " << delFil->dato << endl;
                                     delete(delFil);
                                     break;
                                 }

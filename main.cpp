@@ -20,13 +20,14 @@ int main()
     muestroR(insertoColumna(&tabl, "clientes", "ci"));
     muestroR(insertoColumna(&tabl, "clientes", "Nombre"));
     muestroR(insertoColumna(&tabl, "clientes", "Apellido"));
-    muestroR(insertoDato(&tabl,"clientes", "4:cuatro:RICA"));
-    muestroR(insertoDato(&tabl,"clientes", "1:uno:NoSE"));
-    muestroR(insertoDato(&tabl,"clientes", "5:cinco:SISI"));
-    muestroR(insertoDato(&tabl,"clientes", "3:tres:SISI"));
+    muestroR(insertoDato(&tabl,"clientes", "4:Diego1:RICA"));
+    muestroR(insertoDato(&tabl,"clientes", "1:Diego2:NoSE"));
+    muestroR(insertoDato(&tabl,"clientes", "5:Nicolas:SISI"));
+    muestroR(insertoDato(&tabl,"clientes", "3:Xd:SISI"));
     muestroR(insertoDato(&tabl,"clientes", "7:siete:SISI"));
     muestroR(insertoDato(&tabl,"clientes", "8:ocho:SISI"));
     muestroR(insertoDato(&tabl,"clientes", "2:dos:SISI"));
+    muestroR(eliminoDatoTupla(&tabl, "clientes", "Nombre=Dieg*"));
     muestroR(muestroTabla(tabl,"clientes"));*/
 
     ///
@@ -116,9 +117,12 @@ int main()
                 cout << "- agregarColumna(nombreTabla,nombreColumna)" << endl;
                 cout << "- eliminoColumna(nombreTabla,nombreColumna)" << endl;
                 cout << "- insertoDato(nombreTabla,dato1:dato2)" << endl;
-                cout << "- eliminoDato(nombreTabla,columna=condicion)" << endl;
-                cout << "     eliminoDato puede comparar =, > o <." << endl;
+                cout << "- eliminoDato(nombreTabla,columna,fila)" << endl;
+                cout << "     ej.: eliminoDato(clientes,personas,pepe)" << endl;
                 cout << "- eliminoDatoTupla(nombreTabla,nombreColumna,condicion)" << endl;
+                cout << "     eliminoDatoTupla puede comparar =, > o <." << endl;
+                cout << "     eliminoDatoTupla puede utilizar * al comparar strings." << endl;
+                cout << "     ej.: eliminoDatoTupla(clientes,nombre=pep*)" << endl;
                 cout << "- actualizoDatos(nombreTabla,condicionColumna,condicionDato,nuevoDatoCol,nuevoDato)" << endl;
                 cout << "- printDataTable(nombreTabla)" << endl;
                 cout << "- mostrarTablas()" << endl;

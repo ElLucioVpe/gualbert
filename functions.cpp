@@ -969,6 +969,7 @@ tipoRet eliminoDatoTupla(tabla *tabl, string nombreTabla, string condicion) {
 
 tabla eliminarDatoTupla(tabla tabl, tabla tablaAux, string col, string dato, char comp) {
     columna colAux = tablaAux->columna;
+    bool finRecorrido = false;
 
     while(!esVacia(colAux)) {
         bool elimina = false;
@@ -984,9 +985,28 @@ tabla eliminarDatoTupla(tabla tabl, tabla tablaAux, string col, string dato, cha
                 }
 
                 elimina = false;
-                //cout << "- level " << level << " dato " << filAux->dato << endl;
+                cout << "- level " << level << " dato " << filAux->dato << endl;
                 if(comp == '=') {
-                    if(filAux->dato == dato) {
+                    if(dato.find('*') != std::string::npos) {
+                        std::istringstream dd(dato);
+                        std::string token;
+                        string datoComparar;
+
+                        finRecorrido = false;
+                        while(std::getline(dd, token, '*')) {
+                            if(finRecorrido == false) {
+                                datoComparar = token;
+                                finRecorrido = true;
+                            }
+                         }
+                        //cout << "habeer " << filAux->dato << " contiene: " << dato << endl;
+
+                         string datoCol = filAux->dato;
+                         if (datoCol.find(datoComparar) != std::string::npos) {
+                            //cout << "sabelo" << endl;
+                            elimina = true;
+                         }
+                    } else if(filAux->dato == dato) {
                         //cout << "habeer " << filAux->dato << " == " << dato << endl;
                         elimina = true;
                     }

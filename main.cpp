@@ -15,21 +15,27 @@ int main()
     tabla tabl = new _tabla;
 
     ///Probar FUNCS
-    /*muestroR(inicioTabla(&tabl));
+    /*
+    muestroR(inicioTabla(&tabl));
     muestroR(insertoTabla(&tabl,"clientes"));
     muestroR(insertoColumna(&tabl, "clientes", "ci"));
     muestroR(insertoColumna(&tabl, "clientes", "Nombre"));
     muestroR(insertoColumna(&tabl, "clientes", "Apellido"));
-    muestroR(insertoDato(&tabl,"clientes", "4:Diego1:RICA"));
-    muestroR(insertoDato(&tabl,"clientes", "1:Diego2:NoSE"));
-    muestroR(insertoDato(&tabl,"clientes", "5:Nicolas:SISI"));
-    muestroR(insertoDato(&tabl,"clientes", "3:Xd:SISI"));
-    muestroR(insertoDato(&tabl,"clientes", "7:siete:SISI"));
-    muestroR(insertoDato(&tabl,"clientes", "8:ocho:SISI"));
-    muestroR(insertoDato(&tabl,"clientes", "2:dos:SISI"));
-    muestroR(eliminoDatoTupla(&tabl, "clientes", "Nombre=Dieg*"));
-    muestroR(muestroTabla(tabl,"clientes"));*/
-
+    muestroR(insertoDato(&tabl,"clientes", "adrian:Diego1:RICA"));
+    muestroR(insertoDato(&tabl,"clientes", "2:Diego2:NoSE"));
+    muestroR(insertoDato(&tabl,"clientes", "3:Nicolas:SISI"));
+    muestroR(insertoDato(&tabl,"clientes", "4:Xd:SISI"));
+    muestroR(insertoDato(&tabl,"clientes", "5:siete:SISI"));
+    muestroR(insertoDato(&tabl,"clientes", "6:ocho:SISI"));
+     muestroR(insertoDato(&tabl,"clientes", "7:UFFF:SISI"));
+    muestroR(insertoDato(&tabl,"clientes", "8:dos:SISI"));
+    muestroR(insertoDato(&tabl,"clientes", "10:NIc:SISI"));
+     muestroR(insertoDato(&tabl,"clientes", "11:NIc:SISI"));
+     muestroR(insertoDato(&tabl,"clientes", "13:NIc:SISI"));
+     muestroR(insertoDato(&tabl,"clientes", "12:NIc:SISI"));
+     muestroR(insertoDato(&tabl,"clientes", "9:Rodri:SISI"));
+    muestroR(muestroTabla(tabl,"clientes"));
+    */
     ///
 
     do {
@@ -146,7 +152,7 @@ int main()
                 } else if (orden == "actualizoDatos") {
                     muestroR(actualizoDatos(&tabl, var1, var2, var3, var4, var5));
                 } else if (orden == "printDataTable") {
-                    cout << "Placeholder" << endl;
+                    muestroR(muestroTabla(tabl,var1));
                 } else if (orden == "eliminoDatoTupla") {
                     muestroR(eliminoDatoTupla(&tabl, var1, var2));
                 } else if (orden == "mostrarTablas") {

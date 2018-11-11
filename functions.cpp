@@ -1,5 +1,20 @@
 #include "header.h"
 
+// Funciones de arboles
+
+tabla buscarMenor(tabla tabl) {
+    if (esVacia(tabl))
+       return NULL;
+    while (!esVacia(HijoIzq(tabl)))
+          tabl = HijoIzq(tabl);
+    return tabl;
+}
+
+tabla HijoIzq(tabla tabl)
+{
+  return tabl->hijoIzq;
+}
+
 //Inserto Tabla
 tipoRet insertoTabla(tabla *tabl, string nombre){
     tabla auxTable;
@@ -433,33 +448,46 @@ tipoRet eliminoTabla(tabla *tabl,string nombre){
 
 }
 
-tabla eliminarTabla(tabla tabl, string name){
-    //0 a null 1 a 0
+tabla eliminarTabla(tabla *tabl, string name){
+
     tabla BorrarTabl;
-    tabla anterior;
-
     BorrarTabl = new _tabla;
-    anterior = new _tabla;
-
-    anterior=NULL;
     BorrarTabl=tabl; //apunta al inicio de la lista
 
-    while((BorrarTabl!=NULL)&&(BorrarTabl->nombre!=name)){ //mientras que BorrarTabl no sea null y no sea igual al nombre desdeado
-        anterior=BorrarTabl; //anterior se iguala a BorrarTabl
+    if(BorrarTabl->nombre == name) {
 
-        BorrarTabl=BorrarTabl->ptrtabla; //Borrartabl va al siguiente nodo 'Tabla'
-    }
+            if(EsVacio(BorrarTabl->ptrTablaIzq)) {
+               BorrarTabl = BorrarTabl->hijoDer;
+               //delete BorrarTabl;
 
-    //Casos cuando salga del while
-    if(BorrarTabl==NULL){  // significa que recorrio toda la lista y cuando entro al while al final BorrarTabl es igual a null/ apunta al putero sig del ultimo nodo entonces NULL
-    } else if(anterior==NULL) { // Si entra aca significa que no entro al while porque el elemento que buscamos es el primero en la lista, entonces  tabl apunta al sig nodo y deleteamos el primer nodo que esta en BorrarTabl.
-        tabl = tabl->ptrtabla;
-        delete BorrarTabl;
+            }
+            else if (EsVacio(BorrarTabl->ptrTablaDer)) {
+               BorrarTabl = BorrarTabl->ptrTablaIzq;
+              // A->hijoDer = NULL;
+               //delete BorrarTabl;
+            } else {
+                tabla guardoTabla = BorrarTabl;
+                guardoTabla = BuscarMenor(BorrarTabl->ptrTablaDer);
+                BorrarTabl->nombre = guardoTabla->nombre;
+                BorrarTabl->hijoDer->hijoIzq = guardoTabla->hijoDer;
+                //delete p;
+            }
 
-    } else { // El elemento esta en la lista pero no es el primero
-        anterior->ptrtabla=BorrarTabl->ptrtabla;  // hacemos que el que estaba atras apunte al mismo que estaba apuntando borrartabl 'el siguiente del actual'
-        delete BorrarTabl; // borramos borrartabl
+        }
+    } else {
+        if(!esVacia(BorrarTabl->ptrTablaDer) && !esVacia(BorrarTabl->ptrTablaIzq)) {
+            int compararString;
+            compararString = strcmp(BorrarTabl->nombre, name);
 
+            // Compara nombres de tabla para saber a que hoja del arbol seguir
+            if(comprarString > 0 ) {
+                eliminarTabla(BorrarTabl->ptrTablaDer, name);
+            } else if(comprarString < 0) {
+                eliminarTabla(BorrarTabl->ptrTablaIzq, name);
+            } else {
+                //cout << "" << endl;
+            }
+        }
     }
 
     return tabl;

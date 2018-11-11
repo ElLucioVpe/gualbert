@@ -2,6 +2,23 @@
 
 // Funciones de arboles
 
+bool existeTabla(tabla tabl, string nombre) {
+
+    if(esVacia(tabl)) {
+        return false;
+    } else {
+        int compararString = nombre.compare(tabl->nombre);
+
+        if (compararString > 0) {
+            return existeTabla(tabl->ptrTablaDer, nombre);
+        } else if (compararString < 0) {
+            return existeTabla(tabl->ptrTablaIzq, nombre);
+        } else {
+            return true;
+        }
+    }
+}
+
 tabla buscarMenor(tabla tabl) {
     if (esVacia(tabl))
        return NULL;
@@ -162,37 +179,33 @@ tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
     std::string tokenx;
 
     //Verifico numero de datos que se quieren insertar
-     while(std::getline(dd, tokenx, ':')) {
+    while(std::getline(dd, tokenx, ':')) {
            numDats++;
     }
     numCols=cuentoColumnas(nombreTabla,auxTable);
-    ////
 
-    while(!esVacia(auxTable)){
-        if(auxTable->nombre == nombreTabla) {
+    if(existeTabla(auxTable, nombreTabla)) {
 
-        if(std::getline(ss, token, ':')) {
-            primaryKey = token;
-        }
+            if(std::getline(ss, token, ':')) {
+                primaryKey = token;
+            }
 
-        if(!verificoDuplicadoFila(tabl, nombreTabla, primaryKey)) {
+            if(!verificoDuplicadoFila(tabl, nombreTabla, primaryKey)) {
 
-                if(numCols==numDats){
-                    tablon=insertarDato(tablon, auxTable, dato);
-                   *tabl=tablon;
-                   return ok;
-                }
-                else {
-                cout << "No tiene el mismo numero de tuplas que de columnas";
+                    if(numCols==numDats){
+                        tablon=insertarDato(tablon, auxTable, dato);
+                       *tabl=tablon;
+                       return ok;
+                    }
+                    else {
+                    cout << "No tiene el mismo numero de tuplas que de columnas";
+                    return error;
+                   }
+
+            } else {
+                cout << "Pk multiplicada";
                 return error;
-               }
-
-        } else {
-            cout << "Pk multiplicada";
-            return error;
-        }
-    }
-        auxTable = auxTable->ptrTablaDer;
+            }
     }
     return error; //raro este error
 }
@@ -420,6 +433,34 @@ void mostrarListaRecur(tabla l){
 
 //Eliminar Tabla
 
+tipoRet eliminoTabla(tabla *tabl,string nombre){
+
+    if(nombre != "") {
+        //if tiene columnas pasar a eliminar las col primero
+        tabla auxTable;
+        tabla tablon;
+        auxTable=*tabl;
+        tablon=*tabl;
+
+        if (!esVacia(tablon)){
+
+            if(existeTabla(auxTable, nombre)) {
+                tablon=eliminarTabla(&tablon,nombre);
+                *tabl=tablon;
+                return ok;
+            } else {
+                return error; // No existe la tabla :(
+            }
+
+        }else{
+            return error;
+        }
+    } else {
+        return error;
+    }
+
+}
+
 tabla eliminarTabla(tabla *tabl, string name){
 
     tabla BorrarTabl;
@@ -453,9 +494,9 @@ tabla eliminarTabla(tabla *tabl, string name){
 
             // Compara nombres de tabla para saber a que hoja del arbol seguir
             if(compararString > 0 ) {
-                eliminarTabla(BorrarTabl->ptrTablaDer, name);
+                eliminarTabla(&BorrarTabl->ptrTablaDer, name);
             } else if(compararString < 0) {
-                eliminarTabla(BorrarTabl->ptrTablaIzq, name);
+                eliminarTabla(&BorrarTabl->ptrTablaIzq, name);
             } else {
                 //cout << "" << endl;
             }
@@ -463,38 +504,6 @@ tabla eliminarTabla(tabla *tabl, string name){
     }
 
     return *tabl;
-}
-
-tabla eliminarTabla(tabla tabl, string name){
-    //0 a null 1 a 0
-    tabla BorrarTabl;
-    tabla anterior;
-
-    BorrarTabl = new _tabla;
-    anterior = new _tabla;
-
-    anterior=NULL;
-    BorrarTabl=tabl; //apunta al inicio de la lista
-
-    while((BorrarTabl!=NULL)&&(BorrarTabl->nombre!=name)){ //mientras que BorrarTabl no sea null y no sea igual al nombre desdeado
-        anterior=BorrarTabl; //anterior se iguala a BorrarTabl
-
-        BorrarTabl=BorrarTabl->ptrTablaDer; //Borrartabl va al siguiente nodo 'Tabla'
-    }
-
-    //Casos cuando salga del while
-    if(BorrarTabl==NULL){  // significa que recorrio toda la lista y cuando entro al while al final BorrarTabl es igual a null/ apunta al putero sig del ultimo nodo entonces NULL
-    } else if(anterior==NULL) { // Si entra aca significa que no entro al while porque el elemento que buscamos es el primero en la lista, entonces  tabl apunta al sig nodo y deleteamos el primer nodo que esta en BorrarTabl.
-        tabl = tabl->ptrTablaDer;
-        delete BorrarTabl;
-
-    } else { // El elemento esta en la lista pero no es el primero
-        anterior->ptrTablaDer=BorrarTabl->ptrTablaDer;  // hacemos que el que estaba atras apunte al mismo que estaba apuntando borrartabl 'el siguiente del actual'
-        delete BorrarTabl; // borramos borrartabl
-
-    }
-
-    return tabl;
 }
 
 tipoRet actualizoDatos(tabla *tabl, string tablNom, string condicionCol, string condicionDato, string nuevoDatoCol, string nuevoDato) {

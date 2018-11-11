@@ -48,7 +48,7 @@ tipoRet insertoTabla(tabla *tabl,string nombre);
 tabla insertarTabla(tabla tabl, string name);
 
 tipoRet eliminoTabla(tabla *tabl,string nombre);
-tabla eliminarTabla(tabla tabl, string name);
+tabla eliminarTabla(tabla *tabl, string name);
 
 tipoRet insertoColumna(tabla *tabl, string tabla, string columna);
 tabla insertarColumna(tabla tabl, tabla auxTable, string columna);
@@ -96,3 +96,4 @@ void mostrarSim(tabla lista);
 
 tabla buscarMenor(tabla tabl);
 tabla HijoIzq(tabla tabl);
+bool existeTabla(tabla tabl, string nombre);

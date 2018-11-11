@@ -1202,6 +1202,7 @@ void mostrarTabla(tabla l,string nomTabl){
                     filPK = col->fila;
                     pivot = filPK;
                     actual=NULL;
+                    int compPivAct=0;
 
                     while (pivot!=NULL){
 
@@ -1209,18 +1210,26 @@ void mostrarTabla(tabla l,string nomTabl){
 
                     while(actual!=NULL){
 
-                        if(pivot->dato > actual->dato){
+                        if ((pivot->dato).size()==(actual->dato).size()){ ///Si tiene el mismo SIZE el string
+                        if( pivot->dato > actual->dato ){ ///Ahora si comparamos como es normal, para saber que pasa con el primer digito
                             i++;
+
+                        }
+                        }
+
+                       else if ((pivot->dato).size()>(actual->dato).size()){ ///Si el string no tiene el mismo size pero el pivot es mas grande
+                        i++;
                         }
 
                        actual=actual->sgtFila;
+
                     }
+
                     pos[n]=i;
                     i=1;
                     n++;
                     pivot=pivot->sgtFila;
                     }
-            ///
 
                     ///SE COUTEAN RESPETANDO EL ORDEN
                     n=0;
@@ -1248,10 +1257,7 @@ void mostrarTabla(tabla l,string nomTabl){
 
                                     }
 
-
-                                    //cout << j;
-
-                                    if(enc==1){ //SI lo que esta dentro de pos n es mas grande que j, se paso.. arranquemos otra vez
+                                    if(enc==1){ ///SI lo que esta dentro de pos n es mas grande que j, se paso.. arranquemos otra vez
 
                                     filChan=colChan->fila;
                                     enc=0;
@@ -1260,7 +1266,7 @@ void mostrarTabla(tabla l,string nomTabl){
 
                                     else{
 
-                                    filChan=filChan->sgtFila; //Adelanta uno
+                                    filChan=filChan->sgtFila; ///Adelanta uno
                                     n++;
 
                                 }

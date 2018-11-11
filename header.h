@@ -30,11 +30,11 @@ struct _columna{
 
 struct _tabla{
     string nombre;
-    _tabla *ptrtabla;
+    _tabla *ptrTablaIzq;
+    _tabla *ptrTablaDer;
     _columna *columna;
 
 };typedef struct _tabla *tabla;
-
 
 
 ////////////////////Functs

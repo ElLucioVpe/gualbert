@@ -13,7 +13,10 @@ int main()
     string var5;
 
     tabla tabl = new _tabla;
-
+    muestroR(inicioTabla(&tabl));
+    muestroR(insertoTablaAbb(&tabl,"clientes"));
+    muestroR(insertoTablaAbb(&tabl,"personas"));
+    mostrarSim(tabl);
     ///Probar FUNCS
     /*
     muestroR(inicioTabla(&tabl));

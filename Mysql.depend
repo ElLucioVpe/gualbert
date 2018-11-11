@@ -67,19 +67,15 @@
 1539630420 17b562bc77701a069b6a8f429b60410e84f3c
 	"header.h"
 
-<<<<<<< HEAD
-1540124926 source:/mnt/c/Users/lucia/git/gualbert/functions.cpp
-=======
-1540144876 source:/mnt/c/ProyectoC++MySQL/gualbert/functions.cpp
->>>>>>> c6a5f59be9d12cd9987da95cc2de3e2b15ec7130
+1541904425 source:/mnt/c/ProyectoC++MySQL/gualbert/functions.cpp
 	"header.h"
 
-1540140529 /mnt/c/ProyectoC++MySQL/gualbert/header.h
+1541904911 /mnt/c/ProyectoC++MySQL/gualbert/header.h
 	<iostream>
 	<stdlib.h>
 	<string>
 	<sstream>
 
-1540143662 source:/mnt/c/ProyectoC++MySQL/gualbert/main.cpp
+1541904469 source:/mnt/c/ProyectoC++MySQL/gualbert/main.cpp
 	"header.h"
 

@@ -12,7 +12,7 @@ tabla buscarMenor(tabla tabl) {
 
 tabla HijoIzq(tabla tabl)
 {
-  return tabl->hijoIzq;
+  return tabl->ptrTablaIzq;
 }
 
 //Inserto Tabla
@@ -25,7 +25,6 @@ tipoRet insertoTabla(tabla *tabl, string nombre){
             if(auxTable->nombre == nombre) {
                 return error; // Ya existe una tabla con ese nombre
             }
-            auxTable = auxTable->ptrtabla;
             //auxTable = auxTable->ptrtabla;
         }
 
@@ -46,12 +45,10 @@ tabla insertarTabla(tabla tabl, string name){
     tabla nuevatabla;
     nuevatabla = new _tabla;
     nuevatabla->nombre=name;
-    nuevatabla->ptrtabla=NULL;
    // nuevatabla->ptrtabla=NULL;
 
     if(esVacia(tabl)) {
         // Si es vacia la agrega  al principio
-        //nuevatabla->ptrtabla=tabl;
         nuevatabla->ptrTablaDer=tabl;
         tabl=nuevatabla;
     } else {
@@ -60,18 +57,14 @@ tabla insertarTabla(tabla tabl, string name){
         auxTable = tabl;
 
         while(!esVacia(auxTable)) {
-            if(esVacia(auxTable->ptrtabla)) {
-                auxTable->ptrtabla = nuevatabla; // Asigna la tabla al final
             if(esVacia(auxTable->ptrTablaDer)) {
               auxTable->ptrTablaDer = nuevatabla; // Asigna la tabla al final
                 break;
             }
-            auxTable = auxTable->ptrtabla; // Sigue buscando
 //            auxTable = auxTable->ptrtabla; // Sigue buscando
         }
     }
 
-    return tabl;
    return tabl;
 }
 
@@ -120,7 +113,6 @@ tipoRet insertoColumna(tabla *tabl, string nombreTabla, string nombreColumna){
                 return ok;
             }
 
-            auxTable = auxTable->ptrtabla;
             auxTable = auxTable->ptrTablaDer;
         }
 
@@ -200,7 +192,6 @@ tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
             return error;
         }
     }
-        auxTable = auxTable->ptrtabla;
         auxTable = auxTable->ptrTablaDer;
     }
     return error; //raro este error
@@ -260,7 +251,6 @@ void creoTabla(tabla **tabl){
     tabla nuevatabla;
     nuevatabla = new _tabla;
 
-    nuevatabla -> ptrtabla=NULL; //1 -> null
     nuevatabla ->ptrTablaDer =NULL; //1 -> null
     nuevatabla->ptrTablaIzq=NULL;
 
@@ -420,7 +410,6 @@ void mostrarListaRecur(tabla l){
         }
 
     // Chequea la tabla siguiente
-        mostrarListaRecur(l->ptrtabla); //recursiv
         mostrarListaRecur(l->ptrTablaDer); //recursiv
 
     } else{
@@ -431,63 +420,65 @@ void mostrarListaRecur(tabla l){
 
 //Eliminar Tabla
 
-tipoRet eliminoTabla(tabla *tabl,string nombre){
-
-    if(nombre != "") {
-        //if tiene columnas pasar a eliminar las col primero
-        tabla auxTable;
-        tabla tablon;
-        auxTable=*tabl;
-        tablon=*tabl;
-
-        if (!esVacia(tablon)){
-
-            while(!esVacia(auxTable)) {
-                if(auxTable->nombre == nombre) {
-                    tablon=eliminarTabla(tablon,nombre);
-                    *tabl=tablon;
-                    return ok;
-                }
-                auxTable = auxTable->ptrtabla;
-                auxTable = auxTable->ptrTablaDer;
-            }
-
-            return error; // No existe la tabla :(
-        }else{
-            return error;
-        }
-    } else {
-        return error;
-    }
-
-}
-
 tabla eliminarTabla(tabla *tabl, string name){
 
     tabla BorrarTabl;
     BorrarTabl = new _tabla;
-    BorrarTabl=tabl; //apunta al inicio de la lista
+    BorrarTabl = *tabl; //apunta al inicio de la lista
 
     if(BorrarTabl->nombre == name) {
 
-<<<<<<< HEAD
-            if(EsVacio(BorrarTabl->ptrTablaIzq)) {
-               BorrarTabl = BorrarTabl->hijoDer;
+            if(esVacia(BorrarTabl->ptrTablaIzq)) {
+               BorrarTabl = BorrarTabl->ptrTablaDer;
                //delete BorrarTabl;
 
             }
-            else if (EsVacio(BorrarTabl->ptrTablaDer)) {
+            else if (esVacia(BorrarTabl->ptrTablaDer)) {
                BorrarTabl = BorrarTabl->ptrTablaIzq;
               // A->hijoDer = NULL;
                //delete BorrarTabl;
             } else {
                 tabla guardoTabla = BorrarTabl;
-                guardoTabla = BuscarMenor(BorrarTabl->ptrTablaDer);
+                guardoTabla = buscarMenor(BorrarTabl->ptrTablaDer);
                 BorrarTabl->nombre = guardoTabla->nombre;
-                BorrarTabl->hijoDer->hijoIzq = guardoTabla->hijoDer;
+                BorrarTabl->ptrTablaDer->ptrTablaIzq = guardoTabla->ptrTablaDer;
                 //delete p;
             }
-=======
+
+    } else {
+        if(!esVacia(BorrarTabl->ptrTablaDer) && !esVacia(BorrarTabl->ptrTablaIzq)) {
+            int compararString;
+            string nombreTabla = BorrarTabl->nombre;
+            compararString = nombreTabla.compare(name);
+
+            // Compara nombres de tabla para saber a que hoja del arbol seguir
+            if(compararString > 0 ) {
+                eliminarTabla(BorrarTabl->ptrTablaDer, name);
+            } else if(compararString < 0) {
+                eliminarTabla(BorrarTabl->ptrTablaIzq, name);
+            } else {
+                //cout << "" << endl;
+            }
+        }
+    }
+
+    return *tabl;
+}
+
+tabla eliminarTabla(tabla tabl, string name){
+    //0 a null 1 a 0
+    tabla BorrarTabl;
+    tabla anterior;
+
+    BorrarTabl = new _tabla;
+    anterior = new _tabla;
+
+    anterior=NULL;
+    BorrarTabl=tabl; //apunta al inicio de la lista
+
+    while((BorrarTabl!=NULL)&&(BorrarTabl->nombre!=name)){ //mientras que BorrarTabl no sea null y no sea igual al nombre desdeado
+        anterior=BorrarTabl; //anterior se iguala a BorrarTabl
+
         BorrarTabl=BorrarTabl->ptrTablaDer; //Borrartabl va al siguiente nodo 'Tabla'
     }
 
@@ -500,23 +491,7 @@ tabla eliminarTabla(tabla *tabl, string name){
     } else { // El elemento esta en la lista pero no es el primero
         anterior->ptrTablaDer=BorrarTabl->ptrTablaDer;  // hacemos que el que estaba atras apunte al mismo que estaba apuntando borrartabl 'el siguiente del actual'
         delete BorrarTabl; // borramos borrartabl
->>>>>>> 741961acd4d3fbe3d58bdf80bee19c05a1f4a837
 
-        }
-    } else {
-        if(!esVacia(BorrarTabl->ptrTablaDer) && !esVacia(BorrarTabl->ptrTablaIzq)) {
-            int compararString;
-            compararString = strcmp(BorrarTabl->nombre, name);
-
-            // Compara nombres de tabla para saber a que hoja del arbol seguir
-            if(comprarString > 0 ) {
-                eliminarTabla(BorrarTabl->ptrTablaDer, name);
-            } else if(comprarString < 0) {
-                eliminarTabla(BorrarTabl->ptrTablaIzq, name);
-            } else {
-                //cout << "" << endl;
-            }
-        }
     }
 
     return tabl;
@@ -537,7 +512,6 @@ tipoRet actualizoDatos(tabla *tabl, string tablNom, string condicionCol, string 
                 *tabl=tablon;
                 return ok;
             }
-            auxTable = auxTable->ptrtabla;
             auxTable = auxTable->ptrTablaDer;
         }
 
@@ -660,7 +634,6 @@ int buscoDato(tabla tabl,string tablNom, string colNom, string filNom){ //Encont
 
     //Encontramos la tabla que el user nos indico
    while(tablaAux->nombre!=tablNom){
-    tablaAux=tablaAux->ptrtabla;
     tablaAux=tablaAux->ptrTablaDer;
     }
 
@@ -701,7 +674,6 @@ tabla eliminarDato(tabla tabl, int i, string tablNom){
 
         //Encontramos la tabla que el user nos indico
         while(tablaAux->nombre!=tablNom){
-            tablaAux=tablaAux->ptrtabla;
             tablaAux=tablaAux->ptrTablaDer;
         }
 
@@ -802,7 +774,6 @@ int buscoColumna(tabla tabl,string tablNom, string colNom){ //EncontramosColumna
 
     //Encontramos la tabla que el user nos indico
    while(tablaAux->nombre!=tablNom){
-    tablaAux=tablaAux->ptrtabla;
     tablaAux=tablaAux->ptrTablaDer;
     }
 
@@ -843,7 +814,6 @@ tabla eliminarColumna(tabla tabl, int i, string tablNom){
 
         //Encontramos la tabla que el user nos indico
         while(tablaAux->nombre!=tablNom){
-            tablaAux=tablaAux->ptrtabla;
             tablaAux=tablaAux->ptrTablaDer;
         }
 
@@ -929,7 +899,6 @@ bool verificoDuplicadoFila(tabla *tabl, string nombreTabla, string primaryKey) {
             }
         }
 
-        auxTabla = auxTabla->ptrtabla;
         auxTabla = auxTabla->ptrTablaDer;
 
     }
@@ -947,7 +916,6 @@ columna colum;
 colum = new _columna;
 
     while(tablAux->nombre!=nombreTabla){
-    tablAux= tablAux->ptrtabla;
     tablAux= tablAux->ptrTablaDer;
     }
 colum=tablAux->columna;
@@ -1024,7 +992,6 @@ tipoRet eliminoDatoTupla(tabla *tabl, string nombreTabla, string condicion) {
 
             }
 
-            tabAux = tabAux->ptrtabla;
             tabAux = tabAux->ptrTablaDer;
         }
 
@@ -1235,7 +1202,6 @@ void mostrarTabla(tabla l,string nomTabl){
     if (!esVacia(l)){
 
     while((!esVacia(tabl))&&(tabl->nombre!=nomTabl)){
-    tabl= tabl->ptrtabla;
     tabl= tabl->ptrTablaDer;
 
    }

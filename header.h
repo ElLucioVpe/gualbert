@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
-#include <string>
+#include <cstring>
 #include <sstream>
 
 #define LARGOCADENA 20
@@ -93,3 +93,6 @@ tipoRet insertoTablaAbb(tabla *tabl, string nombre);
 tabla insertarAbb(_tabla *&lista, string n);
 
 void mostrarSim(tabla lista);
+
+tabla buscarMenor(tabla tabl);
+tabla HijoIzq(tabla tabl);

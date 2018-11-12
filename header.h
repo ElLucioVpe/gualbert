@@ -97,3 +97,5 @@ void mostrarSim(tabla lista);
 tabla buscarMenor(tabla tabl);
 tabla HijoIzq(tabla tabl);
 bool existeTabla(tabla tabl, string nombre);
+
+tabla retornarTablaBusacada(tabla A, string nombre);

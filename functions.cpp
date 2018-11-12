@@ -94,10 +94,7 @@ tipoRet insertoColumna(tabla *tabl, string nombreTabla, string nombreColumna){
         return error;
     }
 
-    if(!esVacia(auxTable)) {
-
-        while(!esVacia(auxTable)) {
-
+    auxTable=retornarTablaBusacada(auxTable,nombreTabla);
             if(auxTable->nombre == nombreTabla) {
 
                 columna auxCol;
@@ -128,13 +125,9 @@ tipoRet insertoColumna(tabla *tabl, string nombreTabla, string nombreColumna){
 
                 *tabl=tablon;
                 return ok;
-            }
 
-            auxTable = auxTable->ptrTablaDer;
-        }
-
-        return error; // No existe una tabla con el nombre dado
-    } else {
+                }
+        else {
         return error; // La tabla es vacia
     }
 }
@@ -782,9 +775,8 @@ int buscoColumna(tabla tabl,string tablNom, string colNom){ //EncontramosColumna
 
 
     //Encontramos la tabla que el user nos indico
-   while(tablaAux->nombre!=tablNom){
-    tablaAux=tablaAux->ptrTablaDer;
-    }
+    tablaAux=retornarTablaBusacada(tablaAux,tablNom);
+    if(tablaAux!=NULL){
 
     //encontro la tabla deseada
     //arranca en esta colum de la tabla deseada
@@ -809,6 +801,7 @@ int buscoColumna(tabla tabl,string tablNom, string colNom){ //EncontramosColumna
     return i;
 
 }
+}
 
 
 tabla eliminarColumna(tabla tabl, int i, string tablNom){
@@ -822,9 +815,7 @@ tabla eliminarColumna(tabla tabl, int i, string tablNom){
 
 
         //Encontramos la tabla que el user nos indico
-        while(tablaAux->nombre!=tablNom){
-            tablaAux=tablaAux->ptrTablaDer;
-        }
+        tablaAux=retornarTablaBusacada(tablaAux,tablNom);
 
 
         Cols=tablaAux->columna; //tenemos la primera column de la tabla, TIME TO DELETE!
@@ -1386,3 +1377,19 @@ void mostrarSim(tabla lista){
 
     }
     }
+
+tabla retornarTablaBusacada(tabla A, string nombre){
+
+  if (A==NULL)
+    return NULL;
+  else
+     if (A->nombre == nombre)
+        return A;
+     else
+        if (A->nombre < nombre)
+           return retornarTablaBusacada(A->ptrTablaDer, nombre);
+        else
+           return retornarTablaBusacada(A->ptrTablaIzq, nombre);
+
+
+}

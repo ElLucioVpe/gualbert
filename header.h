@@ -90,8 +90,9 @@ tabla eliminarDatoTupla(tabla tabl, tabla tablaAux, string col, string dato, cha
 void mostrarTabla(tabla l,string nomTabl);
 tipoRet muestroTabla(tabla l, string nomtabl);
 
-tipoRet insertoTablaAbb(tabla *tabl, string nombre);
-tabla insertarAbb(_tabla *&lista, string n);
+tipoRet insertoTablaAbb(tabla &tabl, string nombre);
+//void insertarAbb(_tabla *&lista, string n);
+void insertaNodoArbol( tabla &A, string valor );
 
 void mostrarSim(tabla lista);
 

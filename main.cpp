@@ -14,12 +14,14 @@ int main()
 
     tabla tabl = new _tabla;
     muestroR(inicioTabla(&tabl));
-    muestroR(insertoTablaAbb(&tabl,"clientes"));
-    muestroR(insertoTablaAbb(&tabl,"personas"));
-    muestroR(eliminoTabla(&tabl,"clientes"));
 
+    muestroR(insertoTablaAbb(tabl,"clientes"));
+    muestroR(insertoTablaAbb(tabl,"personas"));
     //tabl = retornarTablaBusacada(tabl,"clientes" );
     muestroR(insertoColumna(&tabl, "clientes", "ci"));
+    muestroR(eliminoColumna(&tabl, "clientes", "ci"));
+
+    //cout<<tabl->nombre;
     mostrarSim(tabl);
     ///Probar FUNCS
     /*
@@ -42,6 +44,7 @@ int main()
      muestroR(insertoDato(&tabl,"clientes", "12:NIc:SISI"));
      muestroR(insertoDato(&tabl,"clientes", "9:Rodri:SISI"));
     muestroR(muestroTabla(tabl,"clientes"));
+    //LUCIUS SEMPAI
     */
     ///
 

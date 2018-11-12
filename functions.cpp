@@ -334,13 +334,11 @@ tipoRet selecto(tabla *tabl, string tabla1, string columnas, string tabla2) {
                 // Puede ser que esta wea este mal
                 string colNombre = token;
                 if(existeColumna(&tablon, tabla1, token)) {
-
+                    break;
                 } else {
                     return error;
                 }
             }
-
-
         }
     }
 }

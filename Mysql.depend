@@ -2,8 +2,6 @@
 1538179056 source:/home/alien/Documents/ProgramaProyecto/Mysql/functions.cpp
 	"header.h"
 
-1541981008 
-
 1541980928 
 
 1538178924 /home/alien/Documents/ProgramaProyecto/Mysql/header.h
@@ -77,19 +75,15 @@
 	"header.h"
 	"header.h"
 
-1541981807 source:/mnt/c/ProyectoC++MySQL/gualbert/functions.cpp
+1541983634 source:/mnt/c/ProyectoC++MySQL/gualbert/functions.cpp
 	"header.h"
 
-1541980928 /mnt/c/ProyectoC++MySQL/gualbert/header.h
+1542057359 /mnt/c/ProyectoC++MySQL/gualbert/header.h
 	<iostream>
 	<stdlib.h>
 	<cstring>
 	<sstream>
 
-1541981008 source:/mnt/c/ProyectoC++MySQL/gualbert/main.cpp
+1542057371 source:/mnt/c/ProyectoC++MySQL/gualbert/main.cpp
 	"header.h"
 
-1541983634 source:/mnt/c/ProyectoC++MySQL/gualbert/functions.cpp
-1541983640 /mnt/c/ProyectoC++MySQL/gualbert/header.h
-1541983664 source:/mnt/c/ProyectoC++MySQL/gualbert/main.cpp
-	"header.h"

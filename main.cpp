@@ -44,6 +44,7 @@ int main()
      muestroR(insertoDato(&tabl,"clientes", "12:NIc:SISI"));
      muestroR(insertoDato(&tabl,"clientes", "9:Rodri:SISI"));
     muestroR(muestroTabla(tabl,"clientes"));
+    //LUCIUS SEMPAI
     */
     ///
 

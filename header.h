@@ -23,6 +23,7 @@ struct _fila{
 
 struct _columna{
     string nombreCol;
+    bool primaryKey;
     _columna *sgtColumna;
     _fila *fila;
 
@@ -51,10 +52,10 @@ tipoRet eliminoTabla(tabla *tabl,string nombre);
 tabla eliminarTabla(tabla *tabl, string name);
 
 tipoRet insertoColumna(tabla *tabl, string tabla, string columna);
-tabla insertarColumna(tabla tabl, tabla auxTable, string columna);
+tabla insertarColumna(tabla tabl, tabla auxTable, string nombreColumna, bool primaryKey);
 
 tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato);
-tabla insertarDato(tabla tabl, tabla tablaInsertarDato, string dato);
+tabla insertarDato(tabla *tabl, tabla *tablaInsertarDato, string dato, string name);
 
 tipoRet actualizoDatos(tabla *tabl, string tablNom, string condicionCol, string condicionDato, string nuevoDatoCol, string nuevoDato);
 tabla actualizarDatos(tabla tabl, tabla auxTabla, string condicionCol, string condicionDato, string nuevoDatoCol, string nuevoDato);
@@ -97,3 +98,7 @@ void mostrarSim(tabla lista);
 tabla buscarMenor(tabla tabl);
 tabla HijoIzq(tabla tabl);
 bool existeTabla(tabla tabl, string nombre);
+bool existeColumna(tabla *tabl, string nombreTabla, string nombreColumna);
+
+tabla retornarTablaBusacada(tabla A, string nombre);
+columna retornarColumna(tabla *tabl, string nombreTabla, string nombreColumna);

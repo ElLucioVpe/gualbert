@@ -16,6 +16,8 @@ int main()
     muestroR(inicioTabla(&tabl));
     muestroR(insertoTablaAbb(&tabl,"clientes"));
     muestroR(insertoTablaAbb(&tabl,"personas"));
+    muestroR(eliminoTabla(&tabl,"clientes"));
+
     mostrarSim(tabl);
     ///Probar FUNCS
     /*

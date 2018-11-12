@@ -79,15 +79,15 @@
 1541904469 source:/mnt/c/ProyectoC++MySQL/gualbert/main.cpp
 	"header.h"
 
-1541971861 source:/mnt/c/Users/lucia/git/gualbert/main.cpp
+1541985398 source:/mnt/c/Users/lucia/git/gualbert/main.cpp
 	"header.h"
 
-1541979094 /mnt/c/Users/lucia/git/gualbert/header.h
+1542053329 /mnt/c/Users/lucia/git/gualbert/header.h
 	<iostream>
 	<stdlib.h>
 	<cstring>
 	<sstream>
 
-1541976437 source:/mnt/c/Users/lucia/git/gualbert/functions.cpp
+1542053698 source:/mnt/c/Users/lucia/git/gualbert/functions.cpp
 	"header.h"
 

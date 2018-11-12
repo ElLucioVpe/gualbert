@@ -1319,23 +1319,11 @@ void mostrarTabla(tabla l,string nomTabl){
           }
 ///ACA TERMINA
 
-tipoRet insertoTablaAbb(tabla *tabl, string nombre){
-    tabla auxTable;
-    auxTable = *tabl;
+tipoRet insertoTablaAbb(tabla &tabl, string nombre){
 
     if(nombre != "") {
-        while(!esVacia(auxTable)) {
-            if(auxTable->nombre == nombre) {
-                return error; // Ya existe una tabla con ese nombre
-            }
-            auxTable = auxTable->ptrTablaDer;
-        }
-
         // Crea nueva tabla
-        _tabla *tablon;
-        tablon=*tabl;
-        insertarAbb(tablon,nombre);
-        *tabl=tablon;
+        insertaNodoArbol(tabl,nombre);
 
         return ok;
     } else {
@@ -1344,27 +1332,33 @@ tipoRet insertoTablaAbb(tabla *tabl, string nombre){
 
 }
 
-
-
 ///Insertar ABB TABLA
-tabla insertarAbb(_tabla *&lista, string n){
-    if (lista==NULL){
-        _tabla *nuevonodo = new _tabla;
-        nuevonodo->nombre=n;
-        lista=nuevonodo;
-        lista->ptrTablaDer=NULL;
-        lista->ptrTablaIzq=NULL;
+void insertaNodoArbol( tabla &A, string valor )
+{
 
-    }else{
-    string valorraiz=lista->nombre;
-    if (n<valorraiz){
-    insertarAbb(lista->ptrTablaIzq, n);
-    }else
-    {
-    insertarAbb(lista->ptrTablaDer, n);
-    }
-}
-//cout << lista->valor<< endl;
+  if (A==NULL) {
+      A = new  _tabla; // creo el nuevo espacio de memoria
+      A->nombre = valor; // asigno el valor al nodo
+      A->ptrTablaDer = NULL; // pongo puntero izq en null
+      A->ptrTablaDer = NULL; // pongo puntero der en null
+   }
+   else
+   {
+      if (valor < A->nombre ) { //pregunto si es menor para ir por la izquierda
+         insertaNodoArbol(A->ptrTablaIzq, valor ); // vuelvo a llamar a insertar nodo por la izq.
+      }
+      else
+      {
+           if ( valor > A->nombre ) { // pregunto si es mayor para ir por la derecha
+               insertaNodoArbol(A->ptrTablaDer, valor ); // vuelvo a llamar a insertar nodo por la der
+            }
+            else
+            {
+                   cout <<  "Valor ya existe" ; // valor ya existe.
+                   cin.get();
+            }
+      }
+   }
 }
 
 

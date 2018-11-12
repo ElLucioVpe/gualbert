@@ -16,13 +16,10 @@ int main()
     muestroR(inicioTabla(&tabl));
     muestroR(insertoTablaAbb(&tabl,"clientes"));
     muestroR(insertoTablaAbb(&tabl,"personas"));
-<<<<<<< HEAD
     muestroR(eliminoTabla(&tabl,"clientes"));
 
-=======
     //tabl = retornarTablaBusacada(tabl,"clientes" );
     muestroR(insertoColumna(&tabl, "clientes", "ci"));
->>>>>>> f4a9912363a4e45d820aaede0cd524539c6d31c7
     mostrarSim(tabl);
     ///Probar FUNCS
     /*

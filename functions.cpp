@@ -1475,11 +1475,7 @@ void mostrarSim(tabla lista){
             mostrarSim(lista->ptrTablaDer);
 
     }
-<<<<<<< HEAD
 }
-=======
-    }
->>>>>>> f4a9912363a4e45d820aaede0cd524539c6d31c7
 
 tabla retornarTablaBusacada(tabla A, string nombre){
 

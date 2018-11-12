@@ -98,8 +98,12 @@ void mostrarSim(tabla lista);
 tabla buscarMenor(tabla tabl);
 tabla HijoIzq(tabla tabl);
 bool existeTabla(tabla tabl, string nombre);
+<<<<<<< HEAD
 bool existeColumna(tabla *tabl, string nombreTabla, string nombreColumna);
 
 tabla retornarTablaBusacada(tabla A, string nombre);
 columna retornarColumna(tabla *tabl, string nombreTabla, string nombreColumna);
+=======
+
 tabla retornarTablaBusacada(tabla A, string nombre);
+>>>>>>> f4a9912363a4e45d820aaede0cd524539c6d31c7

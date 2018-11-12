@@ -874,9 +874,6 @@ int buscoColumna(tabla tabl,string tablNom, string colNom){ //EncontramosColumna
 
 
     //Encontramos la tabla que el user nos indico
-   while(tablaAux->nombre!=tablNom){
-    tablaAux=tablaAux->ptrTablaDer;
-    }
     tablaAux=retornarTablaBusacada(tablaAux,tablNom);
     if(tablaAux!=NULL){
 
@@ -917,9 +914,6 @@ tabla eliminarColumna(tabla tabl, int i, string tablNom){
 
 
         //Encontramos la tabla que el user nos indico
-        while(tablaAux->nombre!=tablNom){
-            tablaAux=tablaAux->ptrTablaDer;
-        }
         tablaAux=retornarTablaBusacada(tablaAux,tablNom);
 
 
@@ -1481,8 +1475,11 @@ void mostrarSim(tabla lista){
             mostrarSim(lista->ptrTablaDer);
 
     }
+<<<<<<< HEAD
 }
+=======
     }
+>>>>>>> f4a9912363a4e45d820aaede0cd524539c6d31c7
 
 tabla retornarTablaBusacada(tabla A, string nombre){
 

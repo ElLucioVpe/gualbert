@@ -529,14 +529,13 @@ tipoRet eliminoTabla(tabla *tabl,string nombre){
         //if tiene columnas pasar a eliminar las col primero
         tabla auxTable;
         tabla tablon;
-        auxTable=*tabl;
         tablon=*tabl;
 
         if (!esVacia(tablon)){
 
-            if(existeTabla(auxTable, nombre)) {
-                tablon=eliminarTabla(&tablon,nombre);
-                *tabl=tablon;
+            if(existeTabla(tablon, nombre)) {
+                auxTable=eliminarTabla(&tablon,nombre);
+                *tabl=auxTable;
                 return ok;
             } else {
                 return error; // No existe la tabla :(
@@ -556,41 +555,47 @@ tabla eliminarTabla(tabla *tabl, string name){
     tabla BorrarTabl;
     BorrarTabl = new _tabla;
     BorrarTabl = *tabl; //apunta al inicio de la lista
+    cout << "inicio eliminar tabla" << BorrarTabl->nombre << endl;
 
     if(BorrarTabl->nombre == name) {
+            cout << "tabla encontrada" << endl;
 
-            if(esVacia(BorrarTabl->ptrTablaIzq)) {
-               BorrarTabl = BorrarTabl->ptrTablaDer;
-               //delete BorrarTabl;
+            if(esVacia(BorrarTabl->ptrTablaDer) && esVacia(BorrarTabl->ptrTablaIzq)) {
+                cout << "es vacio ambos" << endl;
+                BorrarTabl = NULL;
 
-            }
-            else if (esVacia(BorrarTabl->ptrTablaDer)) {
+            } else if (esVacia(BorrarTabl->ptrTablaDer)) {
+                cout << "es vacio der" << endl;
+
                BorrarTabl = BorrarTabl->ptrTablaIzq;
-              // A->hijoDer = NULL;
-               //delete BorrarTabl;
+
+            } else if (esVacia(BorrarTabl->ptrTablaIzq)) {
+               BorrarTabl = BorrarTabl->ptrTablaDer;
+                cout << "es vacio izq" << endl;
+
             } else {
+                cout << "no es vacio ninguno :(" << endl;
+
                 tabla guardoTabla = BorrarTabl;
                 guardoTabla = buscarMenor(BorrarTabl->ptrTablaDer);
                 BorrarTabl->nombre = guardoTabla->nombre;
                 BorrarTabl->ptrTablaDer->ptrTablaIzq = guardoTabla->ptrTablaDer;
-                //delete p;
             }
 
     } else {
-        if(!esVacia(BorrarTabl->ptrTablaDer) && !esVacia(BorrarTabl->ptrTablaIzq)) {
+            cout << "sigue buscando" << endl;
+
             int compararString;
             string nombreTabla = BorrarTabl->nombre;
             compararString = nombreTabla.compare(name);
 
             // Compara nombres de tabla para saber a que hoja del arbol seguir
             if(compararString > 0 ) {
-                eliminarTabla(&BorrarTabl->ptrTablaDer, name);
-            } else if(compararString < 0) {
                 eliminarTabla(&BorrarTabl->ptrTablaIzq, name);
-            } else {
-                //cout << "" << endl;
+            } else if(compararString < 0) {
+                eliminarTabla(&BorrarTabl->ptrTablaDer, name);
             }
-        }
+
     }
 
     return *tabl;

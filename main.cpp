@@ -18,6 +18,8 @@ int main()
     muestroR(insertoTablaAbb(&tabl,"personas"));
     muestroR(eliminoTabla(&tabl,"clientes"));
 
+    //tabl = retornarTablaBusacada(tabl,"clientes" );
+    muestroR(insertoColumna(&tabl, "clientes", "ci"));
     mostrarSim(tabl);
     ///Probar FUNCS
     /*

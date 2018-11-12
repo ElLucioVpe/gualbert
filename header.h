@@ -102,3 +102,4 @@ bool existeColumna(tabla *tabl, string nombreTabla, string nombreColumna);
 
 tabla retornarTablaBusacada(tabla A, string nombre);
 columna retornarColumna(tabla *tabl, string nombreTabla, string nombreColumna);
+tabla retornarTablaBusacada(tabla A, string nombre);

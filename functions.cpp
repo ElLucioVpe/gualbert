@@ -877,6 +877,8 @@ int buscoColumna(tabla tabl,string tablNom, string colNom){ //EncontramosColumna
    while(tablaAux->nombre!=tablNom){
     tablaAux=tablaAux->ptrTablaDer;
     }
+    tablaAux=retornarTablaBusacada(tablaAux,tablNom);
+    if(tablaAux!=NULL){
 
     //encontro la tabla deseada
     //arranca en esta colum de la tabla deseada
@@ -901,6 +903,7 @@ int buscoColumna(tabla tabl,string tablNom, string colNom){ //EncontramosColumna
     return i;
 
 }
+}
 
 
 tabla eliminarColumna(tabla tabl, int i, string tablNom){
@@ -917,6 +920,7 @@ tabla eliminarColumna(tabla tabl, int i, string tablNom){
         while(tablaAux->nombre!=tablNom){
             tablaAux=tablaAux->ptrTablaDer;
         }
+        tablaAux=retornarTablaBusacada(tablaAux,tablNom);
 
 
         Cols=tablaAux->columna; //tenemos la primera column de la tabla, TIME TO DELETE!
@@ -1478,6 +1482,7 @@ void mostrarSim(tabla lista){
 
     }
 }
+    }
 
 tabla retornarTablaBusacada(tabla A, string nombre){
 

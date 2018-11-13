@@ -41,8 +41,8 @@ columna retornarColumna(tabla *tabl, string nombreTabla, string nombreColumna) {
         }
 
         return NULL;
-    }
 
+}
 }
 
 bool existeColumna(tabla *tabl, string nombreTabla, string nombreColumna) {
@@ -77,8 +77,7 @@ tabla buscarMenor(tabla tabl) {
     return tabl;
 }
 
-tabla HijoIzq(tabla tabl)
-{
+tabla HijoIzq(tabla tabl) {
   return tabl->ptrTablaIzq;
 }
 
@@ -150,10 +149,10 @@ tipoRet insertoColumna(tabla *tabl, string nombreTabla, string nombreColumna) {
 
                 columna auxCol;
                 auxCol = auxTable->columna;
+                fila auxFila;
 
                 // Chequea que la primera fila de la primera columna (si existe) no sea vacia
                 if(!esVacia(auxCol)) {
-                    fila auxFila;
                     auxFila = auxCol->fila;
 
                     if(!esVacia(auxCol->fila)) {
@@ -324,12 +323,14 @@ tabla insertarDato(tabla *tabl, tabla *tablaInsertarDato, string dato, string na
 
 tipoRet selecto(tabla *tabl, string tabla1, string columnas, string tabla2) {
     tabla tablon = *tabl;
+    tabla tabAux;
 
     if(!esVacia(tablon)) {
         if(existeTabla(tablon, tabla1)) {
 
             std::istringstream ss(columnas);
             std::string token;
+
             while(std::getline(ss, token, ':')) {
                 // Puede ser que esta wea este mal
                 string colNombre = token;
@@ -339,12 +340,50 @@ tipoRet selecto(tabla *tabl, string tabla1, string columnas, string tabla2) {
                     return error;
                 }
             }
+
+            while(std::getline(ss, token, ':')) {
+                // Puede ser que esta wea este mal
+                columna colAux = retornarColumna(tabl, tabla1, token);
+                tabAux = selecta(tabl, &colAux, tabla2);
+            }
         }
     }
 }
 
 tabla selecta(tabla *tabl, columna *col, string tabla2) {
 
+    tabla auxTab = *tabl;
+    tabla nuevaTab;
+
+    columna auxCol = *col;
+    columna nuevaCol = nuevaTab->columna;
+
+    fila auxFil = auxCol->fila;
+    fila nuevaFil;
+
+    tipoRet retorno;
+
+    // Insertamos tabla con nuevo nombre
+    retorno = insertoTabla(&auxTab, tabla2);
+    retorno = insertoColumna(&auxTab, tabla2, auxCol->nombreCol);
+
+    // Retorna la columna a ingresar datos
+    while(!esVacia(nuevaCol)) {
+        if(nuevaCol->nombreCol == auxCol->nombreCol) {
+            nuevaFil = auxCol->fila;
+            break;
+        }
+    }
+
+    // Enviamos datos a nueva tabla
+
+    nuevaTab = retornarTablaBusacada(auxTab, tabla2);
+    while(!esVacia(auxFil)) {
+        nuevaFil->dato = auxFil->dato;
+        auxFil = auxFil->sgtFila;
+    }
+
+    return auxTab;
 }
 
 ///Inicializar tabla
@@ -534,7 +573,7 @@ tipoRet eliminoTabla(tabla *tabl,string nombre){
         if (!esVacia(tablon)){
 
             if(existeTabla(tablon, nombre)) {
-                auxTable=eliminarTabla(&tablon,nombre);
+                auxTable=eliminarTabla(tabl, tabl, nombre);
                 *tabl=auxTable;
                 return ok;
             } else {
@@ -550,31 +589,32 @@ tipoRet eliminoTabla(tabla *tabl,string nombre){
 
 }
 
-tabla eliminarTabla(tabla *tabl, string name){
+tabla eliminarTabla(tabla *tabl, tabla *aux, string name){
 
     tabla BorrarTabl;
     BorrarTabl = new _tabla;
-    BorrarTabl = *tabl; //apunta al inicio de la lista
-    cout << "inicio eliminar tabla" << BorrarTabl->nombre << endl;
+    tabla auxTable = *tabl;
+    BorrarTabl = *aux; //apunta al inicio de la lista
+
+    cout << "buscando: " << BorrarTabl->nombre << endl;
 
     if(BorrarTabl->nombre == name) {
-            cout << "tabla encontrada" << endl;
 
             if(esVacia(BorrarTabl->ptrTablaDer) && esVacia(BorrarTabl->ptrTablaIzq)) {
-                cout << "es vacio ambos" << endl;
-                BorrarTabl = NULL;
+                delete(BorrarTabl);
+                return auxTable;
 
             } else if (esVacia(BorrarTabl->ptrTablaDer)) {
-                cout << "es vacio der" << endl;
-
                BorrarTabl = BorrarTabl->ptrTablaIzq;
+               return auxTable;
 
             } else if (esVacia(BorrarTabl->ptrTablaIzq)) {
                BorrarTabl = BorrarTabl->ptrTablaDer;
-                cout << "es vacio izq" << endl;
+               cout << "hmm: " << BorrarTabl->ptrTablaDer->nombre << endl;
+                delete(BorrarTabl->ptrTablaDer);
+               return auxTable;
 
             } else {
-                cout << "no es vacio ninguno :(" << endl;
 
                 tabla guardoTabla = BorrarTabl;
                 guardoTabla = buscarMenor(BorrarTabl->ptrTablaDer);
@@ -583,7 +623,6 @@ tabla eliminarTabla(tabla *tabl, string name){
             }
 
     } else {
-            cout << "sigue buscando" << endl;
 
             int compararString;
             string nombreTabla = BorrarTabl->nombre;
@@ -591,14 +630,12 @@ tabla eliminarTabla(tabla *tabl, string name){
 
             // Compara nombres de tabla para saber a que hoja del arbol seguir
             if(compararString > 0 ) {
-                eliminarTabla(&BorrarTabl->ptrTablaIzq, name);
+                return eliminarTabla(&auxTable ,&BorrarTabl->ptrTablaIzq, name);
             } else if(compararString < 0) {
-                eliminarTabla(&BorrarTabl->ptrTablaDer, name);
+                return eliminarTabla(&auxTable ,&BorrarTabl->ptrTablaDer, name);
             }
 
     }
-
-    return *tabl;
 }
 
 tipoRet actualizoDatos(tabla *tabl, string tablNom, string condicionCol, string condicionDato, string nuevoDatoCol, string nuevoDato) {

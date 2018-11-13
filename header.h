@@ -49,7 +49,7 @@ tipoRet insertoTabla(tabla *tabl,string nombre);
 tabla insertarTabla(tabla tabl, string name);
 
 tipoRet eliminoTabla(tabla *tabl,string nombre);
-tabla eliminarTabla(tabla *tabl, string name);
+tabla eliminarTabla(tabla *tabl, tabla *aux, string name);
 
 tipoRet insertoColumna(tabla *tabl, string tabla, string columna);
 tabla insertarColumna(tabla tabl, tabla auxTable, string nombreColumna, bool primaryKey);
@@ -103,3 +103,6 @@ bool existeColumna(tabla *tabl, string nombreTabla, string nombreColumna);
 
 tabla retornarTablaBusacada(tabla A, string nombre);
 columna retornarColumna(tabla *tabl, string nombreTabla, string nombreColumna);
+
+tipoRet selecto(tabla *tabl, string tabla1, string columnas, string tabla2);
+tabla selecta(tabla *tabl, columna *col, string tabla2);

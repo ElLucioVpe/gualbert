@@ -19,7 +19,7 @@ int main()
     muestroR(insertoTablaAbb(tabl,"personas"));
     //tabl = retornarTablaBusacada(tabl,"clientes" );
     muestroR(insertoColumna(&tabl, "clientes", "ci"));
-    muestroR(eliminoTabla(&tabl, "personas"));
+    //muestroR(eliminoTabla(&tabl, "personas"));
     muestroR(eliminoColumna(&tabl, "clientes", "ci"));
 
     //cout<<tabl->nombre;

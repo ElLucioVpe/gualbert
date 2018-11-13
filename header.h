@@ -106,3 +106,5 @@ columna retornarColumna(tabla *tabl, string nombreTabla, string nombreColumna);
 
 tipoRet selecto(tabla *tabl, string tabla1, string columnas, string tabla2);
 tabla selecta(tabla *tabl, columna *col, string tabla2);
+
+void eliminoTablaAbb(tabla &A, string valor);

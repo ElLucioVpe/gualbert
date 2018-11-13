@@ -557,6 +557,59 @@ void mostrarListaRecur(tabla l){
     }
 }
 
+///Eliminar Tabla Gualbert
+void eliminoTablaAbb(tabla &A, string valor)
+{
+    if (A==NULL)
+    {
+        cout << "El árbol está vacio";
+    }
+    if (A->nombre > valor)
+    {
+       eliminoTablaAbb(A->ptrTablaIzq, valor);
+    }
+    else
+    {
+        if (A->nombre < valor)
+        {
+           eliminoTablaAbb(A->ptrTablaDer, valor);
+        }
+        else
+        {
+            tabla ptrElimino;
+            tabla p;
+            ptrElimino = A; //guardo el nodo  encontrado a eliminar
+
+            if (A->ptrTablaIzq==NULL)
+            {
+               A = A->ptrTablaDer;
+               //A->hijoIzq = NULL;
+               delete ptrElimino;
+
+            }
+            else
+            {
+                if (A->ptrTablaDer==NULL)
+                {
+                   A = A->ptrTablaIzq;
+                  // A->hijoDer = NULL;
+                   delete ptrElimino;
+                }
+                else
+                {
+                    p = buscarMenor(A->ptrTablaDer);
+                    A->nombre = p->nombre;
+                    A->ptrTablaDer->ptrTablaIzq = p->ptrTablaDer;
+                    delete p;
+                }
+            }
+        }
+    }
+  return;
+
+}
+
+
 
 //Eliminar Tabla
 
@@ -571,8 +624,7 @@ tipoRet eliminoTabla(tabla *tabl,string nombre){
         if (!esVacia(tablon)){
 
             if(existeTabla(tablon, nombre)) {
-                auxTable=eliminarTabla(tabl, tabl, nombre);
-                *tabl=auxTable;
+                eliminoTablaAbb(*tabl, nombre);
                 return ok;
             } else {
                 return error; // No existe la tabla :(

@@ -15,12 +15,16 @@ int main()
     tabla tabl = new _tabla;
     muestroR(inicioTabla(&tabl));
 
-    muestroR(insertoTablaAbb(tabl,"clientes"));
+    //muestroR(insertoTablaAbb(tabl,"clientes"));
+
+    muestroR(insertoTablaAbb(tabl,"Hoteles"));
+
     muestroR(insertoTablaAbb(tabl,"personas"));
     //tabl = retornarTablaBusacada(tabl,"clientes" );
-    muestroR(insertoColumna(&tabl, "clientes", "ci"));
-    //muestroR(eliminoTabla(&tabl, "personas"));
-    muestroR(eliminoColumna(&tabl, "clientes", "ci"));
+    //muestroR(insertoColumna(&tabl, "clientes", "ci"));
+
+    muestroR(eliminoTabla(&tabl, "personas"));
+    //muestroR(eliminoColumna(&tabl, "clientes", "ci"));
 
     mostrarSim(tabl);
     ///Probar FUNCS

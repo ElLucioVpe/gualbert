@@ -22,7 +22,6 @@ int main()
     //muestroR(eliminoTabla(&tabl, "personas"));
     muestroR(eliminoColumna(&tabl, "clientes", "ci"));
 
-    //cout<<tabl->nombre;
     mostrarSim(tabl);
     ///Probar FUNCS
     /*

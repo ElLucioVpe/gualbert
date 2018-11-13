@@ -391,9 +391,7 @@ void creoTabla(tabla **tabl){
 
     tabla nuevatabla;
     nuevatabla = new _tabla;
-
-    nuevatabla ->ptrTablaDer =NULL; //1 -> null
-    nuevatabla->ptrTablaIzq=NULL;
+    nuevatabla=NULL;
 
     **tabl = nuevatabla;
 }
@@ -1458,6 +1456,7 @@ void mostrarTabla(tabla l,string nomTabl){
           }
 ///ACA TERMINA
 
+///InsertoABB
 tipoRet insertoTablaAbb(tabla &tabl, string nombre){
 
     if(nombre != "") {

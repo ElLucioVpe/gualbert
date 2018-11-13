@@ -20,10 +20,11 @@ int main()
     muestroR(insertoTablaAbb(tabl,"Hoteles"));
 
     muestroR(insertoTablaAbb(tabl,"personas"));
+    muestroR(insertoTablaAbb(tabl,"mascotas"));
     //tabl = retornarTablaBusacada(tabl,"clientes" );
-    muestroR(insertoColumna(&tabl, "clientes", "ci"));
-    muestroR(eliminoTabla(&tabl, "clientes"));
-    muestroR(eliminoColumna(&tabl, "clientes", "ci"));
+    muestroR(insertoColumna(&tabl, "personas", "ci"));
+    //muestroR(eliminoTabla(&tabl, "clientes"));
+    muestroR(eliminoColumna(&tabl, "personas", "ci"));
 
     muestroR(eliminoTabla(&tabl, "personas"));
     //muestroR(eliminoColumna(&tabl, "clientes", "ci"));

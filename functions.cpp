@@ -613,7 +613,7 @@ void eliminoTablaAbb(tabla &A, string valor)
 
 //Eliminar Tabla
 
-tipoRet eliminoTabla(tabla *tabl,string nombre){
+tipoRet eliminoTabla(tabla *tabl, string nombre){
 
     if(nombre != "") {
         //if tiene columnas pasar a eliminar las col primero
@@ -651,17 +651,22 @@ tabla eliminarTabla(tabla *tabl, tabla *aux, string name){
     if(BorrarTabl->nombre == name) {
 
             if(esVacia(BorrarTabl->ptrTablaDer) && esVacia(BorrarTabl->ptrTablaIzq)) {
+                cout << "hmm1: " << endl;
+
                 delete(BorrarTabl);
                 return auxTable;
 
             } else if (esVacia(BorrarTabl->ptrTablaDer)) {
+                cout << "hmm2: " << endl;
+
                BorrarTabl = BorrarTabl->ptrTablaIzq;
                return auxTable;
 
             } else if (esVacia(BorrarTabl->ptrTablaIzq)) {
-               BorrarTabl = BorrarTabl->ptrTablaDer;
-               cout << "hmm: " << BorrarTabl->ptrTablaDer->nombre << endl;
-                delete(BorrarTabl->ptrTablaDer);
+                cout << "hmm3: " << BorrarTabl->ptrTablaDer->nombre <<  endl;
+
+               tabla tabRep = BorrarTabl->ptrTablaDer;
+               BorrarTabl = tabRep;
                return auxTable;
 
             } else {
@@ -680,9 +685,9 @@ tabla eliminarTabla(tabla *tabl, tabla *aux, string name){
 
             // Compara nombres de tabla para saber a que hoja del arbol seguir
             if(compararString > 0 ) {
-                return eliminarTabla(&auxTable ,&BorrarTabl->ptrTablaIzq, name);
+                return eliminarTabla(&auxTable, &BorrarTabl->ptrTablaIzq, name);
             } else if(compararString < 0) {
-                return eliminarTabla(&auxTable ,&BorrarTabl->ptrTablaDer, name);
+                return eliminarTabla(&auxTable, &BorrarTabl->ptrTablaDer, name);
             }
 
     }

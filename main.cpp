@@ -22,11 +22,20 @@ int main()
     muestroR(insertoTablaAbb(tabl,"personas"));
     muestroR(insertoTablaAbb(tabl,"mascotas"));
     //tabl = retornarTablaBusacada(tabl,"clientes" );
-    muestroR(insertoColumna(&tabl, "personas", "ci"));
-    //muestroR(eliminoTabla(&tabl, "clientes"));
-    muestroR(eliminoColumna(&tabl, "personas", "ci"));
+    muestroR(insertoColumna(&tabl, "mascotas", "nombre"));
+    muestroR(insertoColumna(&tabl, "mascotas", "edad"));
+    muestroR(insertoColumna(&tabl, "mascotas", "tipo"));
+    muestroR(insertoColumna(&tabl, "mascotas", "estaVivaNDAH"));
 
-    muestroR(eliminoTabla(&tabl, "personas"));
+    //columna colAAAH = retornarColumna(&tabl, "mascotas", "tipo");
+    //cout << "FJKJDKSJKSA " << colAAAH->nombreCol << endl;
+
+    //muestroR(eliminoTabla(&tabl, "clientes"));
+    //muestroR(eliminoColumna(&tabl, "personas", "ci"));
+
+    //muestroR(eliminoTabla(&tabl, "personas
+    muestroR(proyectoTabla(&tabl, "mascotas", "nombre:edad", "mascotas2.0"));
+
     //muestroR(eliminoColumna(&tabl, "clientes", "ci"));
 
     mostrarSim(tabl);

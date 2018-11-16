@@ -27,10 +27,18 @@ columna retornarColumna(tabla *tabl, string nombreTabla, string nombreColumna) {
     int compararString = nombreTabla.compare(tablaAux->nombre);
 
     if (compararString > 0) {
-        colAux = retornarColumna(&tablaAux->ptrTablaDer, nombreTabla, nombreColumna);
+
+        return retornarColumna(&tablaAux->ptrTablaDer, nombreTabla, nombreColumna);
     } else if (compararString < 0) {
-        colAux = retornarColumna(&tablaAux->ptrTablaIzq, nombreTabla, nombreColumna);
+
+        return retornarColumna(&tablaAux->ptrTablaIzq, nombreTabla, nombreColumna);
     } else {
+        if (esVacia(tablaAux->columna)) {
+            return NULL;
+        } else {
+            colAux = tablaAux->columna;
+        }
+
         while(!esVacia(colAux)) {
 
             if(colAux->nombreCol == nombreColumna) {
@@ -39,10 +47,10 @@ columna retornarColumna(tabla *tabl, string nombreTabla, string nombreColumna) {
 
             colAux = colAux->sgtColumna;
         }
+    }
 
-        return NULL;
+    return NULL;
 
-}
 }
 
 bool existeColumna(tabla *tabl, string nombreTabla, string nombreColumna) {
@@ -321,7 +329,7 @@ tabla insertarDato(tabla *tabl, tabla *tablaInsertarDato, string dato, string na
     }
 }
 
-tipoRet selecto(tabla *tabl, string tabla1, string columnas, string tabla2) {
+tipoRet proyectoTabla(tabla *tabl, string tabla1, string columnas, string tabla2) {
     tabla tablon = *tabl;
     tabla tabAux;
 
@@ -333,6 +341,8 @@ tipoRet selecto(tabla *tabl, string tabla1, string columnas, string tabla2) {
 
             while(std::getline(ss, token, ':')) {
                 // Puede ser que esta wea este mal
+                cout <<  "V1 -- Nombre columna: " <<token << endl;
+
                 string colNombre = token;
                 if(existeColumna(&tablon, tabla1, token)) {
                     break;
@@ -341,31 +351,35 @@ tipoRet selecto(tabla *tabl, string tabla1, string columnas, string tabla2) {
                 }
             }
 
+            token = "";
+
             while(std::getline(ss, token, ':')) {
                 // Puede ser que esta wea este mal
+                cout <<  "V2 -- Nombre columna: " << token << " NomTab: " << tabla1 << endl;
+
                 columna colAux = retornarColumna(tabl, tabla1, token);
-                tabAux = selecta(tabl, &colAux, tabla2);
+                cout << colAux->nombreCol << endl;
+
+                tabAux = proyectarTabla(tablon, colAux, tabla2);
             }
         }
     }
 }
 
-tabla selecta(tabla *tabl, columna *col, string tabla2) {
+tabla proyectarTabla(tabla tabl, columna col, string tabla2) {
 
-    tabla auxTab = *tabl;
+    tabla auxTab = tabl;
     tabla nuevaTab;
 
-    columna auxCol = *col;
+    columna auxCol = col;
     columna nuevaCol = nuevaTab->columna;
 
     fila auxFil = auxCol->fila;
     fila nuevaFil;
 
-    tipoRet retorno;
-
     // Insertamos tabla con nuevo nombre
-    retorno = insertoTabla(&auxTab, tabla2);
-    retorno = insertoColumna(&auxTab, tabla2, auxCol->nombreCol);
+    muestroR(insertoTablaAbb(auxTab, tabla2));
+    muestroR(insertoColumna(&auxTab, tabla2, auxCol->nombreCol));
 
     // Retorna la columna a ingresar datos
     while(!esVacia(nuevaCol)) {
@@ -375,12 +389,12 @@ tabla selecta(tabla *tabl, columna *col, string tabla2) {
         }
     }
 
-    // Enviamos datos a nueva tabla
-
+    // Enviamos datos a nueva tablabg
     nuevaTab = retornarTablaBusacada(auxTab, tabla2);
     while(!esVacia(auxFil)) {
         nuevaFil->dato = auxFil->dato;
         auxFil = auxFil->sgtFila;
+        // pumba
     }
 
     return auxTab;

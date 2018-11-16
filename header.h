@@ -104,7 +104,7 @@ bool existeColumna(tabla *tabl, string nombreTabla, string nombreColumna);
 tabla retornarTablaBusacada(tabla A, string nombre);
 columna retornarColumna(tabla *tabl, string nombreTabla, string nombreColumna);
 
-tipoRet selecto(tabla *tabl, string tabla1, string columnas, string tabla2);
-tabla selecta(tabla *tabl, columna *col, string tabla2);
+tipoRet proyectoTabla(tabla *tabl, string tabla1, string columnas, string tabla2);
+tabla proyectarTabla(tabla tabl, columna col, string tabla2);
 
 void eliminoTablaAbb(tabla &A, string valor);

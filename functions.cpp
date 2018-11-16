@@ -665,8 +665,11 @@ tabla eliminarTabla(tabla *tabl, tabla *aux, string name){
             } else if (esVacia(BorrarTabl->ptrTablaIzq)) {
                 cout << "hmm3: " << BorrarTabl->ptrTablaDer->nombre <<  endl;
 
+                cout << "antes: " << BorrarTabl->nombre <<  endl;
                tabla tabRep = BorrarTabl->ptrTablaDer;
                BorrarTabl = tabRep;
+               cout << "despues: " << BorrarTabl->nombre <<  endl;
+
                return auxTable;
 
             } else {

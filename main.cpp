@@ -35,10 +35,11 @@ int main()
 
     //muestroR(eliminoTabla(&tabl, "personas
     muestroR(proyectoTabla(&tabl, "mascotas", "nombre:edad", "mascotas2.0"));
+    muestroR(muestroTabla(tabl,"mascotas"));
 
     //muestroR(eliminoColumna(&tabl, "clientes", "ci"));
 
-    mostrarSim(tabl);
+    //mostrarSim(tabl);
     ///Probar FUNCS
     /*
     muestroR(inicioTabla(&tabl));

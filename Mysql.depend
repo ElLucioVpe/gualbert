@@ -53,7 +53,7 @@
 	"header.h"
 	"header.h"
 
-1542414172 source:/mnt/c/ProyectoC++MySQL/gualbert/functions.cpp
+1542415343 source:/mnt/c/ProyectoC++MySQL/gualbert/functions.cpp
 	"header.h"
 
 1542409037 /mnt/c/ProyectoC++MySQL/gualbert/header.h
@@ -62,6 +62,6 @@
 	<cstring>
 	<sstream>
 
-1542410242 source:/mnt/c/ProyectoC++MySQL/gualbert/main.cpp
+1542415397 source:/mnt/c/ProyectoC++MySQL/gualbert/main.cpp
 	"header.h"
 

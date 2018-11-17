@@ -214,7 +214,7 @@ tabla insertarColumna(tabla tabl, tabla auxTable, string nombreColumna, bool pri
     return tabl;
 }
 
-//Inserto Dato
+///Inserto Dato
 tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
     tabla tablon;
     tablon=*tabl;
@@ -264,7 +264,7 @@ tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
     }
     return error; //raro este error
 }
-
+///Insertar Dato
 tabla insertarDato(tabla *tabl, tabla *tablaInsertarDato, string dato, string name){
     tabla tablaAux;
     tablaAux = *tablaInsertarDato;
@@ -328,7 +328,7 @@ tabla insertarDato(tabla *tabl, tabla *tablaInsertarDato, string dato, string na
         }
     }
 }
-
+///Proyecto Tabla
 tipoRet proyectoTabla(tabla *tabl, string tabla1, string columnas, string tabla2) {
     tabla tablon = *tabl;
     tabla tabAux;
@@ -365,7 +365,7 @@ tipoRet proyectoTabla(tabla *tabl, string tabla1, string columnas, string tabla2
         }
     }
 }
-
+///Proyectar Tabla
 tabla proyectarTabla(tabla tabl, columna col, string tabla2) {
 
     tabla auxTab = tabl;
@@ -1577,8 +1577,21 @@ void insertaNodoArbol( tabla &A, string valor )
 void mostrarSim(tabla lista){
     if (lista!=NULL){
             mostrarSim(lista->ptrTablaIzq);
-            cout <<lista->nombre<<endl;
+            cout <<lista->nombre;
 
+            while(lista->columna!=NULL){
+            cout << endl;
+            cout <<lista->columna->nombreCol;
+
+                    while(lista->columna->fila!=NULL){
+                        cout <<lista->columna->fila->dato<< endl;
+                        lista->columna->fila=lista->columna->fila->sgtFila;
+                    }
+
+            lista->columna=lista->columna->sgtColumna;
+            }
+            cout << endl;
+            cout << endl;
             mostrarSim(lista->ptrTablaDer);
 
     }

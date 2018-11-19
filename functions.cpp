@@ -214,7 +214,7 @@ tabla insertarColumna(tabla tabl, tabla auxTable, string nombreColumna, bool pri
     return tabl;
 }
 
-//Inserto Dato
+///Inserto Dato
 tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
 
     tabla tablon;
@@ -331,7 +331,7 @@ tabla insertarDato(tabla *tabl, tabla *tablaInsertarDato, string dato, string na
         }
     }
 }
-
+///Proyecto Tabla
 tipoRet proyectoTabla(tabla *tabl, string tabla1, string columnas, string tabla2) {
     tabla tablon = *tabl;
     tabla tabAux;
@@ -368,7 +368,7 @@ tipoRet proyectoTabla(tabla *tabl, string tabla1, string columnas, string tabla2
         }
     }
 }
-
+///Proyectar Tabla
 tabla proyectarTabla(tabla tabl, columna col, string tabla2) {
 
     tabla auxTab = tabl;
@@ -1558,8 +1558,7 @@ void mostrarTabla(tabla l,string nomTabl){
 
     if (!esVacia(l)){
 
-    while((!esVacia(tabl))&&(tabl->nombre!=nomTabl)){
-    tabl= tabl->ptrTablaDer;
+        tabl=retornarTablaBusacada(tabl,nomTabl);
 
    }
 
@@ -1672,8 +1671,6 @@ void mostrarTabla(tabla l,string nomTabl){
           }
 
           }
-
-          }
 ///ACA TERMINA
 
 ///InsertoABB
@@ -1723,8 +1720,21 @@ void insertaNodoArbol( tabla &A, string valor )
 void mostrarSim(tabla lista){
     if (lista!=NULL){
             mostrarSim(lista->ptrTablaIzq);
-            cout <<lista->nombre<<endl;
+            cout <<lista->nombre;
 
+            while(lista->columna!=NULL){
+            cout << endl;
+            cout <<lista->columna->nombreCol;
+
+                    while(lista->columna->fila!=NULL){
+                        cout <<lista->columna->fila->dato<< endl;
+                        lista->columna->fila=lista->columna->fila->sgtFila;
+                    }
+
+            lista->columna=lista->columna->sgtColumna;
+            }
+            cout << endl;
+            cout << endl;
             mostrarSim(lista->ptrTablaDer);
 
     }
@@ -1744,4 +1754,76 @@ tabla retornarTablaBusacada(tabla A, string nombre){
            return retornarTablaBusacada(A->ptrTablaIzq, nombre);
 
 
+}
+
+///Select Where
+tipoRet sleccionoTablas (tabla *tabl,string tabla2, string condicion, string tabla1){ //Tomamos dos tablas, y con una columna pk del mismo nombre hacemos union con todo sin repetir datos pk.
+    tabla tablon = *tabl;
+    tabla tabAux;
+
+    if(!esVacia(tablon)) {
+        if(existeTabla(tablon, tabla1)) {
+
+            std::istringstream ss(columnas);
+            std::string token;
+
+            while(std::getline(ss, token, ':')) {
+                // Puede ser que esta wea este mal
+                cout <<  "V1 -- Nombre columna: " <<token << endl;
+
+                string colNombre = token;
+                if(existeColumna(&tablon, tabla1, token)) {
+                    break;
+                } else {
+                    return error;
+                }
+            }
+
+            token = "";
+
+            while(std::getline(ss, token, ':')) {
+                // Puede ser que esta wea este mal
+                cout <<  "V2 -- Nombre columna: " << token << " NomTab: " << tabla1 << endl;
+
+                columna colAux = retornarColumna(tabl, tabla1, token);
+                cout << colAux->nombreCol << endl;
+
+                tabAux = sleccionarTablas(tablon, colAux, tabla2);
+            }
+        }
+    }
+}
+///selectar Tabla
+tabla sleccionarTablas(tabla tabl, columna col, string tabla2) {
+
+    tabla auxTab = tabl;
+    tabla nuevaTab;
+
+    columna auxCol = col;
+    columna nuevaCol = nuevaTab->columna;
+
+    fila auxFil = auxCol->fila;
+    fila nuevaFil;
+
+    // Insertamos tabla con nuevo nombre
+    muestroR(insertoTablaAbb(auxTab, tabla2));
+    muestroR(insertoColumna(&auxTab, tabla2, auxCol->nombreCol));
+
+    // Retorna la columna a ingresar datos
+    while(!esVacia(nuevaCol)) {
+        if(nuevaCol->nombreCol == auxCol->nombreCol) {
+            nuevaFil = auxCol->fila;
+            break;
+        }
+    }
+
+    // Enviamos datos a nueva tablabg
+    nuevaTab = retornarTablaBusacada(auxTab, tabla2);
+    while(!esVacia(auxFil)) {
+        nuevaFil->dato = auxFil->dato;
+        auxFil = auxFil->sgtFila;
+        // pumba
+    }
+
+    return auxTab;
 }

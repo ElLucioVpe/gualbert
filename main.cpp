@@ -26,6 +26,13 @@ int main()
     muestroR(insertoColumna(&tabl, "mascotas", "edad"));
     muestroR(insertoColumna(&tabl, "mascotas", "tipo"));
     muestroR(insertoColumna(&tabl, "mascotas", "estaVivaNDAH"));
+    muestroR(insertoColumna(&tabl, "mascotas", "estaVivaNDAH"));
+
+    muestroR(insertoDato(&tabl, "mascotas", "julian:18:agua:0:0"));
+    //muestroR(insertoDato(&tabl, "mascotas", "schrodinger:50:tramboliko:0:1"));
+
+
+
 
     //columna colAAAH = retornarColumna(&tabl, "mascotas", "tipo");
     //cout << "FJKJDKSJKSA " << colAAAH->nombreCol << endl;
@@ -34,11 +41,12 @@ int main()
     //muestroR(eliminoColumna(&tabl, "personas", "ci"));
 
     //muestroR(eliminoTabla(&tabl, "personas
-    muestroR(proyectoTabla(&tabl, "mascotas", "nombre:edad", "mascotas2.0"));
+    //muestroR(proyectoTabla(&tabl, "mascotas", "nombre:edad", "mascotas2.0"));
 
     //muestroR(eliminoColumna(&tabl, "clientes", "ci"));
 
     mostrarSim(tabl);
+
     ///Probar FUNCS
     /*
     muestroR(inicioTabla(&tabl));

@@ -216,6 +216,7 @@ tabla insertarColumna(tabla tabl, tabla auxTable, string nombreColumna, bool pri
 
 //Inserto Dato
 tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
+
     tabla tablon;
     tablon=*tabl;
 
@@ -234,10 +235,11 @@ tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
 
     //Verifico numero de datos que se quieren insertar
     while(std::getline(dd, tokenx, ':')) {
-           numDats++;
+       numDats++;
     }
 
     numCols=cuentoColumnas(nombreTabla,auxTable);
+    cout << "AAAAAAHHHHHHHHHHHHHHHH mi pixula vDP" << endl;
 
     if(existeTabla(auxTable, nombreTabla)) {
 
@@ -265,7 +267,8 @@ tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
     return error; //raro este error
 }
 
-tabla insertarDato(tabla *tabl, tabla *tablaInsertarDato, string dato, string name){
+tabla insertarDato(tabla *tabl, tabla *tablaInsertarDato, string dato, string name) {
+
     tabla tablaAux;
     tablaAux = *tablaInsertarDato;
     tabla tabRaiz = *tabl;
@@ -351,7 +354,7 @@ tipoRet proyectoTabla(tabla *tabl, string tabla1, string columnas, string tabla2
                 }
             }
 
-            token = "";
+            //token = "";
 
             while(std::getline(ss, token, ':')) {
                 // Puede ser que esta wea este mal
@@ -801,6 +804,153 @@ tabla actualizarDatos(tabla tabl, tabla auxTabla, string condicionCol, string co
 
 }
 
+tipoRet proyectarWhere(tabla *tabl, string nombreTabla1, string condicion, string nombreTabla2) {
+    tabla tablon = new _tabla;
+    tabla auxTable = new _tabla;
+    tablon = *tabl;
+    auxTable = *tabl;
+
+   if(nombreTabla1 == "" || condicion == "" || nombreTabla2 == "") {
+        return error;
+    } else {
+        auxTable = retornarTablaBusacada(tablon, nombreTabla1);
+
+        if(!esVacia(auxTable)) {
+            tablon = proyectoWhere(*tabl, auxTable, nombreTabla1, condicion, nombreTabla2);
+            auxTable=tablon;
+            return ok;
+        } else {
+            return error;
+        }
+    }
+}
+
+tabla proyectoWhere(tabla tabl, tabla auxTabla, string nombreTabla1, string condicion, string nombreTabla2) {
+    columna auxCol;
+    fila auxFila;
+    int nivel = 0;
+    bool primerDato = true; // Cuenta cuantos datos han sido agregados
+    char comp;
+    bool agregarDato = false;
+    string datoColumna;
+    string datoComp;
+
+    if(!esVacia(auxTabla->columna)) {
+        auxCol = auxTabla->columna;
+    } else {
+        return tabl;
+    }
+
+    // Encuentra comparador
+    if(condicion.find('=') != std::string::npos) {
+        comp = '=';
+    } else if (condicion.find('>') != std::string::npos) {
+        comp = '>';
+    } else if (condicion.find('<') != std::string::npos) {
+        comp = '<';
+    } else {
+        return tabl;
+    }
+
+    // Separa datos provisionados por el usuario
+    std::istringstream ss(condicion);
+    std::string token;
+
+    int i = 0;
+    while(std::getline(ss, token, comp)) {
+        if (i = 0) {
+            datoColumna = token;
+        } else if (i = 1) {
+            datoComp = token;
+        } else {
+            return tabl;
+        }
+
+        i++;
+    }
+
+    // Declaraciones para tabla ya existente
+    columna colComp = retornarColumna(&tabl, nombreTabla1, datoColumna);
+
+    // Declaraciones para tabla nueva
+    tipoRet retorno = insertoTabla(&tabl, nombreTabla2);
+    tabla tablaNueva = retornarTablaBusacada(tabl, nombreTabla2);
+
+    // Recorre todas las columnas
+    while(!esVacia(colComp)) {
+        fila filComp = colComp->fila;
+        nivel = 0;
+
+        // Crea nueva columna en tabla2
+        retorno = insertoColumna(&tabl, nombreTabla2, colComp->nombreCol);
+        columna nuevaColumna = retornarColumna(&tabl, nombreTabla2, colComp->nombreCol);
+
+        // Recorre cada fila de las columnas
+        while(!esVacia(filComp)) {
+
+            fila filaInsertar = nuevaColumna->fila;
+
+            // Compara datos
+            if(comp = '=') {
+                if(filComp->dato == datoComp) {
+                    agregarDato = true;
+                }
+            } else if (comp = '>') {
+                if(filComp->dato > datoComp) {
+                    agregarDato = true;
+                }
+            } else if (comp = '<') {
+                if(filComp->dato < datoComp) {
+                    agregarDato = true;
+                }
+            }
+
+            // Si los datos concuerdan, ingresa los datos a la nueva tabla
+            if(agregarDato) {
+
+                // Recorre los datos
+                int contar = 0;
+
+                columna auxCol = auxTabla->columna;
+                while(!esVacia(auxCol)) {
+
+                        fila auxFil = auxCol->fila;
+
+                        while(!esVacia(auxFil)) {
+                            while(contar < nivel) {
+                                auxFil = auxFil->sgtFila;
+                                contar++;
+                            }
+                        }
+
+                        if(nivel = contar) {
+                            fila filNueva = NULL;
+                            filNueva->dato = auxFila->dato;
+                            filNueva->sgtFila = NULL;
+
+                            if(primerDato) {
+                                filaInsertar = filNueva;
+                            } else {
+                                filaInsertar->sgtFila = filNueva;
+                            }
+                        }
+
+                }
+
+                primerDato = false;
+                auxCol = auxCol->sgtColumna;
+            }
+
+            nivel++; // Agrega un nuevo nivel
+            filComp = filComp->sgtFila;
+        }
+
+        colComp = colComp->sgtColumna;
+    }
+
+    return tabl;
+}
+
 tipoRet eliminoDato(tabla *tabl,string tablNom, string colNom, string filNom){
     //condis como que si tenes una sola column pregunte si queres borrar toda la tabla antes de seguir.
     tabla tablon;
@@ -1079,13 +1229,12 @@ fila vaciarFilas(fila fil){
 
 bool verificoDuplicadoFila(tabla *tabl, string nombreTabla, string primaryKey) {
     tabla auxTabla;
-    auxTabla = *tabl;
-
+    cout << "AAAAAAHHHHHHHHHHHHHHHH mi pixula vDP" << endl;
     // Recorre tablas
-    while(!esVacia(auxTabla)) {
+    auxTabla = retornarTablaBusacada(*tabl, nombreTabla);
 
-        // Existe una tabla con nombre igual a nombreTabla
-        if(auxTabla->nombre == nombreTabla) {
+    if(!esVacia(auxTabla)) {
+            // Existe una tabla con nombre igual a nombreTabla
             columna auxCol;
             auxCol = auxTabla->columna;
 
@@ -1108,12 +1257,11 @@ bool verificoDuplicadoFila(tabla *tabl, string nombreTabla, string primaryKey) {
             } else {
                 return false;
             }
-        }
 
-        auxTabla = auxTabla->ptrTablaDer;
-
+    } else {
+        return false;
     }
-    return false;
+
 }
 
 
@@ -1126,15 +1274,13 @@ int cuentoColumnas(string nombreTabla,tabla tabl){ // cuento columns en una tabl
     columna colum;
     colum = new _columna;
 
-        while(tablAux->nombre!=nombreTabla){
-        tablAux= tablAux->ptrTablaDer;
-        }
-    colum=tablAux->columna;
+    tablAux = retornarTablaBusacada(tabl, nombreTabla);
+    colum = tablAux->columna;
 
-        while(colum!=NULL){
+    while(!esVacia(colum)){
         i++;
-        colum=colum->sgtColumna;
-        }
+        colum = colum->sgtColumna;
+    }
 
     return i;
 }

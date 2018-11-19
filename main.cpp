@@ -26,10 +26,8 @@ int main()
     muestroR(insertoColumna(&tabl, "mascotas", "edad"));
     muestroR(insertoColumna(&tabl, "mascotas", "tipo"));
     muestroR(insertoColumna(&tabl, "mascotas", "estaVivaNDAH"));
-    muestroR(insertoColumna(&tabl, "mascotas", "estaVivaNDAH"));
-
-    muestroR(insertoDato(&tabl, "mascotas", "julian:18:agua:0:0"));
-    //muestroR(insertoDato(&tabl, "mascotas", "schrodinger:50:tramboliko:0:1"));
+    muestroR(insertoDato(&tabl, "mascotas", "julian:18:agua:0"));
+    muestroR(insertoDato(&tabl, "mascotas", "schrodinger:50:tramboliko:0"));
 
 
 

@@ -225,6 +225,7 @@ tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
 
     tabla auxTable;
     auxTable = *tabl;
+    tabla enviarTabla;
 
     string primaryKey;
     std::istringstream ss(dato);
@@ -239,24 +240,24 @@ tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
     }
 
     numCols=cuentoColumnas(nombreTabla,auxTable);
-    cout << "AAAAAAHHHHHHHHHHHHHHHH mi pixula vDP" << endl;
+    cout << "AAAAAAHHHHHHHHHHHHHHHH mi pixula vDP" << numCols << endl;
 
     if(existeTabla(auxTable, nombreTabla)) {
+
+            enviarTabla = retornarTablaBusacada(auxTable, nombreTabla);
 
             if(std::getline(ss, token, ':')) {
                 primaryKey = token;
             }
 
             if(!verificoDuplicadoFila(tabl, nombreTabla, primaryKey)) {
-
                     if(numCols==numDats){
-                        tablon=insertarDato(&tablon , &auxTable, dato, nombreTabla);
+                        tablon=insertarDato(&tablon , &enviarTabla, dato, nombreTabla);
                        *tabl=tablon;
                        return ok;
-                    }
-                    else {
-                    cout << "No tiene el mismo numero de tuplas que de columnas";
-                    return error;
+                    } else {
+                        cout << "No tiene el mismo numero de tuplas que de columnas";
+                        return error;
                    }
 
             } else {
@@ -316,19 +317,6 @@ tabla insertarDato(tabla *tabl, tabla *tablaInsertarDato, string dato, string na
             return tabRaiz;
         }
 
-    } else {
-        if(!esVacia(tablaAux->ptrTablaDer) && !esVacia(tablaAux->ptrTablaIzq)) {
-            int compararString;
-            string nombreTabla = tablaAux->nombre;
-            compararString = nombreTabla.compare(name);
-
-            // Compara nombres de tabla para saber a que hoja del arbol seguir
-            if(compararString > 0 ) {
-                insertarDato(&tabRaiz, &tablaAux->ptrTablaDer, dato, name);
-            } else if(compararString < 0) {
-                insertarDato(&tabRaiz, &tablaAux->ptrTablaIzq, dato, name);
-            }
-        }
     }
 }
 ///Proyecto Tabla
@@ -1754,76 +1742,4 @@ tabla retornarTablaBusacada(tabla A, string nombre){
            return retornarTablaBusacada(A->ptrTablaIzq, nombre);
 
 
-}
-
-///Select Where
-tipoRet sleccionoTablas (tabla *tabl,string tabla2, string condicion, string tabla1){ //Tomamos dos tablas, y con una columna pk del mismo nombre hacemos union con todo sin repetir datos pk.
-    tabla tablon = *tabl;
-    tabla tabAux;
-
-    if(!esVacia(tablon)) {
-        if(existeTabla(tablon, tabla1)) {
-
-            std::istringstream ss(columnas);
-            std::string token;
-
-            while(std::getline(ss, token, ':')) {
-                // Puede ser que esta wea este mal
-                cout <<  "V1 -- Nombre columna: " <<token << endl;
-
-                string colNombre = token;
-                if(existeColumna(&tablon, tabla1, token)) {
-                    break;
-                } else {
-                    return error;
-                }
-            }
-
-            token = "";
-
-            while(std::getline(ss, token, ':')) {
-                // Puede ser que esta wea este mal
-                cout <<  "V2 -- Nombre columna: " << token << " NomTab: " << tabla1 << endl;
-
-                columna colAux = retornarColumna(tabl, tabla1, token);
-                cout << colAux->nombreCol << endl;
-
-                tabAux = sleccionarTablas(tablon, colAux, tabla2);
-            }
-        }
-    }
-}
-///selectar Tabla
-tabla sleccionarTablas(tabla tabl, columna col, string tabla2) {
-
-    tabla auxTab = tabl;
-    tabla nuevaTab;
-
-    columna auxCol = col;
-    columna nuevaCol = nuevaTab->columna;
-
-    fila auxFil = auxCol->fila;
-    fila nuevaFil;
-
-    // Insertamos tabla con nuevo nombre
-    muestroR(insertoTablaAbb(auxTab, tabla2));
-    muestroR(insertoColumna(&auxTab, tabla2, auxCol->nombreCol));
-
-    // Retorna la columna a ingresar datos
-    while(!esVacia(nuevaCol)) {
-        if(nuevaCol->nombreCol == auxCol->nombreCol) {
-            nuevaFil = auxCol->fila;
-            break;
-        }
-    }
-
-    // Enviamos datos a nueva tablabg
-    nuevaTab = retornarTablaBusacada(auxTab, tabla2);
-    while(!esVacia(auxFil)) {
-        nuevaFil->dato = auxFil->dato;
-        auxFil = auxFil->sgtFila;
-        // pumba
-    }
-
-    return auxTab;
 }

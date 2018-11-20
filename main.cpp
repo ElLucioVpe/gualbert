@@ -18,18 +18,13 @@ int main()
     //muestroR(insertoTablaAbb(tabl,"clientes"));
 
     muestroR(insertoTablaAbb(tabl,"Hoteles"));
-
     muestroR(insertoTablaAbb(tabl,"personas"));
     muestroR(insertoTablaAbb(tabl,"mascotas"));
-    //tabl = retornarTablaBusacada(tabl,"clientes" );
+    tabl = retornarTablaBusacada(tabl,"clientes" );
     muestroR(insertoColumna(&tabl, "mascotas", "nombre"));
     muestroR(insertoColumna(&tabl, "mascotas", "edad"));
     muestroR(insertoColumna(&tabl, "mascotas", "tipo"));
     muestroR(insertoColumna(&tabl, "mascotas", "estaVivaNDAH"));
-    muestroR(insertoDato(&tabl, "mascotas", "julian:18:agua:0"));
-    muestroR(insertoDato(&tabl, "mascotas", "schrodinger:50:tramboliko:0"));
-
-
 
 
     //columna colAAAH = retornarColumna(&tabl, "mascotas", "tipo");

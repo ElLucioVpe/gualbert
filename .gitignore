@@ -3,5 +3,5 @@ obj/
 bin/
 .idea/
 cmake-build-debug/
-Mysql.depend
 CMakeLists.txt
+Mysql.depend

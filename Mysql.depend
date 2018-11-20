@@ -74,6 +74,15 @@
 	<cstring>
 	<sstream>
 
-1542728749 source:/mnt/c/Users/lucia/git/gualbert - Copy/main.cpp
+1542727695 source:/mnt/c/ProyectoC++MySQL/gualbert/functions.cpp
 	"header.h"
+
+1542729152 source:/mnt/c/ProyectoC++MySQL/gualbert/main.cpp
+	"header.h"
+
+1542729152 /mnt/c/ProyectoC++MySQL/gualbert/header.h
+	<iostream>
+	<stdlib.h>
+	<cstring>
+	<sstream>
 

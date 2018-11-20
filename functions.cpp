@@ -716,6 +716,7 @@ tipoRet actualizoDatos(tabla *tabl, string tablNom, string condicionCol, string 
                 *tabl=tablon;
                 return ok;
             }
+           ///Fixear aca
             auxTable = auxTable->ptrTablaDer;
         }
 
@@ -984,9 +985,7 @@ int buscoDato(tabla tabl,string tablNom, string colNom, string filNom){ //Encont
 
 
     //Encontramos la tabla que el user nos indico
-   while(tablaAux->nombre!=tablNom){
-    tablaAux=tablaAux->ptrTablaDer;
-    }
+    tablaAux=retornarTablaBusacada(tablaAux,tablNom);
 
     //encontro la tabla deseada
     //arranca en esta colum de la tabla deseada
@@ -1024,9 +1023,7 @@ tabla eliminarDato(tabla tabl, int i, string tablNom){
 
 
         //Encontramos la tabla que el user nos indico
-        while(tablaAux->nombre!=tablNom){
-            tablaAux=tablaAux->ptrTablaDer;
-        }
+            tablaAux=retornarTablaBusacada(tablaAux,tablNom);
 
         //queremos eliminar todas las filas corresp a todas las columns de una tabla!
         Cols=tablaAux->columna; //tenemos la primera column de la tabla, TIME TO DELETE!
@@ -1295,7 +1292,7 @@ tipoRet eliminoDatoTupla(tabla *tabl, string nombreTabla, string condicion) {
         return error; // Tabla no especificada
     } else {
 
-        while(!esVacia(tabAux)) {
+        //while(!esVacia(tabAux)) {
 
             if(tabAux->nombre == nombreTabla) {
 
@@ -1337,8 +1334,11 @@ tipoRet eliminoDatoTupla(tabla *tabl, string nombreTabla, string condicion) {
 
             }
 
-            tabAux = tabAux->ptrTablaDer;
-        }
+            ///Fixeando ACA
+            //tabAux = tabAux->ptrTablaDer;
+            //tipoRet eliminoDatoTupla(tabAux->ptrTablaDer,nombreTabla,condicion);
+            //tipoRet eliminoDatoTupla(tabAux->ptrTablaIzq,nombreTabla,condicion);
+      //  }
 
         return error; // Tabla no existe
     }

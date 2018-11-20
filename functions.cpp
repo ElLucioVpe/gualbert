@@ -555,7 +555,9 @@ void mostrarListaRecur(tabla l){
         }
 
     // Chequea la tabla siguiente
-        mostrarListaRecur(l->ptrTablaDer); //recursiv
+        mostrarListaRecur(l->ptrTablaDer);
+        mostrarListaRecur(l->ptrTablaIzq);
+        //recursiv
 
     } else{
 

@@ -555,9 +555,7 @@ void mostrarListaRecur(tabla l){
         }
 
     // Chequea la tabla siguiente
-        mostrarListaRecur(l->ptrTablaIzq);
         mostrarListaRecur(l->ptrTablaDer); //recursiv
-        //recursiv
 
     } else{
 
@@ -618,7 +616,7 @@ void eliminoTablaAbb(tabla &A, string valor)
 
 
 
-///Eliminar Tabla creo que el eliminar tabla es el de lucius, pero estamos usando el de gualbert
+//Eliminar Tabla
 
 tipoRet eliminoTabla(tabla *tabl, string nombre){
 
@@ -703,7 +701,6 @@ tabla eliminarTabla(tabla *tabl, tabla *aux, string name){
     }
 }
 
-///Actualizo datos
 tipoRet actualizoDatos(tabla *tabl, string tablNom, string condicionCol, string condicionDato, string nuevoDatoCol, string nuevoDato) {
     tabla tablon;
     tabla auxTable;
@@ -713,23 +710,19 @@ tipoRet actualizoDatos(tabla *tabl, string tablNom, string condicionCol, string 
    if(tablNom == "" || condicionCol == "" || condicionCol == "") {
         return error;
     } else {
-
         while(!esVacia(auxTable)) {
             if(auxTable->nombre == tablNom) {
                 tablon = actualizarDatos(*tabl, auxTable, condicionCol, condicionDato, nuevoDatoCol, nuevoDato);
                 *tabl=tablon;
                 return ok;
-
             }
-            //Me falta Fixear Esto
-         //actualizoDatos( (*auxTable)->ptrTablaDer,  tablNom,  condicionCol,  condicionDato,  nuevoDatoCol,  nuevoDato);
-         //actualizoDatos( auxTable->ptrTablaIzq,  tablNom,  condicionCol,  condicionDato,  nuevoDatoCol,  nuevoDato);
+            auxTable = auxTable->ptrTablaDer;
         }
 
         return error;
     }
 }
-///Actualizar Datos
+
 tabla actualizarDatos(tabla tabl, tabla auxTabla, string condicionCol, string condicionDato, string nuevoDatoCol, string nuevoDato){ //update (Personas,Nombre=”Pepe”,CI,1555000);
     columna auxCol;
     fila auxFila;
@@ -798,7 +791,7 @@ tabla actualizarDatos(tabla tabl, tabla auxTabla, string condicionCol, string co
     return tabl; // No encuentra columna que cumpla condicion
 
 }
-///Where
+
 tipoRet proyectarWhere(tabla *tabl, string nombreTabla1, string condicion, string nombreTabla2) {
     tabla tablon = new _tabla;
     tabla auxTable = new _tabla;
@@ -945,7 +938,7 @@ tabla proyectoWhere(tabla tabl, tabla auxTabla, string nombreTabla1, string cond
 
     return tabl;
 }
-///Elimino dato
+
 tipoRet eliminoDato(tabla *tabl,string tablNom, string colNom, string filNom){
     //condis como que si tenes una sola column pregunte si queres borrar toda la tabla antes de seguir.
     tabla tablon;
@@ -974,7 +967,7 @@ tipoRet eliminoDato(tabla *tabl,string tablNom, string colNom, string filNom){
 
 }
 
-///BuscoDato
+
 int buscoDato(tabla tabl,string tablNom, string colNom, string filNom){ //EncontramosDato por= buscamos una tabla, una column y un dato. retorna posi de esa fila (dato)
 
    columna col;
@@ -991,7 +984,9 @@ int buscoDato(tabla tabl,string tablNom, string colNom, string filNom){ //Encont
 
 
     //Encontramos la tabla que el user nos indico
-   tablaAux=retornarTablaBusacada(tabl,tablNom);
+   while(tablaAux->nombre!=tablNom){
+    tablaAux=tablaAux->ptrTablaDer;
+    }
 
     //encontro la tabla deseada
     //arranca en esta colum de la tabla deseada
@@ -1017,7 +1012,7 @@ int buscoDato(tabla tabl,string tablNom, string colNom, string filNom){ //Encont
 
 }
 
-///EliminarDato
+
 tabla eliminarDato(tabla tabl, int i, string tablNom){
     columna Cols = new _columna;
     fila filita = new _fila;
@@ -1029,7 +1024,9 @@ tabla eliminarDato(tabla tabl, int i, string tablNom){
 
 
         //Encontramos la tabla que el user nos indico
-       tablaAux=retornarTablaBusacada(tabl,tablNom);
+        while(tablaAux->nombre!=tablNom){
+            tablaAux=tablaAux->ptrTablaDer;
+        }
 
         //queremos eliminar todas las filas corresp a todas las columns de una tabla!
         Cols=tablaAux->columna; //tenemos la primera column de la tabla, TIME TO DELETE!
@@ -1077,7 +1074,7 @@ tabla eliminarDato(tabla tabl, int i, string tablNom){
 }
 
 
-///Elimino Columna
+//Elimino Columna
 
 tipoRet eliminoColumna(tabla *tabl,string tablNom, string colNom){
     //condis como que si tenes una sola column pregunte si queres borrar toda la tabla antes de seguir.
@@ -1113,7 +1110,7 @@ tipoRet eliminoColumna(tabla *tabl,string tablNom, string colNom){
     return ok;
 
 }
-///BuscoColumna
+
 int buscoColumna(tabla tabl,string tablNom, string colNom){ //EncontramosColumna por= buscamos una tabla, una column. retorna posi de esa column
 
    columna col;
@@ -1155,7 +1152,7 @@ int buscoColumna(tabla tabl,string tablNom, string colNom){ //EncontramosColumna
 }
 }
 
-///EliminarColumna
+
 tabla eliminarColumna(tabla tabl, int i, string tablNom){
     columna Cols = new _columna;
     columna auxCol = new _columna;
@@ -1202,7 +1199,7 @@ tabla eliminarColumna(tabla tabl, int i, string tablNom){
 
 }
 
-///Vaciar Filas
+
 fila vaciarFilas(fila fil){
 
     if(fil!=NULL){
@@ -1217,7 +1214,7 @@ fila vaciarFilas(fila fil){
     return fil;//Podria ser Return NULL tambien
 
 }
-///VerificoDuplicado Filas
+
 bool verificoDuplicadoFila(tabla *tabl, string nombreTabla, string primaryKey) {
     tabla auxTabla;
     cout << "AAAAAAHHHHHHHHHHHHHHHH mi pixula vDP" << endl;
@@ -1255,7 +1252,7 @@ bool verificoDuplicadoFila(tabla *tabl, string nombreTabla, string primaryKey) {
 
 }
 
-///CuentoColumnas
+
 int cuentoColumnas(string nombreTabla,tabla tabl){ // cuento columns en una tabla
     int i=0;
     tabla tablAux;
@@ -1275,7 +1272,7 @@ int cuentoColumnas(string nombreTabla,tabla tabl){ // cuento columns en una tabl
 
     return i;
 }
-///Elimino Dato Tupla
+
 tipoRet eliminoDatoTupla(tabla *tabl, string nombreTabla, string condicion) {
     tabla tabAux = *tabl;
     char comp;
@@ -1745,76 +1742,4 @@ tabla retornarTablaBusacada(tabla A, string nombre){
            return retornarTablaBusacada(A->ptrTablaIzq, nombre);
 
 
-}
-
-///Select Where creo que esta es mia, de ser asi la podemos borrar xD
-tipoRet sleccionoTablas (tabla *tabl,string tabla2, string condicion, string tabla1){ //Tomamos dos tablas, y con una columna pk del mismo nombre hacemos union con todo sin repetir datos pk.
-    tabla tablon = *tabl;
-    tabla tabAux;
-
-    if(!esVacia(tablon)) {
-        if(existeTabla(tablon, tabla1)) {
-
-            std::istringstream ss(condicion);
-            std::string token;
-
-            while(std::getline(ss, token, ':')) {
-                // Puede ser que esta wea este mal
-                cout <<  "V1 -- Nombre columna: " <<token << endl;
-
-                string colNombre = token;
-                if(existeColumna(&tablon, tabla1, token)) {
-                    break;
-                } else {
-                    return error;
-                }
-            }
-
-            token = "";
-
-            while(std::getline(ss, token, ':')) {
-                // Puede ser que esta wea este mal
-                cout <<  "V2 -- Nombre columna: " << token << " NomTab: " << tabla1 << endl;
-
-                columna colAux = retornarColumna(tabl, tabla1, token);
-                cout << colAux->nombreCol << endl;
-
-                tabAux = sleccionarTablas(tablon, colAux, tabla2);
-            }
-        }
-    }
-}
-///selectar Tabla
-tabla sleccionarTablas(tabla tabl, columna col, string tabla2) {
-
-    tabla auxTab = tabl;
-    tabla nuevaTab;
-
-    columna auxCol = col;
-    columna nuevaCol = nuevaTab->columna;
-
-    fila auxFil = auxCol->fila;
-    fila nuevaFil;
-
-    // Insertamos tabla con nuevo nombre
-    muestroR(insertoTablaAbb(auxTab, tabla2));
-    muestroR(insertoColumna(&auxTab, tabla2, auxCol->nombreCol));
-
-    // Retorna la columna a ingresar datos
-    while(!esVacia(nuevaCol)) {
-        if(nuevaCol->nombreCol == auxCol->nombreCol) {
-            nuevaFil = auxCol->fila;
-            break;
-        }
-    }
-
-    // Enviamos datos a nueva tablabg
-    nuevaTab = retornarTablaBusacada(auxTab, tabla2);
-    while(!esVacia(auxFil)) {
-        nuevaFil->dato = auxFil->dato;
-        auxFil = auxFil->sgtFila;
-        // pumba
-    }
-
-    return auxTab;
 }

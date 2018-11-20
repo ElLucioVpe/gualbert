@@ -1,7 +1,4 @@
 *.layout
 obj/
 bin/
-.idea/
-cmake-build-debug/
-CMakeLists.txt
 Mysql.depend

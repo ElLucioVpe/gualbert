@@ -110,5 +110,3 @@ tabla proyectarTabla(tabla tabl, columna col, string tabla2);
 void eliminoTablaAbb(tabla &A, string valor);
 tabla proyectoWhere(tabla tabl, tabla auxTabla, string nombreTabla1, string condicion, string nombreTabla2);
 tipoRet proyectarWhere(tabla *tabl, string nombreTabla1, string condicion, string nombreTabla2);
-
-tabla sleccionarTablas(tabla tabl, columna col, string tabla2);

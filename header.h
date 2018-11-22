@@ -105,7 +105,7 @@ tabla retornarTablaBusacada(tabla A, string nombre);
 columna retornarColumna(tabla *tabl, string nombreTabla, string nombreColumna);
 
 tipoRet proyectoTabla(tabla *tabl, string tabla1, string columnas, string tabla2);
-tabla proyectarTabla(tabla tabl, columna col, string tabla2);
+tabla proyectarTabla(tabla *tabl, columna col, string tabla2);
 
 void eliminoTablaAbb(tabla &A, string valor);
 tabla proyectoWhere(tabla tabl, tabla auxTabla, string nombreTabla1, string condicion, string nombreTabla2);

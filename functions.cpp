@@ -164,7 +164,8 @@ tipoRet insertoColumna(tabla *tabl, string nombreTabla, string nombreColumna) {
                     auxFila = auxCol->fila;
 
                     if(!esVacia(auxCol->fila)) {
-                        return error; // La tabla tiene por log menos una tupla
+                        cout << "es este el error kbeza2" << endl;
+                        //return error; // La tabla tiene por log menos una tupla
                     }
                 } else {
                     primaryKey = true;
@@ -240,7 +241,6 @@ tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
     }
 
     numCols=cuentoColumnas(nombreTabla,auxTable);
-    cout << "AAAAAAHHHHHHHHHHHHHHHH mi pixula vDP" << numCols << endl;
 
     if(existeTabla(auxTable, nombreTabla)) {
 
@@ -322,7 +322,6 @@ tabla insertarDato(tabla *tabl, tabla *tablaInsertarDato, string dato, string na
 ///Proyecto Tabla
 tipoRet proyectoTabla(tabla *tabl, string tabla1, string columnas, string tabla2) {
     tabla tablon = *tabl;
-    tabla tabAux;
 
     if(!esVacia(tablon)) {
         if(existeTabla(tablon, tabla1)) {
@@ -330,65 +329,87 @@ tipoRet proyectoTabla(tabla *tabl, string tabla1, string columnas, string tabla2
             std::istringstream ss(columnas);
             std::string token;
 
+            // Verifica que las tablas dadas por el usuario existan en tabla1
             while(std::getline(ss, token, ':')) {
                 // Puede ser que esta wea este mal
-                cout <<  "V1 -- Nombre columna: " <<token << endl;
 
                 string colNombre = token;
-                if(existeColumna(&tablon, tabla1, token)) {
-                    break;
-                } else {
+                if(!existeColumna(&tablon, tabla1, token)) {
+                    cout <<  "V1 -- No existe columna: " <<token << endl;
                     return error;
                 }
             }
 
-            //token = "";
+            muestroR(insertoTablaAbb(tablon, tabla2));
 
-            while(std::getline(ss, token, ':')) {
-                // Puede ser que esta wea este mal
-                cout <<  "V2 -- Nombre columna: " << token << " NomTab: " << tabla1 << endl;
+            std::istringstream ssx(columnas);
+            std::string token2;
 
-                columna colAux = retornarColumna(tabl, tabla1, token);
-                cout << colAux->nombreCol << endl;
+            while(std::getline(ssx, token2, ':')) {
 
-                tabAux = proyectarTabla(tablon, colAux, tabla2);
+                cout <<  "V2 -- Nombre columna: " << token2 << " NomTab: " << tabla1 << endl;
+
+                // Envia columna con datos
+                columna colAux = retornarColumna(tabl, tabla1, token2);
+
+                // Proyecta la tabla con la columna de datos dados
+                tablon = proyectarTabla(&tablon, colAux, tabla2);
+                *tabl=tablon;
+
             }
+
+            return ok;
         }
     }
+
+    return error;
 }
 ///Proyectar Tabla
-tabla proyectarTabla(tabla tabl, columna col, string tabla2) {
+tabla proyectarTabla(tabla *tabl, columna col, string tabla2) {
 
-    tabla auxTab = tabl;
-    tabla nuevaTab;
+    // Tabla raiz
+    tabla tablon = *tabl;
 
+    // Columna con datos
     columna auxCol = col;
-    columna nuevaCol = nuevaTab->columna;
 
-    fila auxFil = auxCol->fila;
+    // Columna a proyectar
+    columna nuevaCol;
+
+    // Fila a ingresar datos
     fila nuevaFil;
 
-    // Insertamos tabla con nuevo nombre
-    muestroR(insertoTablaAbb(auxTab, tabla2));
-    muestroR(insertoColumna(&auxTab, tabla2, auxCol->nombreCol));
+    // Insertamos columna en tabla nueva
+    muestroR(insertoColumna(&tablon, tabla2, auxCol->nombreCol));
 
-    // Retorna la columna a ingresar datos
-    while(!esVacia(nuevaCol)) {
-        if(nuevaCol->nombreCol == auxCol->nombreCol) {
-            nuevaFil = auxCol->fila;
-            break;
-        }
-    }
+    tabla auxTabla = retornarTablaBusacada(tablon, tabla2);
+    //nuevaCol = auxTabla->columna;
+    nuevaCol = retornarColumna(&tablon, tabla2, auxCol->nombreCol);
 
-    // Enviamos datos a nueva tablabg
-    nuevaTab = retornarTablaBusacada(auxTab, tabla2);
+    fila auxFil = col->fila;
+    bool esPrimera = true;
+
     while(!esVacia(auxFil)) {
-        nuevaFil->dato = auxFil->dato;
+        fila nuevoDato = new _fila;
+
+        if(esPrimera) {
+            fila newFila = new _fila;
+            newFila->dato = auxFil->dato;
+            nuevaCol->fila = newFila;
+            nuevaFil = nuevaCol->fila;
+            esPrimera = false;
+
+        } else {
+            nuevoDato->dato = auxFil->dato;
+            nuevoDato->sgtFila = NULL;
+
+            nuevaFil->sgtFila = nuevoDato;
+            nuevaFil = nuevaFil->sgtFila;
+        }
         auxFil = auxFil->sgtFila;
-        // pumba
     }
 
-    return auxTab;
+    return tablon;
 }
 
 ///Inicializar tabla
@@ -1216,7 +1237,6 @@ fila vaciarFilas(fila fil){
 
 bool verificoDuplicadoFila(tabla *tabl, string nombreTabla, string primaryKey) {
     tabla auxTabla;
-    cout << "AAAAAAHHHHHHHHHHHHHHHH mi pixula vDP" << endl;
     // Recorre tablas
     auxTabla = retornarTablaBusacada(*tabl, nombreTabla);
 

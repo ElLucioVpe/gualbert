@@ -21,15 +21,27 @@ int main()
 
     muestroR(insertoTablaAbb(tabl,"personas"));
     muestroR(insertoTablaAbb(tabl,"mascotas"));
+    muestroR(insertoTablaAbb(tabl,"prueba"));
+
     //tabl = retornarTablaBusacada(tabl,"clientes" );
     muestroR(insertoColumna(&tabl, "mascotas", "nombre"));
     muestroR(insertoColumna(&tabl, "mascotas", "edad"));
     muestroR(insertoColumna(&tabl, "mascotas", "tipo"));
+    muestroR(insertoColumna(&tabl, "prueba", "xd"));
+    muestroR(insertoColumna(&tabl, "prueba", "NDEAAAA"));
+
     muestroR(insertoColumna(&tabl, "mascotas", "estaVivaNDAH"));
     muestroR(insertoDato(&tabl, "mascotas", "julian:18:agua:0"));
-    muestroR(insertoDato(&tabl, "mascotas", "schrodinger:50:tramboliko:0"));
+
+    muestroR(insertoDato(&tabl, "prueba", "dato1:123"));
+    muestroR(insertoDato(&tabl, "prueba", "dato2:1234"));
+    muestroR(insertoDato(&tabl, "prueba", "julian1:12345"));
 
 
+
+
+    //muestroR(insertoDato(&tabl, "mascotas", "schrodinger:50:tramboliko:0"));
+    muestroR(proyectoTabla(&tabl, "prueba", "xd:NDEAAAA", "mascotas2.0"));
 
 
     //columna colAAAH = retornarColumna(&tabl, "mascotas", "tipo");
@@ -42,6 +54,9 @@ int main()
     //muestroR(proyectoTabla(&tabl, "mascotas", "nombre:edad", "mascotas2.0"));
 
     //muestroR(eliminoColumna(&tabl, "clientes", "ci"));
+
+    //tabla tabRet = retornarTablaBusacada(tabl, "mascotas2.0");
+    //cout << "adnaskjds" << tabRet->columna->nombreCol << endl;
 
     mostrarSim(tabl);
 

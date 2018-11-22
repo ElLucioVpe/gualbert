@@ -383,7 +383,6 @@ tabla proyectarTabla(tabla *tabl, columna col, string tabla2) {
     muestroR(insertoColumna(&tablon, tabla2, auxCol->nombreCol));
 
     tabla auxTabla = retornarTablaBusacada(tablon, tabla2);
-    //nuevaCol = auxTabla->columna;
     nuevaCol = retornarColumna(&tablon, tabla2, auxCol->nombreCol);
 
     fila auxFil = col->fila;

@@ -33,15 +33,13 @@ int main()
     muestroR(insertoColumna(&tabl, "mascotas", "estaVivaNDAH"));
     muestroR(insertoDato(&tabl, "mascotas", "julian:18:agua:0"));
 
-    muestroR(insertoDato(&tabl, "prueba", "dato1:123"));
-    muestroR(insertoDato(&tabl, "prueba", "dato2:1234"));
-    muestroR(insertoDato(&tabl, "prueba", "julian1:12345"));
-
-
-
+    muestroR(insertoDato(&tabl, "prueba", "0:xdxd"));
+    muestroR(insertoDato(&tabl, "prueba", "1:lmao"));
+    muestroR(insertoDato(&tabl, "prueba", "2:nibba"));
+    muestroR(insertoDato(&tabl, "prueba", "3:rigby"));
 
     //muestroR(insertoDato(&tabl, "mascotas", "schrodinger:50:tramboliko:0"));
-    muestroR(proyectoTabla(&tabl, "prueba", "xd:NDEAAAA", "mascotas2.0"));
+    muestroR(proyectarWhere(&tabl, "prueba", "xd<1", "mascotas2.0"));
 
 
     //columna colAAAH = retornarColumna(&tabl, "mascotas", "tipo");

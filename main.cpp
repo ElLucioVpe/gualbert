@@ -28,20 +28,22 @@ int main()
     muestroR(insertoColumna(&tabl, "mascotas", "edad"));
     muestroR(insertoColumna(&tabl, "mascotas", "tipo"));
 
-    muestroR(insertoColumna(&tabl, "prueba", "xd"));
-    muestroR(insertoColumna(&tabl, "prueba", "NDEAAAA"));
+    muestroR(insertoColumna(&tabl, "prueba", "nombre"));
+    muestroR(insertoColumna(&tabl, "prueba", "vivo"));
 
-    muestroR(insertoColumna(&tabl, "mascotas", "estaVivaNDAH"));
-    muestroR(insertoDato(&tabl, "mascotas", "julian:18:agua:0"));
+    muestroR(insertoDato(&tabl, "mascotas", "julian:18:agua"));
+    muestroR(insertoDato(&tabl, "mascotas", "1:18:agua"));
 
-    muestroR(insertoDato(&tabl, "prueba", "0:xdxd"));
+    muestroR(insertoDato(&tabl, "prueba", "julian:xdxd"));
     muestroR(insertoDato(&tabl, "prueba", "1:lmao"));
     muestroR(insertoDato(&tabl, "prueba", "2:nibba"));
     muestroR(insertoDato(&tabl, "prueba", "3:rigby"));
 
     //muestroR(insertoDato(&tabl, "mascotas", "schrodinger:50:tramboliko:0"));
     //muestroR(proyectoTabla(&tabl, "prueba", "xd:NDEAAAA", "mascotas2.0"));
-    muestroR(eliminoDatoTupla(&tabl, "prueba", "xd=dato1"));
+    //muestroR(eliminoDatoTupla(&tabl, "prueba", "xd=dato1"));
+    cout << "ASJKJSKD" << endl;
+    muestroR(unirTablas(&tabl, "prueba", "mascotas", "pruebaMascotas"));
 
 
     //columna colAAAH = retornarColumna(&tabl, "mascotas", "tipo");

@@ -110,3 +110,6 @@ tabla proyectarTabla(tabla *tabl, columna col, string tabla2);
 void eliminoTablaAbb(tabla &A, string valor);
 tabla proyectoWhere(tabla tabl, tabla auxTabla, string nombreTabla1, string condicion, string nombreTabla2);
 tipoRet proyectarWhere(tabla *tabl, string nombreTabla1, string condicion, string nombreTabla2);
+
+tipoRet unirTablas(tabla *tabl, string nombreTabla1, string nombreTabla2, string nombreTabla3);
+tabla unoTablas(tabla *tabl, tabla tabla1, tabla tabla2, string nombreTabla3);

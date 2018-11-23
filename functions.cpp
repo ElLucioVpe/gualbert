@@ -732,15 +732,14 @@ tipoRet actualizoDatos(tabla *tabl, string tablNom, string condicionCol, string 
    if(tablNom == "" || condicionCol == "" || condicionCol == "") {
         return error;
     } else {
-        if(!esVacia(auxTable)) {
+        while(!esVacia(auxTable)) {
             if(auxTable->nombre == tablNom) {
                 tablon = actualizarDatos(*tabl, auxTable, condicionCol, condicionDato, nuevoDatoCol, nuevoDato);
                 *tabl=tablon;
                 return ok;
             }
            ///Fixear aca
-            actualizoDatos(&auxTable->ptrTablaDer, tablNom, condicionCol, condicionDato, nuevoDatoCol, nuevoDato);
-            actualizoDatos(&auxTable->ptrTablaIzq, tablNom, condicionCol, condicionDato, nuevoDatoCol, nuevoDato);
+            auxTable = auxTable->ptrTablaDer;
         }
 
         return error;
@@ -814,6 +813,206 @@ tabla actualizarDatos(tabla tabl, tabla auxTabla, string condicionCol, string co
 
     return tabl; // No encuentra columna que cumpla condicion
 
+}
+
+tipoRet unirTablas(tabla *tabl, string nombreTabla1, string nombreTabla2, string nombreTabla3) {
+    tabla tablon = *tabl;
+    tabla tabla1;
+    tabla tabla2;
+
+    tabla1 = retornarTablaBusacada(tablon, nombreTabla1);
+    tabla2 = retornarTablaBusacada(tablon, nombreTabla2);
+
+    if (esVacia(tabla1) || esVacia(tabla2)) {
+        return error; // Al menos una de las tablas es vacia
+    } else {
+        if(tabla1->columna->nombreCol != tabla2->columna->nombreCol) {
+            return error; // Las columnas son distintas
+
+        } else {
+
+            columna colTab1 = tabla1->columna;
+            columna colTab2 = tabla2->columna;
+
+            if(esVacia(colTab1->fila) || esVacia(colTab2->fila)) {
+                return error; // No tienen tuplas en la primer columna
+
+            } else {
+
+                while(!esVacia(colTab1)) {
+
+                    while(!esVacia(colTab2) && colTab2->primaryKey == 0) {
+
+                        if(colTab1->nombreCol == colTab2->nombreCol) {
+                            return error;
+
+                        }
+
+                        colTab2 = colTab2->sgtColumna;
+                    }
+                    colTab1 = colTab1->sgtColumna;
+                }
+
+                tabla tablaRaiz = unoTablas(&tablon, tabla1, tabla2, nombreTabla3);
+                *tabl = tablaRaiz;
+                return ok;
+
+            }
+        }
+    }
+}
+
+tabla unoTablas(tabla *tabl, tabla tabla1, tabla tabla2, string nombreTabla3) {
+    tabla tablon = *tabl;
+    insertoTablaAbb(tablon, nombreTabla3);
+    tabla tabla3 = retornarTablaBusacada(tablon, nombreTabla3);
+    bool primerDato = true;
+
+    columna colTab1 = tabla1->columna;
+    columna colTab2 = tabla2->columna;
+
+    // Crea nuevas columnas y le asigna filas
+
+    while(colTab1) {
+        fila newFila = new _fila;
+        insertoColumna(&tablon, nombreTabla3, colTab1->nombreCol);
+        columna newCol = retornarColumna(&tablon, nombreTabla3, colTab1->nombreCol);
+        newCol->fila = newFila;
+        colTab1 = colTab1->sgtColumna;
+    }
+
+    while(colTab2) {
+        fila newFila = new _fila;
+        insertoColumna(&tablon, nombreTabla3, colTab2->nombreCol);
+        columna newCol = retornarColumna(&tablon, nombreTabla3, colTab2->nombreCol);
+        newCol->fila = newFila;
+        colTab2 = colTab2->sgtColumna;
+    }
+
+    // Retorna valores de tabla3
+    columna colTab3 = tabla3->columna;
+
+    colTab1 = tabla1->columna;
+    colTab2 = tabla2->columna;
+
+    bool agregarDato = false;
+    int levelTab1 = 0;
+    int levelTab2 = 0;
+
+    if(!esVacia(colTab1)) {
+
+        if(!esVacia(colTab2)) {
+
+            fila filTab1 = colTab1->fila;
+            fila filTab2 = colTab2->fila;
+
+            while(!esVacia(filTab1)) {
+                levelTab2 = 0;
+
+                while(!esVacia(filTab2)) {
+
+                    if(filTab1->dato == filTab2->dato) {
+                        agregarDato = true;
+                    }
+
+                    cout << "dato1: " << filTab1->dato << " dato2: " << filTab2->dato << endl;
+
+
+                    if(agregarDato) {
+                        // adasdas
+                        cout << "dato1: " << filTab1->dato << " dato2: " << filTab2->dato << endl;
+
+                        columna newColTab1 = tabla1->columna;
+                        columna newColTab2 = tabla2->columna;
+                        columna auxTab3 = colTab3;
+                        string primaryKey = "";
+                        bool esPK = true;
+
+                        // Recorre tabla 1 hasta llegar a levelTab1
+                        while(!esVacia(newColTab1)) {
+                            fila auxFil3 = auxTab3->fila;
+
+                            cout << "columna: " << auxTab3->nombreCol << endl;
+
+                            fila newFilTab1 = newColTab1->fila;
+
+                            int contar = 0;
+                            while(contar < levelTab1) {
+                                newFilTab1 = newFilTab1->sgtFila;
+                            }
+
+                            if(esPK == true) {
+                                primaryKey = newFilTab1->dato;
+                                esPK = false;
+                            }
+
+                            cout << "dato1: " << newFilTab1->dato << endl;
+
+                            if(primerDato) {
+                                auxFil3->dato = newFilTab1->dato;
+                            } else {
+                                fila newFila = new _fila;
+                                newFila->dato = newFilTab1->dato;
+                                auxFil3->sgtFila = newFila;
+                            }
+
+                            newColTab1 = newColTab1->sgtColumna;
+                            auxTab3 = auxTab3->sgtColumna;
+                        }
+
+                        // Recorre tabla 2 hasta llegar a levelTab2
+                        while(!esVacia(newColTab2)) {
+                            fila auxFil3 = auxTab3->fila;
+
+                            cout << "columna: " << auxTab3->nombreCol << endl;
+
+                            fila newFilTab2 = newColTab2->fila;
+
+                            int contar = 0;
+                            while(contar < levelTab1) {
+                                newFilTab2 = newFilTab2->sgtFila;
+                            }
+
+                                                            cout << "dato2: " << newFilTab2->dato << endl;
+
+
+                            if(newFilTab2->dato != primaryKey) {
+                                if(primerDato) {
+                                    auxFil3->dato = newFilTab2->dato;
+                                    auxFil3 = auxFil3->sgtFila;
+                                } else {
+                                    fila newFila = new _fila;
+                                    newFila->dato = newFilTab2->dato;
+                                    auxFil3->sgtFila = newFila;
+                                    auxFil3 = auxFil3->sgtFila;
+
+                                }
+
+                                auxTab3 = auxTab3->sgtColumna;
+                            }
+
+                            newColTab2 = newColTab2->sgtColumna;
+                        }
+                     }
+
+                     agregarDato = false;
+                     primerDato = false;
+
+                    levelTab2++;
+                    filTab2 = filTab2->sgtFila;
+                }
+
+                levelTab1++;
+                filTab1 = filTab1->sgtFila;
+            }
+
+            colTab2 = colTab2->sgtColumna;
+        }
+
+        colTab1 = colTab1->sgtColumna;
+    }
+
+    return tablon;
 }
 
 tipoRet proyectarWhere(tabla *tabl, string nombreTabla1, string condicion, string nombreTabla2) {
@@ -1339,7 +1538,7 @@ tipoRet eliminoDatoTupla(tabla *tabl, string nombreTabla, string condicion) {
         return error; // Tabla no especificada
     } else {
 
-        if(!esVacia(tabAux)) {
+        //while(!esVacia(tabAux)) {
 
             if(tabAux->nombre == nombreTabla) {
 
@@ -1381,10 +1580,11 @@ tipoRet eliminoDatoTupla(tabla *tabl, string nombreTabla, string condicion) {
 
             }
 
-            ///Fixeado ACA
-             eliminoDatoTupla(&tabAux->ptrTablaDer,nombreTabla,condicion);
-             eliminoDatoTupla(&tabAux->ptrTablaIzq,nombreTabla,condicion);
-        }
+            ///Fixeando ACA
+            //tabAux = tabAux->ptrTablaDer;
+            //tipoRet eliminoDatoTupla(tabAux->ptrTablaDer,nombreTabla,condicion);
+            //tipoRet eliminoDatoTupla(tabAux->ptrTablaIzq,nombreTabla,condicion);
+      //  }
 
         return error; // Tabla no existe
     }

@@ -33,7 +33,9 @@
 1539740642 source:/home/alien/Documents/ProgramaProyecto/GualbertProy/gualbert/main.cpp
 	"header.h"
 
-1542992120 source:/mnt/c/Users/lucia/git/gualbert/main.cpp
+1543006837 source:/mnt/c/Users/lucia/git/gualbert/main.cpp
+	"header.h"
+	"header.h"
 	"header.h"
 	"header.h"
 	"header.h"
@@ -41,7 +43,15 @@
 	"header.h"
 	"header.h"
 
-1542988390 /mnt/c/Users/lucia/git/gualbert/header.h
+1543010880 /mnt/c/Users/lucia/git/gualbert/header.h
+	<iostream>
+	<stdlib.h>
+	<cstring>
+	<sstream>
+	<iostream>
+	<stdlib.h>
+	<cstring>
+	<sstream>
 	<iostream>
 	<stdlib.h>
 	<cstring>
@@ -69,7 +79,9 @@
 
 1541980928 D
 
-1542992120 source:/mnt/c/Users/lucia/git/gualbert/functions.cpp
+1543010705 source:/mnt/c/Users/lucia/git/gualbert/functions.cpp
+	"header.h"
+	"header.h"
 	"header.h"
 	"header.h"
 	"header.h"
@@ -86,27 +98,15 @@
 	<cstring>
 	<sstream>
 
-1542938355 source:/mnt/c/ProyectoC++MySQL/gualbert/functions.cpp
+1543011938 source:/mnt/c/ProyectoC++MySQL/gualbert/functions.cpp
 	"header.h"
 
-1542937959 source:/mnt/c/ProyectoC++MySQL/gualbert/main.cpp
+1543011368 source:/mnt/c/ProyectoC++MySQL/gualbert/main.cpp
 	"header.h"
 
-1542938187 /mnt/c/ProyectoC++MySQL/gualbert/header.h
+1543011886 /mnt/c/ProyectoC++MySQL/gualbert/header.h
 	<iostream>
 	<stdlib.h>
 	<cstring>
 	<sstream>
-
-1543013642 source:/mnt/c/Users/lucia/git/gualbert/main.cpp
-	"header.h"
-
-1543013748 /mnt/c/Users/lucia/git/gualbert/header.h
-	<iostream>
-	<stdlib.h>
-	<cstring>
-	<sstream>
-
-1543013720 source:/mnt/c/Users/lucia/git/gualbert/functions.cpp
-	"header.h"
 

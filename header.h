@@ -120,3 +120,6 @@ tipoRet unirTablas(tabla *tabl, string nombreTabla1, string nombreTabla2, string
 tabla unoTablas(tabla *tabl, tabla tabla1, tabla tabla2, string nombreTabla3);
 void actualizarListadoModificacionTablas(string nuevoDato);
 void mostrarArray();
+
+tipoRet recento(tabla lista);
+void recent(tabla lista,int cont);

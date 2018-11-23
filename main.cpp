@@ -16,7 +16,7 @@ int main()
 
     //muestroR(insertoTablaAbb(tabl,"clientes"));
 
-    muestroR(insertoTablaAbb(tabl,"Hoteles"));
+    //muestroR(insertoTablaAbb(tabl,"Hoteles"));
 
     muestroR(insertoTablaAbb(tabl,"personas"));
     muestroR(insertoTablaAbb(tabl,"mascotas"));
@@ -39,6 +39,7 @@ int main()
     muestroR(insertoDato(&tabl, "prueba", "3:rigby"));
 
 
+
     //muestroR(printoTables(tabl));
     //muestroR(printoMetadata(tabl));
 
@@ -56,7 +57,7 @@ int main()
     //muestroR(eliminoTabla(&tabl, "personas
     //muestroR(proyectoTabla(&tabl, "mascotas", "nombre:edad", "mascotas2.0"));
 
-    muestroR(unirTablas(&tabl, "mascotas", "prueba", "MI PIXULA"));
+   // muestroR(unirTablas(&tabl, "mascotas", "prueba", "MI PIXULA"));
 
 
 
@@ -64,7 +65,7 @@ int main()
 
     //tabla tabRet = retornarTablaBusacada(tabl, "mascotas2.0");
     //cout << "adnaskjds" << tabRet->columna->nombreCol << endl;
-    mostrarArray();
+    muestroR(recento(tabl));
     //mostrarSim(tabl);
 
     ///Probar FUNCS

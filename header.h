@@ -4,8 +4,11 @@
 #include <sstream>
 
 #define LARGOCADENA 20
+#define MAX_MODIFICADAS 2
 
 using namespace std;
+
+string TABLAS_MODIFICADAS[MAX_MODIFICADAS];
 
 
 enum _Retorno{

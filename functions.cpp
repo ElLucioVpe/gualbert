@@ -908,6 +908,8 @@ tabla unoTablas(tabla *tabl, tabla tabla1, tabla tabla2, string nombreTabla3) {
 
             while(!esVacia(filTab1)) {
                 levelTab2 = 0;
+                //cout << "start"<< levelTab1 << endl;
+                filTab2 = colTab2->fila;
 
                 while(!esVacia(filTab2)) {
 
@@ -915,12 +917,11 @@ tabla unoTablas(tabla *tabl, tabla tabla1, tabla tabla2, string nombreTabla3) {
                         agregarDato = true;
                     }
 
-                    cout << "dato1: " << filTab1->dato << " dato2: " << filTab2->dato << endl;
-
+                    //cout << "------- dato1: " << filTab1->dato << " dato2: " << filTab2->dato << endl;
 
                     if(agregarDato) {
                         // adasdas
-                        cout << "dato1: " << filTab1->dato << " dato2: " << filTab2->dato << endl;
+                        //cout << "dato1: " << filTab1->dato << " dato2: " << filTab2->dato << endl;
 
                         columna newColTab1 = tabla1->columna;
                         columna newColTab2 = tabla2->columna;
@@ -932,13 +933,15 @@ tabla unoTablas(tabla *tabl, tabla tabla1, tabla tabla2, string nombreTabla3) {
                         while(!esVacia(newColTab1)) {
                             fila auxFil3 = auxTab3->fila;
 
-                            cout << "columna: " << auxTab3->nombreCol << endl;
+                            //cout << "columna: " << auxTab3->nombreCol << endl;
 
                             fila newFilTab1 = newColTab1->fila;
 
                             int contar = 0;
                             while(contar < levelTab1) {
+                                //cout << "contar " << contar << " level " << levelTab1 << " dato " << newFilTab1->dato << endl;
                                 newFilTab1 = newFilTab1->sgtFila;
+                                contar++;
                             }
 
                             if(esPK == true) {
@@ -946,7 +949,7 @@ tabla unoTablas(tabla *tabl, tabla tabla1, tabla tabla2, string nombreTabla3) {
                                 esPK = false;
                             }
 
-                            cout << "dato1: " << newFilTab1->dato << endl;
+                            //cout << "dato1: " << newFilTab1->dato << endl;
 
                             if(primerDato) {
                                 auxFil3->dato = newFilTab1->dato;
@@ -964,17 +967,17 @@ tabla unoTablas(tabla *tabl, tabla tabla1, tabla tabla2, string nombreTabla3) {
                         while(!esVacia(newColTab2)) {
                             fila auxFil3 = auxTab3->fila;
 
-                            cout << "columna: " << auxTab3->nombreCol << endl;
+                            //cout << "columna: " << auxTab3->nombreCol << endl;
 
                             fila newFilTab2 = newColTab2->fila;
 
                             int contar = 0;
                             while(contar < levelTab1) {
                                 newFilTab2 = newFilTab2->sgtFila;
+                                contar++;
                             }
 
-                                                            cout << "dato2: " << newFilTab2->dato << endl;
-
+                            //cout << "dato2: " << newFilTab2->dato << endl;
 
                             if(newFilTab2->dato != primaryKey) {
                                 if(primerDato) {
@@ -1004,6 +1007,7 @@ tabla unoTablas(tabla *tabl, tabla tabla1, tabla tabla2, string nombreTabla3) {
 
                 levelTab1++;
                 filTab1 = filTab1->sgtFila;
+                cout << "end" << endl;
             }
 
             colTab2 = colTab2->sgtColumna;

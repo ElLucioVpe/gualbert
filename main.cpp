@@ -57,6 +57,8 @@ int main()
     //muestroR(eliminoTabla(&tabl, "personas
     //muestroR(proyectoTabla(&tabl, "mascotas", "nombre:edad", "mascotas2.0"));
 
+    muestroR(unirTablas(&tabl, "mascotas", "prueba", "MI PIXULA"));
+
     //muestroR(eliminoColumna(&tabl, "clientes", "ci"));
 
     //tabla tabRet = retornarTablaBusacada(tabl, "mascotas2.0");

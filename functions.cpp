@@ -732,14 +732,15 @@ tipoRet actualizoDatos(tabla *tabl, string tablNom, string condicionCol, string 
    if(tablNom == "" || condicionCol == "" || condicionCol == "") {
         return error;
     } else {
-        while(!esVacia(auxTable)) {
+        if(!esVacia(auxTable)) {
             if(auxTable->nombre == tablNom) {
                 tablon = actualizarDatos(*tabl, auxTable, condicionCol, condicionDato, nuevoDatoCol, nuevoDato);
                 *tabl=tablon;
                 return ok;
             }
            ///Fixear aca
-            auxTable = auxTable->ptrTablaDer;
+            actualizoDatos(&auxTable->ptrTablaDer, tablNom, condicionCol, condicionDato, nuevoDatoCol, nuevoDato);
+            actualizoDatos(&auxTable->ptrTablaIzq, tablNom, condicionCol, condicionDato, nuevoDatoCol, nuevoDato);
         }
 
         return error;
@@ -1338,7 +1339,7 @@ tipoRet eliminoDatoTupla(tabla *tabl, string nombreTabla, string condicion) {
         return error; // Tabla no especificada
     } else {
 
-        //while(!esVacia(tabAux)) {
+        if(!esVacia(tabAux)) {
 
             if(tabAux->nombre == nombreTabla) {
 
@@ -1380,11 +1381,10 @@ tipoRet eliminoDatoTupla(tabla *tabl, string nombreTabla, string condicion) {
 
             }
 
-            ///Fixeando ACA
-            //tabAux = tabAux->ptrTablaDer;
-            //tipoRet eliminoDatoTupla(tabAux->ptrTablaDer,nombreTabla,condicion);
-            //tipoRet eliminoDatoTupla(tabAux->ptrTablaIzq,nombreTabla,condicion);
-      //  }
+            ///Fixeado ACA
+             eliminoDatoTupla(&tabAux->ptrTablaDer,nombreTabla,condicion);
+             eliminoDatoTupla(&tabAux->ptrTablaIzq,nombreTabla,condicion);
+        }
 
         return error; // Tabla no existe
     }

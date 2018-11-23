@@ -111,5 +111,10 @@ void eliminoTablaAbb(tabla &A, string valor);
 tabla proyectoWhere(tabla tabl, tabla auxTabla, string nombreTabla1, string condicion, string nombreTabla2);
 tipoRet proyectarWhere(tabla *tabl, string nombreTabla1, string condicion, string nombreTabla2);
 
+void printTables(tabla lista);
+tipoRet printoTables(tabla l);
+void printMetadata(tabla lista);
+tipoRet printoMetadata(tabla lista);
+
 tipoRet unirTablas(tabla *tabl, string nombreTabla1, string nombreTabla2, string nombreTabla3);
 tabla unoTablas(tabla *tabl, tabla tabla1, tabla tabla2, string nombreTabla3);

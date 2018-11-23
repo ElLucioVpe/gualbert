@@ -1199,6 +1199,20 @@ tipoRet eliminoDato(tabla *tabl,string tablNom, string colNom, string filNom){
     TablaBorrar=*tabl;
     int i;
 
+    tabla tablaEncontrar;
+    tablaEncontrar=*tabl;
+
+    if(!existeTabla(tablaEncontrar,tablNom)){
+    cout << "No existe esa tabla";
+    return error;
+
+    }
+    if(!existeColumna(&tablaEncontrar,tablNom,colNom)){
+    cout << "No existe esa columna";
+    return error;
+    }
+
+
     i=buscoDato(tablon,tablNom,colNom,filNom);//Busco la pos del dato
     if(i==-1){
         //no existe el dato
@@ -1973,6 +1987,54 @@ void mostrarSim(tabla lista){
 
     }
 }
+
+void printTables(tabla lista){
+    if (lista!=NULL){
+            printTables(lista->ptrTablaIzq);
+            cout <<lista->nombre;
+            cout << endl;
+            cout << endl;
+            printTables(lista->ptrTablaDer);
+    }
+}
+
+void printMetadata(tabla lista){
+    if (lista!=NULL){
+            printMetadata(lista->ptrTablaIzq);
+            cout <<lista->nombre;
+
+            while(lista->columna!=NULL){
+            cout << endl;
+            cout <<lista->columna->nombreCol;
+            lista->columna=lista->columna->sgtColumna;
+            }
+            cout << endl;
+            cout << endl;
+            printMetadata(lista->ptrTablaDer);
+
+    }
+}
+
+tipoRet printoMetadata(tabla lista){
+if(lista!=NULL){
+    printMetadata(lista);
+    return ok;
+}else{
+    return error;
+}
+
+}
+
+tipoRet printoTables(tabla lista){
+if(lista!=NULL){
+    printTables(lista);
+    return ok;
+}else{
+    return error;
+}
+
+}
+
 
 tabla retornarTablaBusacada(tabla A, string nombre){
 

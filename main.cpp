@@ -39,11 +39,13 @@ int main()
     muestroR(insertoDato(&tabl, "prueba", "2:nibba"));
     muestroR(insertoDato(&tabl, "prueba", "3:rigby"));
 
+
+    //muestroR(printoTables(tabl));
+    //muestroR(printoMetadata(tabl));
+
     //muestroR(insertoDato(&tabl, "mascotas", "schrodinger:50:tramboliko:0"));
     //muestroR(proyectoTabla(&tabl, "prueba", "xd:NDEAAAA", "mascotas2.0"));
-    //muestroR(eliminoDatoTupla(&tabl, "prueba", "xd=dato1"));
-    cout << "ASJKJSKD" << endl;
-    muestroR(unirTablas(&tabl, "prueba", "mascotas", "pruebaMascotas"));
+    //muestroR(eliminoDato(&tabl, "prueba", "xd", "ddf"));
 
 
     //columna colAAAH = retornarColumna(&tabl, "mascotas", "tipo");

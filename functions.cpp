@@ -838,14 +838,15 @@ tipoRet proyectarWhere(tabla *tabl, string nombreTabla1, string condicion, strin
 }
 
 tabla proyectoWhere(tabla tabl, tabla auxTabla, string nombreTabla1, string condicion, string nombreTabla2) {
+
     columna auxCol;
     fila auxFila;
     int nivel = 0;
     bool primerDato = true; // Cuenta cuantos datos han sido agregados
     char comp;
     bool agregarDato = false;
-    string datoColumna;
-    string datoComp;
+    string datoColumna = "";
+    string datoComp = "";
 
     if(!esVacia(auxTabla->columna)) {
         auxCol = auxTabla->columna;
@@ -868,97 +869,121 @@ tabla proyectoWhere(tabla tabl, tabla auxTabla, string nombreTabla1, string cond
     std::istringstream ss(condicion);
     std::string token;
 
-    int i = 0;
+    bool primeraVez = true;
     while(std::getline(ss, token, comp)) {
-        if (i = 0) {
+        if (primeraVez) {
             datoColumna = token;
-        } else if (i = 1) {
-            datoComp = token;
+            primeraVez = false;
         } else {
-            return tabl;
+            datoComp = token;
         }
 
-        i++;
     }
 
     // Declaraciones para tabla ya existente
     columna colComp = retornarColumna(&tabl, nombreTabla1, datoColumna);
 
     // Declaraciones para tabla nueva
-    tipoRet retorno = insertoTabla(&tabl, nombreTabla2);
+    insertoTablaAbb(tabl, nombreTabla2);
     tabla tablaNueva = retornarTablaBusacada(tabl, nombreTabla2);
 
     // Recorre todas las columnas
-    while(!esVacia(colComp)) {
+    if(!esVacia(colComp)) {
+
         fila filComp = colComp->fila;
         nivel = 0;
 
-        // Crea nueva columna en tabla2
-        retorno = insertoColumna(&tabl, nombreTabla2, colComp->nombreCol);
-        columna nuevaColumna = retornarColumna(&tabl, nombreTabla2, colComp->nombreCol);
+        while(!esVacia(colComp)) {
+            // Crea nueva columna en tabla2
+            insertoColumna(&tabl, nombreTabla2, colComp->nombreCol);
+            colComp = colComp->sgtColumna;
+        }
 
         // Recorre cada fila de las columnas
         while(!esVacia(filComp)) {
+            agregarDato = false;
+            //cout << " UF COMO PEGAN ESAS TUCS dato " << filComp->dato << comp << endl;
 
-            fila filaInsertar = nuevaColumna->fila;
+            fila filaInsertar;
 
             // Compara datos
-            if(comp = '=') {
+            if(comp == '=') {
                 if(filComp->dato == datoComp) {
                     agregarDato = true;
                 }
-            } else if (comp = '>') {
+            } else if (comp == '>') {
                 if(filComp->dato > datoComp) {
                     agregarDato = true;
                 }
-            } else if (comp = '<') {
+            } else if (comp == '<') {
                 if(filComp->dato < datoComp) {
                     agregarDato = true;
                 }
+            } else {
+                agregarDato = false;
             }
 
             // Si los datos concuerdan, ingresa los datos a la nueva tabla
             if(agregarDato) {
 
-                // Recorre los datos
-                int contar = 0;
-
                 columna auxCol = auxTabla->columna;
                 while(!esVacia(auxCol)) {
 
-                        fila auxFil = auxCol->fila;
+                    columna nuevaColumna = retornarColumna(&tabl, nombreTabla2, auxCol->nombreCol);
+                    filaInsertar = nuevaColumna->fila;
 
-                        while(!esVacia(auxFil)) {
-                            while(contar < nivel) {
-                                auxFil = auxFil->sgtFila;
-                                contar++;
-                            }
+                    // Recorre los datos
+                    int contar = 0;
+
+                    fila auxFil = auxCol->fila;
+                    while(!esVacia(auxFil)) {
+                        //cout << "contando " << contar << " nivel " << nivel <<  " dato " << auxFil->dato << endl;
+
+                        if(contar == nivel) {
+                            break;
+                        } else {
+                            contar++;
+                            auxFil = auxFil->sgtFila;
                         }
+                    }
 
-                        if(nivel = contar) {
-                            fila filNueva = NULL;
-                            filNueva->dato = auxFila->dato;
-                            filNueva->sgtFila = NULL;
+                    cout << "contar" << contar << " level" << nivel << " dato " << auxFil->dato << endl;
 
-                            if(primerDato) {
-                                filaInsertar = filNueva;
-                            } else {
-                                filaInsertar->sgtFila = filNueva;
+                    if(nivel == contar) {
+                        fila filNueva = new _fila;
+                        filNueva->dato = auxFil->dato;
+                        filNueva->sgtFila = NULL;
+
+                        if(primerDato) {
+                            nuevaColumna->fila = filNueva;
+                            filaInsertar = nuevaColumna->fila;
+                            //cout << "primerDato " << filNueva->dato << " true" << endl;
+                        } else {
+
+                            while(!esVacia(filaInsertar->sgtFila)) {
+                                filaInsertar = filaInsertar->sgtFila;
                             }
-                        }
 
+                            filaInsertar->sgtFila = filNueva;
+                            filaInsertar = filaInsertar->sgtFila;
+                        }
+                    }
+
+                    auxCol = auxCol->sgtColumna;
                 }
 
                 primerDato = false;
-                auxCol = auxCol->sgtColumna;
             }
 
             nivel++; // Agrega un nuevo nivel
             filComp = filComp->sgtFila;
+
         }
 
-        colComp = colComp->sgtColumna;
+        //colComp = colComp->sgtColumna;
     }
+
+    cout << "proceso finalizado" << endl;
 
     return tabl;
 }

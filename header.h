@@ -122,4 +122,4 @@ void actualizarListadoModificacionTablas(string nuevoDato);
 void mostrarArray();
 
 tipoRet recento(tabla lista);
-void recent(tabla lista,int cont);
+void recent(tabla lista,tabla raiz, int cont);

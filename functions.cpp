@@ -2099,11 +2099,15 @@ if(lista!=NULL){
 }
 
 tipoRet recento(tabla lista){
+//encontrar desde que pos tiene algo TABLAS_Modificadas
 int cont=MAX_MODIFICADAS;
+
+    while(TABLAS_MODIFICADAS[cont]==""){
+    cont--;
+    }
+
 if(lista!=NULL){
-    //cout<<TABLAS_MODIFICADAS[0];
-    //cout<<TABLAS_MODIFICADAS[1];
-    recent(lista,cont);
+    recent(lista,lista,cont);
     return ok;
 }else{
     return error;
@@ -2112,18 +2116,19 @@ if(lista!=NULL){
 }
 
 
-void recent(tabla lista,int cont){
+void recent(tabla lista,tabla raiz, int cont){
 
     if (lista!=NULL){
 
             if(lista->nombre==TABLAS_MODIFICADAS[cont]){
                 cout <<lista->nombre;
                 cout << endl;
-                cout << endl;
                 cont--;
+                lista=raiz;
             }
-        recent(lista->ptrTablaIzq,cont);
-        recent(lista->ptrTablaDer,cont);
+
+        recent(lista->ptrTablaIzq,raiz,cont);
+        recent(lista->ptrTablaDer,raiz,cont);
     }
 }
 

@@ -58,12 +58,14 @@ int main()
 
     muestroR(unirTablas(&tabl, "mascotas", "prueba", "MI PIXULA"));
 
+
+
     //muestroR(eliminoColumna(&tabl, "clientes", "ci"));
 
     //tabla tabRet = retornarTablaBusacada(tabl, "mascotas2.0");
     //cout << "adnaskjds" << tabRet->columna->nombreCol << endl;
-
-    mostrarSim(tabl);
+    mostrarArray();
+    //mostrarSim(tabl);
 
     ///Probar FUNCS
     /*

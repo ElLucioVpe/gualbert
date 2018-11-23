@@ -4,7 +4,7 @@
 #include <sstream>
 
 #define LARGOCADENA 20
-#define MAX_MODIFICADAS 2
+#define MAX_MODIFICADAS 10
 
 using namespace std;
 
@@ -119,3 +119,4 @@ tipoRet printoMetadata(tabla lista);
 tipoRet unirTablas(tabla *tabl, string nombreTabla1, string nombreTabla2, string nombreTabla3);
 tabla unoTablas(tabla *tabl, tabla tabla1, tabla tabla2, string nombreTabla3);
 void actualizarListadoModificacionTablas(string nuevoDato);
+void mostrarArray();

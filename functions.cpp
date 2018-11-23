@@ -20,6 +20,20 @@ bool existeTabla(tabla tabl, string nombre) {
     }
 }
 
+void mostrarArray() {
+    cout << "hmmKJSADJKASDJKADSJKADSJKDSAKJ" << endl;
+
+    int i = 0;
+    while(i < MAX_MODIFICADAS) {
+        cout << "i: " << i << " dato " << TABLAS_MODIFICADAS[i] << endl;
+
+        if(TABLAS_MODIFICADAS[i+1] == "") {
+            return;
+        }
+        i++;
+    }
+}
+
 void actualizarListadoModificacionTablas(string nuevoDato) {
     int i = 0;
     bool salir = false;
@@ -33,13 +47,18 @@ void actualizarListadoModificacionTablas(string nuevoDato) {
             break;
         }
 
+        if(TABLAS_MODIFICADAS[i] == nuevoDato) {
+            salir = true;
+            break;
+        }
+
         if(i == 0 ) {
             anterior = TABLAS_MODIFICADAS[i];
             TABLAS_MODIFICADAS[i] = nuevoDato;
             //TABLAS_MODIFICADAS[i+1] = anterior;
         } else {
-            if(TABLAS_MODIFICADAS[i] == "") {
-                salir = true;
+            if(anterior == TABLAS_MODIFICADAS[i]) {
+                break;
             }
 
             despues = TABLAS_MODIFICADAS[i];

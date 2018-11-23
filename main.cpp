@@ -39,6 +39,7 @@ int main()
     muestroR(insertoDato(&tabl, "prueba", "3:rigby"));
 
 
+
     //muestroR(printoTables(tabl));
     //muestroR(printoMetadata(tabl));
 
@@ -62,8 +63,8 @@ int main()
 
     //tabla tabRet = retornarTablaBusacada(tabl, "mascotas2.0");
     //cout << "adnaskjds" << tabRet->columna->nombreCol << endl;
-
-    mostrarSim(tabl);
+    muestroR(recento(tabl));
+    //mostrarSim(tabl);
 
     ///Probar FUNCS
     /*

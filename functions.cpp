@@ -2079,6 +2079,35 @@ if(lista!=NULL){
 
 }
 
+tipoRet recento(tabla lista){
+int cont=MAX_MODIFICADAS;
+if(lista!=NULL){
+    //cout<<TABLAS_MODIFICADAS[0];
+    //cout<<TABLAS_MODIFICADAS[1];
+    recent(lista,cont);
+    return ok;
+}else{
+    return error;
+}
+
+}
+
+
+void recent(tabla lista,int cont){
+
+    if (lista!=NULL){
+
+            if(lista->nombre==TABLAS_MODIFICADAS[cont]){
+                cout <<lista->nombre;
+                cout << endl;
+                cout << endl;
+                cont--;
+            }
+        recent(lista->ptrTablaIzq,cont);
+        recent(lista->ptrTablaDer,cont);
+    }
+}
+
 
 tabla retornarTablaBusacada(tabla A, string nombre){
 

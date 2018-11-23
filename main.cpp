@@ -27,6 +27,7 @@ int main()
     muestroR(insertoColumna(&tabl, "mascotas", "nombre"));
     muestroR(insertoColumna(&tabl, "mascotas", "edad"));
     muestroR(insertoColumna(&tabl, "mascotas", "tipo"));
+
     muestroR(insertoColumna(&tabl, "prueba", "xd"));
     muestroR(insertoColumna(&tabl, "prueba", "NDEAAAA"));
 
@@ -41,7 +42,8 @@ int main()
 
 
     //muestroR(insertoDato(&tabl, "mascotas", "schrodinger:50:tramboliko:0"));
-    muestroR(proyectoTabla(&tabl, "prueba", "xd:NDEAAAA", "mascotas2.0"));
+    //muestroR(proyectoTabla(&tabl, "prueba", "xd:NDEAAAA", "mascotas2.0"));
+    muestroR(eliminoDatoTupla(&tabl, "prueba", "xd=dato1"));
 
 
     //columna colAAAH = retornarColumna(&tabl, "mascotas", "tipo");

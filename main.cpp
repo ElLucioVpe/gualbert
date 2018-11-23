@@ -39,6 +39,9 @@ int main()
     muestroR(insertoDato(&tabl, "prueba", "2:nibba"));
     muestroR(insertoDato(&tabl, "prueba", "3:rigby"));
 
+
+    printMetadata(tabl);
+
     //muestroR(insertoDato(&tabl, "mascotas", "schrodinger:50:tramboliko:0"));
     //muestroR(proyectoTabla(&tabl, "prueba", "xd:NDEAAAA", "mascotas2.0"));
     //muestroR(eliminoDato(&tabl, "prueba", "xd", "ddf"));
@@ -58,7 +61,7 @@ int main()
     //tabla tabRet = retornarTablaBusacada(tabl, "mascotas2.0");
     //cout << "adnaskjds" << tabRet->columna->nombreCol << endl;
 
-    mostrarSim(tabl);
+    //mostrarSim(tabl);
 
     ///Probar FUNCS
     /*

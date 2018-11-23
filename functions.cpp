@@ -1788,6 +1788,33 @@ void mostrarSim(tabla lista){
     }
 }
 
+void printTables(tabla lista){
+    if (lista!=NULL){
+            printTables(lista->ptrTablaIzq);
+            cout <<lista->nombre;
+            cout << endl;
+            cout << endl;
+            printTables(lista->ptrTablaDer);
+    }
+}
+
+void printMetadata(tabla lista){
+    if (lista!=NULL){
+            printMetadata(lista->ptrTablaIzq);
+            cout <<lista->nombre;
+
+            while(lista->columna!=NULL){
+            cout << endl;
+            cout <<lista->columna->nombreCol;
+            lista->columna=lista->columna->sgtColumna;
+            }
+            cout << endl;
+            cout << endl;
+            printMetadata(lista->ptrTablaDer);
+
+    }
+}
+
 tabla retornarTablaBusacada(tabla A, string nombre){
 
   if (A==NULL)

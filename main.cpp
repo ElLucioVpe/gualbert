@@ -16,7 +16,7 @@ int main()
 
     //muestroR(insertoTablaAbb(tabl,"clientes"));
 
-    muestroR(insertoTablaAbb(tabl,"Hoteles"));
+    //muestroR(insertoTablaAbb(tabl,"Hoteles"));
 
     muestroR(insertoTablaAbb(tabl,"personas"));
     muestroR(insertoTablaAbb(tabl,"mascotas"));
@@ -56,7 +56,7 @@ int main()
     //muestroR(eliminoTabla(&tabl, "personas
     //muestroR(proyectoTabla(&tabl, "mascotas", "nombre:edad", "mascotas2.0"));
 
-    muestroR(unirTablas(&tabl, "mascotas", "prueba", "MI PIXULA"));
+   // muestroR(unirTablas(&tabl, "mascotas", "prueba", "MI PIXULA"));
 
     //muestroR(eliminoColumna(&tabl, "clientes", "ci"));
 

@@ -3,8 +3,8 @@ string TABLAS_MODIFICADAS[MAX_MODIFICADAS];
 
 // Funciones de arboles
 
-bool existeTabla(tabla tabl, string nombre) {
 
+bool existeTabla(tabla tabl, string nombre) {
     if(esVacia(tabl)) {
         return false;
     } else {

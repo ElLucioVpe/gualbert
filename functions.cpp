@@ -1,4 +1,5 @@
 #include "header.h"
+string TABLAS_MODIFICADAS[MAX_MODIFICADAS];
 
 // Funciones de arboles
 
@@ -16,6 +17,38 @@ bool existeTabla(tabla tabl, string nombre) {
         } else {
             return true;
         }
+    }
+}
+
+void actualizarListadoModificacionTablas(string nuevoDato) {
+    int i = 0;
+    bool salir = false;
+    string anterior = "";
+    string despues = "";
+    while(!salir) {
+        //cout << "i: " << i << " MAX: " << TABLAS_MODIFICADAS[i] << endl;
+
+        if(i > MAX_MODIFICADAS) {
+            salir = true;
+            break;
+        }
+
+        if(i == 0 ) {
+            anterior = TABLAS_MODIFICADAS[i];
+            TABLAS_MODIFICADAS[i] = nuevoDato;
+            //TABLAS_MODIFICADAS[i+1] = anterior;
+        } else {
+            if(TABLAS_MODIFICADAS[i] == "") {
+                salir = true;
+            }
+
+            despues = TABLAS_MODIFICADAS[i];
+            TABLAS_MODIFICADAS[i] = anterior;
+            anterior = despues;
+
+        }
+
+        i++;
     }
 }
 
@@ -153,6 +186,10 @@ tipoRet insertoColumna(tabla *tabl, string nombreTabla, string nombreColumna) {
     }
 
     auxTable=retornarTablaBusacada(auxTable,nombreTabla);
+            if(esVacia(auxTable)) {
+                return error;
+            }
+
             if(auxTable->nombre == nombreTabla) {
 
                 columna auxCol;
@@ -254,6 +291,8 @@ tipoRet insertoDato(tabla *tabl, string nombreTabla, string dato){
                     if(numCols==numDats){
                         tablon=insertarDato(&tablon , &enviarTabla, dato, nombreTabla);
                        *tabl=tablon;
+
+                        actualizarListadoModificacionTablas(enviarTabla->nombre);
                        return ok;
                     } else {
                         cout << "No tiene el mismo numero de tuplas que de columnas";
@@ -736,6 +775,7 @@ tipoRet actualizoDatos(tabla *tabl, string tablNom, string condicionCol, string 
             if(auxTable->nombre == tablNom) {
                 tablon = actualizarDatos(*tabl, auxTable, condicionCol, condicionDato, nuevoDatoCol, nuevoDato);
                 *tabl=tablon;
+                actualizarListadoModificacionTablas(auxTable->nombre);
                 return ok;
             }
            ///Fixear aca
@@ -908,7 +948,7 @@ tabla unoTablas(tabla *tabl, tabla tabla1, tabla tabla2, string nombreTabla3) {
 
             while(!esVacia(filTab1)) {
                 levelTab2 = 0;
-                //cout << "start"<< levelTab1 << endl;
+                cout << "start"<< levelTab1 << endl;
                 filTab2 = colTab2->fila;
 
                 while(!esVacia(filTab2)) {

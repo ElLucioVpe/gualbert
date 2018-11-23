@@ -2,7 +2,6 @@
 
 int main()
 {
-
     string entradaUsuario;
 
     int varCount = 0;

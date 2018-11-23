@@ -8,9 +8,6 @@
 
 using namespace std;
 
-string TABLAS_MODIFICADAS[MAX_MODIFICADAS];
-
-
 enum _Retorno{
 
     ok,error,noImplementada //solo puede retornar estos 3 res, como array
@@ -121,3 +118,4 @@ tipoRet printoMetadata(tabla lista);
 
 tipoRet unirTablas(tabla *tabl, string nombreTabla1, string nombreTabla2, string nombreTabla3);
 tabla unoTablas(tabla *tabl, tabla tabla1, tabla tabla2, string nombreTabla3);
+void actualizarListadoModificacionTablas(string nuevoDato);

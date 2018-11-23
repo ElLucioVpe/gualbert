@@ -1815,6 +1815,27 @@ void printMetadata(tabla lista){
     }
 }
 
+tipoRet printoMetadata(tabla lista){
+if(lista!=NULL){
+    printMetadata(lista);
+    return ok;
+}else{
+    return error;
+}
+
+}
+
+tipoRet printoTables(tabla lista){
+if(lista!=NULL){
+    printTables(lista);
+    return ok;
+}else{
+    return error;
+}
+
+}
+
+
 tabla retornarTablaBusacada(tabla A, string nombre){
 
   if (A==NULL)

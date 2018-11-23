@@ -80,13 +80,13 @@
 	<cstring>
 	<sstream>
 
-1542937947 source:/mnt/c/ProyectoC++MySQL/gualbert/functions.cpp
+1542938355 source:/mnt/c/ProyectoC++MySQL/gualbert/functions.cpp
 	"header.h"
 
 1542937959 source:/mnt/c/ProyectoC++MySQL/gualbert/main.cpp
 	"header.h"
 
-1542937643 /mnt/c/ProyectoC++MySQL/gualbert/header.h
+1542938187 /mnt/c/ProyectoC++MySQL/gualbert/header.h
 	<iostream>
 	<stdlib.h>
 	<cstring>

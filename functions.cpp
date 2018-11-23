@@ -975,6 +975,20 @@ tipoRet eliminoDato(tabla *tabl,string tablNom, string colNom, string filNom){
     TablaBorrar=*tabl;
     int i;
 
+    tabla tablaEncontrar;
+    tablaEncontrar=*tabl;
+
+    if(!existeTabla(tablaEncontrar,tablNom)){
+    cout << "No existe esa tabla";
+    return error;
+
+    }
+    if(!existeColumna(&tablaEncontrar,tablNom,colNom)){
+    cout << "No existe esa columna";
+    return error;
+    }
+
+
     i=buscoDato(tablon,tablNom,colNom,filNom);//Busco la pos del dato
     if(i==-1){
         //no existe el dato

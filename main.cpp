@@ -43,7 +43,7 @@ int main()
 
     //muestroR(insertoDato(&tabl, "mascotas", "schrodinger:50:tramboliko:0"));
     //muestroR(proyectoTabla(&tabl, "prueba", "xd:NDEAAAA", "mascotas2.0"));
-    muestroR(eliminoDatoTupla(&tabl, "prueba", "xd=dato1"));
+    //muestroR(eliminoDato(&tabl, "prueba", "xd", "ddf"));
 
 
     //columna colAAAH = retornarColumna(&tabl, "mascotas", "tipo");

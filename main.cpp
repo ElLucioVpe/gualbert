@@ -219,7 +219,7 @@ int main()
                     muestroR(eliminoDato(&tabl, var1, var2, var3));
                 } else if (orden == "actualizarDatos") {
                     muestroR(actualizoDatos(&tabl, var1, var2, var3, var4, var5));
-                } else if (orden == "mostrarDatos") {
+                } else if (orden == "mostrarDatosTabla") {
                     muestroR(muestroTabla(tabl,var1));
                 } else if (orden == "eliminarDatoTupla") {
                     muestroR(eliminoDatoTupla(&tabl, var1, var2));
@@ -234,8 +234,7 @@ int main()
                 } else if (orden == "mostrarMetadata") {
                     muestroR(printoMetadata(tabl));
                 } else if (orden == "mostrarDatos") {
-                    cout << "me quiero MATAR" << endl;
-
+                    mostrarSim(tabl);
                 } else if (orden == "mostrarTablasRecientes") {
                     muestroR(recento(tabl));
                 } else {

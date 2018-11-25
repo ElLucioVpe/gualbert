@@ -2,7 +2,7 @@
 1538179056 source:/home/alien/Documents/ProgramaProyecto/Mysql/functions.cpp
 	"header.h"
 
-1543106218 
+1543106527 
 
 1538178924 /home/alien/Documents/ProgramaProyecto/Mysql/header.h
 	<iostream>
@@ -123,4 +123,16 @@
 	<sstream>
 
 1543106218 ter
+
+1543113869 source:/mnt/c/Users/lucia/git/gualbert/functions.cpp
+	"header.h"
+
+1543109788 /mnt/c/Users/lucia/git/gualbert/header.h
+	<iostream>
+	<stdlib.h>
+	<cstring>
+	<sstream>
+
+1543114083 source:/mnt/c/Users/lucia/git/gualbert/main.cpp
+	"header.h"
 

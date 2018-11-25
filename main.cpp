@@ -183,20 +183,21 @@ int main()
                 cout << "- iniciarTabla()" << endl;
                 cout << "- insertarTabla(nombreTabla)" << endl;
                 cout << "- agregarColumna(nombreTabla,nombreColumna)" << endl;
-                cout << "- eliminoColumna(nombreTabla,nombreColumna)" << endl;
-                cout << "- insertoDato(nombreTabla,dato1:dato2)" << endl;
-                cout << "- eliminoDato(nombreTabla,columna,fila)" << endl;
+                cout << "- eliminarColumna(nombreTabla,nombreColumna)" << endl;
+                cout << "- insertarDato(nombreTabla,dato1:dato2)" << endl;
+                cout << "- eliminarDato(nombreTabla,columna,fila)" << endl;
                 cout << "     ej.: eliminoDato(clientes,personas,pepe)" << endl;
-                cout << "- eliminoDatoTupla(nombreTabla,nombreColumna,condicion)" << endl;
-                cout << "     eliminoDatoTupla puede comparar =, > o <." << endl;
-                cout << "     eliminoDatoTupla puede utilizar * al comparar strings." << endl;
+                cout << "- eliminarDatoTupla(nombreTabla,nombreColumna,condicion)" << endl;
+                cout << "     eliminarDatoTupla puede comparar =, > o <." << endl;
+                cout << "     eliminarDatoTupla puede utilizar * al comparar strings." << endl;
                 cout << "     ej.: eliminoDatoTupla(clientes,nombre=pep*)" << endl;
-                cout << "- actualizoDatos(nombreTabla,condicionColumna,condicionDato,nuevoDatoCol,nuevoDato)" << endl;
-                cout << "- printDataTable(nombreTabla)" << endl;
-                cout << "- mostrarTablas()" << endl;
+                cout << "- actualizarDatos(nombreTabla,condicionColumna,condicionDato,nuevoDatoCol,nuevoDato)" << endl;
+                cout << "- eliminarDatoTupla(nombreTabla)" << endl;
+                cout << "- eliminarTabla(nombreTabla)" << endl;
                 cout << "- unirTablas(nombreTabla1, nombreTabla2, nuevaTabla)" << endl;
+                cout << "- mostrarTablas()" << endl;
                 cout << "- mostrarMetadata()" << endl;
-                cout << "- tablasRecientes()" << endl;
+                cout << "- mostrarTablasRecientes()" << endl;
                 cout << endl;
             } else {
 
@@ -208,21 +209,22 @@ int main()
                     muestroR(insertoTablaAbb(tabl, var1));
                 } else if (orden == "agregarColumna") {
                     muestroR(insertoColumna(&tabl, var1, var2));
-                } else if (orden == "eliminoColumna") {
+                } else if (orden == "eliminarColumna") {
                     muestroR(eliminoColumna(&tabl, var1, var2));
-                }  else if (orden == "insertoDato") {
+                }  else if (orden == "insertarDato") {
                     muestroR(insertoDato(&tabl, var1, var2));
-                } else if (orden == "eliminoDato") {
+                    cout << var1 << var2 << endl;
+                } else if (orden == "eliminarDato") {
                     muestroR(eliminoDato(&tabl, var1, var2, var3));
-                } else if (orden == "actualizoDatos") {
+                } else if (orden == "actualizarDatos") {
                     muestroR(actualizoDatos(&tabl, var1, var2, var3, var4, var5));
-                } else if (orden == "printDataTable") {
+                } else if (orden == "mostrarDatos") {
                     muestroR(muestroTabla(tabl,var1));
-                } else if (orden == "eliminoDatoTupla") {
+                } else if (orden == "eliminarDatoTupla") {
                     muestroR(eliminoDatoTupla(&tabl, var1, var2));
-                } else if (orden == "eliminoTabla") {
+                } else if (orden == "eliminarTabla") {
                     muestroR(eliminoTabla(&tabl, var1));
-                } else if (orden == "proyectoWhere") {
+                } else if (orden == "proyectarWhere") {
                     muestroR(proyectarWhere(&tabl, var1, var2, var3));
                 } else if (orden == "mostrarTablas") {
                     muestroR(printoTables(tabl));
@@ -230,7 +232,7 @@ int main()
                     muestroR(unirTablas(&tabl, var1, var2, var3));
                 } else if (orden == "mostrarMetadata") {
                     muestroR(printoMetadata(tabl));
-                } else if (orden == "tablasRecientes") {
+                } else if (orden == "mostrarTablasRecientes") {
                     muestroR(recento(tabl));
                 } else {
                     cout << "Comando no valido. Puede escribir ayuda para repasar los comandos basicos." << endl;

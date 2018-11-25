@@ -11,8 +11,9 @@ int main()
     string var4;
     string var5;
 
+
     tabla tabl = new _tabla;
-    muestroR(inicioTabla(&tabl));
+   // muestroR(inicioTabla(&tabl));
 
     //muestroR(insertoTablaAbb(tabl,"clientes"));
 
@@ -36,18 +37,17 @@ int main()
     muestroR(insertoColumna(&tabl, "prueba", "nombre"));
     muestroR(insertoColumna(&tabl, "prueba", "vivo"));
 
-    muestroR(insertoDato(&tabl, "mascotas", "julian:18:agua"));
-    muestroR(insertoDato(&tabl, "mascotas", "1:18:agua"));
+   // muestroR(insertoDato(&tabl, "mascotas", "julian:18:agua"));
+    //muestroR(insertoDato(&tabl, "mascotas", "1:18:agua"));
 
-    muestroR(insertoDato(&tabl, "prueba", "julian:xdxd"));
-    muestroR(insertoDato(&tabl, "prueba", "1:lmao"));
-    muestroR(insertoDato(&tabl, "prueba", "2:nibba"));
-    muestroR(insertoDato(&tabl, "prueba", "3:rigby"));
-
+    //muestroR(insertoDato(&tabl, "prueba", "julian:xdxd"));
+    //muestroR(insertoDato(&tabl, "prueba", "1:lmao"));
+   // muestroR(insertoDato(&tabl, "prueba", "2:nibba"));
+   // muestroR(insertoDato(&tabl, "prueba", "3:rigby"));
 
 
     //muestroR(printoTables(tabl));
-    //muestroR(printoMetadata(tabl));
+
 
     //muestroR(insertoDato(&tabl, "mascotas", "schrodinger:50:tramboliko:0"));
     //muestroR(proyectoTabla(&tabl, "prueba", "xd:NDEAAAA", "mascotas2.0"));
@@ -65,14 +65,15 @@ int main()
 
    // muestroR(unirTablas(&tabl, "mascotas", "prueba", "MI PIXULA"));
 
-
+    muestroR(printoMetadata(tabl));
 
     //muestroR(eliminoColumna(&tabl, "clientes", "ci"));
 
     //tabla tabRet = retornarTablaBusacada(tabl, "mascotas2.0");
     //cout << "adnaskjds" << tabRet->columna->nombreCol << endl;
     //muestroR(recento(tabl));
-    mostrarSim(tabl);
+    //mostrarSim(tabl);
+
 
     ///Probar FUNCS
     /*

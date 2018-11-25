@@ -660,7 +660,8 @@ void eliminoTablaAbb(tabla &A, string valor)
            eliminoTablaAbb(A->ptrTablaDer, valor);
         }
         else
-        {
+        if(A->nombre==valor){
+
             tabla ptrElimino;
             tabla p;
             ptrElimino = A; //guardo el nodo  encontrado a eliminar
@@ -684,14 +685,16 @@ void eliminoTablaAbb(tabla &A, string valor)
                 {
                     p = buscarMenor(A->ptrTablaDer);
                     A->nombre = p->nombre;
+                    //A->columna=p->columna;//sacamos las columns que arratrasn las filas
+
                     A->ptrTablaDer->ptrTablaIzq = p->ptrTablaDer;
-                    delete p;
+
+                    delete A;
                 }
             }
         }
-    }
-  return;
 
+    }
 }
 
 
@@ -709,8 +712,9 @@ tipoRet eliminoTabla(tabla *tabl, string nombre){
         if (!esVacia(tablon)){
 
             if(existeTabla(tablon, nombre)) {
-                vaciarColumnas(*tabl);
-                eliminoTablaAbb(*tabl, nombre);
+                tablon=retornarTablaBusacada(tablon,nombre);
+                vaciarColumnas(tablon);
+                eliminoTablaAbb(*tabl,nombre);
                 return ok;
             } else {
                 return error; // No existe la tabla :(

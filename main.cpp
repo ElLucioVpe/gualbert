@@ -14,36 +14,9 @@ int main()
     tabla tabl = new _tabla;
     muestroR(inicioTabla(&tabl));
 
-    //muestroR(insertoTablaAbb(tabl,"clientes"));
+        muestroR(insertoTablaAbb(tabl,"mascotas"));
+        muestroR(insertoTablaAbb(tabl,"xd"));
 
-    //muestroR(insertoTablaAbb(tabl,"Hoteles"));
-
-    muestroR(insertoTablaAbb(tabl,"personas"));
-    muestroR(insertoTablaAbb(tabl,"mascotas"));
-    muestroR(insertoTablaAbb(tabl,"prueba"));
-
-    //tabl = retornarTablaBusacada(tabl,"clientes" );
-    muestroR(insertoColumna(&tabl, "mascotas", "nombre"));
-    muestroR(insertoColumna(&tabl, "mascotas", "edad"));
-    muestroR(insertoColumna(&tabl, "mascotas", "tipo"));
-
-
-    muestroR(insertoColumna(&tabl, "personas", "socios"));
-    muestroR(insertoColumna(&tabl, "personas", "Amigos"));
-     muestroR(insertoDato(&tabl, "personas", "julian:Nose"));
-     muestroR(insertoDato(&tabl, "personas", "Ricardo:Dofe"));
-
-    muestroR(insertoColumna(&tabl, "prueba", "nombre"));
-    muestroR(insertoColumna(&tabl, "prueba", "vivo"));
-
-    muestroR(insertoDato(&tabl, "mascotas", "julian:18:agua"));
-    muestroR(insertoDato(&tabl, "mascotas", "1:18:agua"));
-
-    muestroR(insertoDato(&tabl, "prueba", "julian:xdxd"));
-    muestroR(insertoDato(&tabl, "prueba", "1:lmao"));
-    muestroR(insertoDato(&tabl, "prueba", "2:nibba"));
-    muestroR(insertoDato(&tabl, "prueba", "3:rigby"));
-    muestroR(eliminoTabla(&tabl, "prueba"));
 
 
 
@@ -59,22 +32,17 @@ int main()
     //columna colAAAH = retornarColumna(&tabl, "mascotas", "tipo");
     //cout << "FJKJDKSJKSA " << colAAAH->nombreCol << endl;
 
-    //muestroR(eliminoTabla(&tabl, "clientes"));
+    muestroR(eliminoTabla(&tabl, "mascotas"));
     //muestroR(eliminoColumna(&tabl, "personas", "ci"));
 
-    muestroR(eliminoTabla(&tabl, "personas"));
+    //muestroR(eliminoTabla(&tabl, "personas"));
     //muestroR(proyectoTabla(&tabl, "mascotas", "nombre:edad", "mascotas2.0"));
 
    // muestroR(unirTablas(&tabl, "mascotas", "prueba", "MI PIXULA"));
 
-
-
-    //muestroR(eliminoColumna(&tabl, "clientes", "ci"));
-
-    //tabla tabRet = retornarTablaBusacada(tabl, "mascotas2.0");
-    //cout << "adnaskjds" << tabRet->columna->nombreCol << endl;
-    //muestroR(recento(tabl));
-    mostrarSim(tabl);
+   cout << "----------------------------------" << endl;
+    //muestroR(eliminoTabla(&tabl, "Clientes"));
+    muestroR(printoTables(tabl));
 
     ///Probar FUNCS
     /*
@@ -106,6 +74,7 @@ int main()
 
         string orden;
         std::getline(std::cin, entradaUsuario);
+        int getchar();
 
         if (entradaUsuario.empty())
         {
@@ -183,7 +152,7 @@ int main()
                 cout << endl;
                 cout << "- iniciarTabla()" << endl;
                 cout << "- insertarTabla(nombreTabla)" << endl;
-                cout << "- agregarColumna(nombreTabla,nombreColumna)" << endl;
+                cout << "- insertarColumna(nombreTabla,nombreColumna)" << endl;
                 cout << "- eliminarColumna(nombreTabla,nombreColumna)" << endl;
                 cout << "- insertarDato(nombreTabla,dato1:dato2)" << endl;
                 cout << "- eliminarDato(nombreTabla,columna,fila)" << endl;
@@ -208,13 +177,12 @@ int main()
                     muestroR(inicioTabla(&tabl));
                 } else if (orden == "insertarTabla") {
                     muestroR(insertoTablaAbb(tabl, var1));
-                } else if (orden == "agregarColumna") {
+                } else if (orden == "insertarColumna") {
                     muestroR(insertoColumna(&tabl, var1, var2));
                 } else if (orden == "eliminarColumna") {
                     muestroR(eliminoColumna(&tabl, var1, var2));
                 }  else if (orden == "insertarDato") {
                     muestroR(insertoDato(&tabl, var1, var2));
-                    cout << var1 << var2 << endl;
                 } else if (orden == "eliminarDato") {
                     muestroR(eliminoDato(&tabl, var1, var2, var3));
                 } else if (orden == "actualizarDatos") {
@@ -233,6 +201,9 @@ int main()
                     muestroR(unirTablas(&tabl, var1, var2, var3));
                 } else if (orden == "mostrarMetadata") {
                     muestroR(printoMetadata(tabl));
+                } else if (orden == "mostrarDatos") {
+                    cout << "me quiero MATAR" << endl;
+
                 } else if (orden == "mostrarTablasRecientes") {
                     muestroR(recento(tabl));
                 } else {
@@ -251,6 +222,6 @@ int main()
         }
     } while (entradaUsuario != "salir");
 
-    cout << "Hasta luego!" << endl;
-    return 0;
+        cout << "Hasta luego!" << endl;
+        return 0;
 }

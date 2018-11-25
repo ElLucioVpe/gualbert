@@ -21,11 +21,8 @@ bool existeTabla(tabla tabl, string nombre) {
 }
 
 void mostrarArray() {
-    cout << "hmmKJSADJKASDJKADSJKADSJKDSAKJ" << endl;
-
     int i = 0;
     while(i < MAX_MODIFICADAS) {
-        cout << "i: " << i << " dato " << TABLAS_MODIFICADAS[i] << endl;
 
         if(TABLAS_MODIFICADAS[i+1] == "") {
             return;
@@ -710,7 +707,7 @@ tipoRet eliminoTabla(tabla *tabl, string nombre){
 
             if(existeTabla(tablon, nombre)) {
                 vaciarColumnas(*tabl);
-                eliminoTablaAbb(*tabl, nombre);
+                eliminoTablaAbb(tabl, &auxTable, nombre);
                 return ok;
             } else {
                 return error; // No existe la tabla :(
@@ -743,10 +740,8 @@ columna colAux;
 
 tabla eliminarTabla(tabla *tabl, tabla *aux, string name){
 
-    tabla BorrarTabl;
-    BorrarTabl = new _tabla;
+    tabla BorrarTabl =  *aux; //apun;
     tabla auxTable = *tabl;
-    BorrarTabl = *aux; //apunta al inicio de la lista
 
     cout << "buscando: " << BorrarTabl->nombre << endl;
 
@@ -754,7 +749,6 @@ tabla eliminarTabla(tabla *tabl, tabla *aux, string name){
 
             if(esVacia(BorrarTabl->ptrTablaDer) && esVacia(BorrarTabl->ptrTablaIzq)) {
                 cout << "hmm1: " << endl;
-
                 delete(BorrarTabl);
                 return auxTable;
 
@@ -766,12 +760,11 @@ tabla eliminarTabla(tabla *tabl, tabla *aux, string name){
 
             } else if (esVacia(BorrarTabl->ptrTablaIzq)) {
                 cout << "hmm3: " << BorrarTabl->ptrTablaDer->nombre <<  endl;
-
                 cout << "antes: " << BorrarTabl->nombre <<  endl;
-               tabla tabRep = BorrarTabl->ptrTablaDer;
+               tabla tabRep = new _tabla;
+               tabRep = BorrarTabl->ptrTablaDer;
                BorrarTabl = tabRep;
                cout << "despues: " << BorrarTabl->nombre <<  endl;
-
                return auxTable;
 
             } else {

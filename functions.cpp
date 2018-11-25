@@ -642,7 +642,7 @@ void mostrarListaRecur(tabla l){
     }
 }
 
-///Eliminar Tabla Gualbert
+///Eliminar Tabla
 void eliminoTablaAbb(tabla &A, string valor)
 {
     if (A==NULL)

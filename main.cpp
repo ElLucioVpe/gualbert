@@ -187,6 +187,9 @@ int main()
                 cout << "- actualizoDatos(nombreTabla,condicionColumna,condicionDato,nuevoDatoCol,nuevoDato)" << endl;
                 cout << "- printDataTable(nombreTabla)" << endl;
                 cout << "- mostrarTablas()" << endl;
+                cout << "- unirTablas(nombreTabla1, nombreTabla2, nuevaTabla)" << endl;
+                cout << "- mostrarMetadata()" << endl;
+                cout << "- tablasRecientes()" << endl;
                 cout << endl;
             } else {
 
@@ -195,7 +198,7 @@ int main()
                 if(orden == "iniciarTabla") {
                     muestroR(inicioTabla(&tabl));
                 } else if (orden == "insertarTabla") {
-                    muestroR(insertoTabla(&tabl,var1));
+                    muestroR(insertoTablaAbb(tabl, var1));
                 } else if (orden == "agregarColumna") {
                     muestroR(insertoColumna(&tabl, var1, var2));
                 } else if (orden == "eliminoColumna") {
@@ -210,8 +213,18 @@ int main()
                     muestroR(muestroTabla(tabl,var1));
                 } else if (orden == "eliminoDatoTupla") {
                     muestroR(eliminoDatoTupla(&tabl, var1, var2));
+                } else if (orden == "eliminoTabla") {
+                    muestroR(eliminoTabla(&tabl, var1));
+                } else if (orden == "proyectoWhere") {
+                    muestroR(proyectarWhere(&tabl, var1, var2, var3));
                 } else if (orden == "mostrarTablas") {
-                    muestroR(mostrarListaRet(tabl));
+                    muestroR(printoTables(tabl));
+                } else if (orden == "unirTablas") {
+                    muestroR(unirTablas(&tabl, var1, var2, var3));
+                } else if (orden == "mostrarMetadata") {
+                    muestroR(printoMetadata(tabl));
+                } else if (orden == "tablasRecientes") {
+                    muestroR(recento(tabl));
                 } else {
                     cout << "Comando no valido. Puede escribir ayuda para repasar los comandos basicos." << endl;
                 }

@@ -10,18 +10,23 @@ int main()
     string var3;
     string var4;
     string var5;
-
-
     tabla tabl = new _tabla;
+
+
+
    // muestroR(inicioTabla(&tabl));
 
     //muestroR(insertoTablaAbb(tabl,"clientes"));
 
     //muestroR(insertoTablaAbb(tabl,"Hoteles"));
-
+    /*
     muestroR(insertoTablaAbb(tabl,"personas"));
     muestroR(insertoTablaAbb(tabl,"mascotas"));
     muestroR(insertoTablaAbb(tabl,"prueba"));
+    muestroR(insertoTablaAbb(tabl,"Ricardos"));
+    muestroR(insertoTablaAbb(tabl,"Analfabeto"));
+    muestroR(insertoTablaAbb(tabl,"Zorros"));
+    muestroR(insertoTablaAbb(tabl,"Elefantes"));
 
     //tabl = retornarTablaBusacada(tabl,"clientes" );
     muestroR(insertoColumna(&tabl, "mascotas", "nombre"));
@@ -60,7 +65,7 @@ int main()
     //muestroR(eliminoTabla(&tabl, "clientes"));
     //muestroR(eliminoColumna(&tabl, "personas", "ci"));
 
-    muestroR(eliminoTabla(&tabl, "personas"));
+    muestroR(eliminoTabla(&tabl, "Elefantes"));
     //muestroR(proyectoTabla(&tabl, "mascotas", "nombre:edad", "mascotas2.0"));
 
    // muestroR(unirTablas(&tabl, "mascotas", "prueba", "MI PIXULA"));
@@ -74,7 +79,7 @@ int main()
     //muestroR(recento(tabl));
     //mostrarSim(tabl);
 
-
+    */
     ///Probar FUNCS
     /*
     muestroR(inicioTabla(&tabl));

@@ -685,11 +685,14 @@ void eliminoTablaAbb(tabla &A, string valor)
                 {
                     p = buscarMenor(A->ptrTablaDer);
                     A->nombre = p->nombre;
-                    //A->columna=p->columna;//sacamos las columns que arratrasn las filas
 
-                    A->ptrTablaDer->ptrTablaIzq = p->ptrTablaDer;
+                    A->columna=p->columna;//sacamos las columns que arratrasn las filas
 
-                    delete A;
+                    A->ptrTablaDer = p->ptrTablaDer;
+
+                    delete p;
+
+
                 }
             }
         }

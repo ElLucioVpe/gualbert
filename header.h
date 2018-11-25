@@ -123,3 +123,5 @@ void mostrarArray();
 
 tipoRet recento(tabla lista);
 void recent(tabla lista,tabla raiz, int cont);
+
+void vaciarColumnas(tabla &tabl);

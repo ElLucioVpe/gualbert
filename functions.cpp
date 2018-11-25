@@ -709,6 +709,7 @@ tipoRet eliminoTabla(tabla *tabl, string nombre){
         if (!esVacia(tablon)){
 
             if(existeTabla(tablon, nombre)) {
+                vaciarColumnas(*tabl);
                 eliminoTablaAbb(*tabl, nombre);
                 return ok;
             } else {
@@ -723,6 +724,22 @@ tipoRet eliminoTabla(tabla *tabl, string nombre){
     }
 
 }
+
+void vaciarColumnas(tabla &tabl){
+columna colAux;
+
+    while(tabl->columna!=NULL){
+    colAux=tabl->columna->sgtColumna;
+
+        tabl->columna->fila=vaciarFilas(tabl->columna->fila);
+        delete(tabl->columna);
+
+    tabl->columna=colAux;
+
+    }
+
+}
+
 
 tabla eliminarTabla(tabla *tabl, tabla *aux, string name){
 

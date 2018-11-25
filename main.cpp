@@ -27,6 +27,12 @@ int main()
     muestroR(insertoColumna(&tabl, "mascotas", "edad"));
     muestroR(insertoColumna(&tabl, "mascotas", "tipo"));
 
+
+    muestroR(insertoColumna(&tabl, "personas", "socios"));
+    muestroR(insertoColumna(&tabl, "personas", "Amigos"));
+     muestroR(insertoDato(&tabl, "personas", "julian:Nose"));
+     muestroR(insertoDato(&tabl, "personas", "Ricardo:Dofe"));
+
     muestroR(insertoColumna(&tabl, "prueba", "nombre"));
     muestroR(insertoColumna(&tabl, "prueba", "vivo"));
 
@@ -56,7 +62,7 @@ int main()
     //muestroR(eliminoTabla(&tabl, "clientes"));
     //muestroR(eliminoColumna(&tabl, "personas", "ci"));
 
-    //muestroR(eliminoTabla(&tabl, "personas
+    muestroR(eliminoTabla(&tabl, "personas"));
     //muestroR(proyectoTabla(&tabl, "mascotas", "nombre:edad", "mascotas2.0"));
 
    // muestroR(unirTablas(&tabl, "mascotas", "prueba", "MI PIXULA"));

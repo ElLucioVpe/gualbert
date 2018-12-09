@@ -125,3 +125,6 @@ tipoRet recento(tabla lista);
 void recent(tabla lista,tabla raiz, int cont);
 
 void vaciarColumnas(tabla &tabl);
+void mostrarTablaDatos(tabla lista);
+void mostrarListaRecurSilenc(tabla l);
+tipoRet retornarTablaSilen(tabla l);

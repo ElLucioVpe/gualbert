@@ -124,15 +124,15 @@
 
 1543106218 ter
 
-1543113869 source:/mnt/c/Users/lucia/git/gualbert/functions.cpp
+1544194269 source:/mnt/c/Users/lucia/git/gualbert/functions.cpp
 	"header.h"
 
-1543109788 /mnt/c/Users/lucia/git/gualbert/header.h
+1544193852 /mnt/c/Users/lucia/git/gualbert/header.h
 	<iostream>
 	<stdlib.h>
 	<cstring>
 	<sstream>
 
-1543114083 source:/mnt/c/Users/lucia/git/gualbert/main.cpp
+1544194007 source:/mnt/c/Users/lucia/git/gualbert/main.cpp
 	"header.h"
 

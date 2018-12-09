@@ -14,30 +14,48 @@ int main()
 
 
 
-   // muestroR(inicioTabla(&tabl));
+    muestroR(inicioTabla(&tabl));
 
     //muestroR(insertoTablaAbb(tabl,"clientes"));
 
     //muestroR(insertoTablaAbb(tabl,"Hoteles"));
-    /*
+
     muestroR(insertoTablaAbb(tabl,"personas"));
-    muestroR(insertoTablaAbb(tabl,"mascotas"));
+    //muestroR(insertoTablaAbb(tabl,"mascotas"));
     muestroR(insertoTablaAbb(tabl,"prueba"));
-    muestroR(insertoTablaAbb(tabl,"Ricardos"));
-    muestroR(insertoTablaAbb(tabl,"Analfabeto"));
-    muestroR(insertoTablaAbb(tabl,"Zorros"));
-    muestroR(insertoTablaAbb(tabl,"Elefantes"));
+
+    //muestroR(insertoTablaAbb(tabl,"Ricardos"));
+    //muestroR(insertoTablaAbb(tabl,"Analfabeto"));
+    //muestroR(insertoTablaAbb(tabl,"Zorros"));
+   // muestroR(insertoTablaAbb(tabl,"Elefantes"));
 
 
 
     muestroR(insertoColumna(&tabl, "personas", "socios"));
     muestroR(insertoColumna(&tabl, "personas", "Amigos"));
-     muestroR(insertoDato(&tabl, "personas", "julian:Nose"));
-     muestroR(insertoDato(&tabl, "personas", "Ricardo:Dofe"));
+    muestroR(insertoColumna(&tabl, "personas", "Familiares"));
 
-    muestroR(insertoColumna(&tabl, "prueba", "nombre"));
-    muestroR(insertoColumna(&tabl, "prueba", "vivo"));
+    //muestroR(eliminoColumna(&tabl, "personas", "Amigos"));
 
+     muestroR(insertoDato(&tabl, "personas", "julian:Nose:nixon"));
+     muestroR(insertoDato(&tabl, "personas", "Ricardo:Dofe:richard"));
+
+   // muestroR(eliminoColumna(&tabl, "personas", "Amigos"));
+    muestroR(eliminoDatoTupla(&tabl, "personas", "socios=Ricardo"));
+    muestroR(eliminoDatoTupla(&tabl, "personas", "socios=julian"));
+    muestroR(insertoColumna(&tabl, "personas", "Perros"));
+     muestroR(insertoDato(&tabl, "personas", "julian:Nose:nixon:luis"));
+
+    //muestroR(insertoColumna(&tabl, "personas", "Deportistas"));
+
+
+    muestroR(muestroTabla(tabl,"personas"));
+    //muestroR(muestroTabla(tabl3,"personas"));
+
+
+    //muestroR(insertoColumna(&tabl, "prueba", "nombre"));
+    //muestroR(insertoColumna(&tabl, "prueba", "vivo"));
+    //muestroR(muestroTabla(tabl,"Amigos"));
    // muestroR(insertoDato(&tabl, "mascotas", "julian:18:agua"));
     //muestroR(insertoDato(&tabl, "mascotas", "1:18:agua"));
 
@@ -47,7 +65,7 @@ int main()
    // muestroR(insertoDato(&tabl, "prueba", "3:rigby"));
 
 
-    //muestroR(printoTables(tabl));
+   // muestroR(mostrarTablaDatos(tabl,personas));
 
 
     //muestroR(insertoDato(&tabl, "mascotas", "schrodinger:50:tramboliko:0"));
@@ -58,24 +76,25 @@ int main()
     //columna colAAAH = retornarColumna(&tabl, "mascotas", "tipo");
     //cout << "FJKJDKSJKSA " << colAAAH->nombreCol << endl;
 
-    muestroR(eliminoTabla(&tabl, "mascotas"));
+    //muestroR(eliminoTabla(&tabl, "mascotas"));
     //muestroR(eliminoColumna(&tabl, "personas", "ci"));
 
-    muestroR(eliminoTabla(&tabl, "Elefantes"));
+    //muestroR(eliminoTabla(&tabl, "Elefantes"));
     //muestroR(proyectoTabla(&tabl, "mascotas", "nombre:edad", "mascotas2.0"));
 
    // muestroR(unirTablas(&tabl, "mascotas", "prueba", "MI PIXULA"));
 
-    muestroR(printoMetadata(tabl));
+    //muestroR(printoMetadata(tabl));
 
-    //muestroR(eliminoColumna(&tabl, "clientes", "ci"));
+    //muestroR(eliminoColumna(&tabl, "personas", "Amigos"));
+    //muestroR(muestroTabla(tabl,"personas"));
 
     //tabla tabRet = retornarTablaBusacada(tabl, "mascotas2.0");
     //cout << "adnaskjds" << tabRet->columna->nombreCol << endl;
     //muestroR(recento(tabl));
-    //mostrarSim(tabl);
+   // mostrarSim(tabl);
 
-    */
+
     ///Probar FUNCS
     /*
     muestroR(inicioTabla(&tabl));

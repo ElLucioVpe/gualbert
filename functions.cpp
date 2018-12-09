@@ -217,7 +217,7 @@ tipoRet insertoColumna(tabla *tabl, string nombreTabla, string nombreColumna) {
                     auxFila = auxCol->fila;
 
                     if(!esVacia(auxCol->fila)) {
-                        cout << "es este el error kbeza2" << endl;
+                        return error;
                         //return error; // La tabla tiene por log menos una tupla
                     }
                 } else {
@@ -251,7 +251,7 @@ tabla insertarColumna(tabla tabl, tabla auxTable, string nombreColumna, bool pri
     columna newCol = new _columna;
     newCol->primaryKey = primaryKey;
     newCol->nombreCol = nombreColumna;
-
+    newCol->sgtColumna=NULL;
     if(esVacia(auxTable->columna)) {
         auxTable->columna = newCol;
     } else {
@@ -548,6 +548,94 @@ tipoRet mostrarListaRet(tabla l){
     }
 }
 
+tipoRet retornarTablaSilen(tabla l){
+    if(!esVacia(l)){
+        mostrarListaRecurSilenc(l);
+        // Finaliza
+        //cout << "Fin" << endl;
+        return ok;
+    }else{
+        return error;
+        //cout << "Empty";
+    }
+}
+
+void mostrarListaRecurSilenc(tabla l){
+    columna col;
+    col = new _columna;
+
+    fila fil;
+    fil = new _fila;
+
+    if (!esVacia(l)){
+
+    // Escribe nombre de la tabla
+
+    // Chequea cada columna
+        col = l->columna;
+
+        if(!esVacia(l->columna)) {
+            // Muestra el nombre de las columnas
+            while(!esVacia(col)) {
+                col = col->sgtColumna;
+            }
+
+            col = l->columna;
+            fila ultimaFila = col->fila;
+            int i = 0;
+
+            // Recorre las filas siguientes
+            col = l->columna;
+            if(ultimaFila==NULL){
+            }else{
+
+            while(!esVacia(ultimaFila->sgtFila)) { // Recorre hasta que el siguiente de alguna columna sea NULL -BEBETO si hace eso y queda uno solo nunca entra
+                //cout << "IMPORTANTE" << i << endl;
+            col = l->columna;
+
+                while(!esVacia(col)) { // Recorre todas las columnas
+
+                    int contar = 0;
+                    fila fil = col->fila;
+
+                    while(contar<i) { // Recorre todas las filas
+                        fil = fil->sgtFila;
+                        contar++;
+                    }
+
+                    ultimaFila = fil;
+                    col = col->sgtColumna;
+                }
+                i++;
+
+            }
+
+            if((i==0)&&(!esVacia(ultimaFila))){ //Hay una sola fila. nunca entro al while de arriba por eso esta i en 0
+
+            col = l->columna;
+
+            while(!esVacia(col)) {//REcorre Columns
+            fila fil = col->fila;//Toma primer fila de column
+            col = col->sgtColumna;
+
+            }
+
+            }
+            }
+
+        } else {
+        }
+
+    // Chequea la tabla siguiente
+        mostrarListaRecurSilenc(l->ptrTablaDer);
+        mostrarListaRecurSilenc(l->ptrTablaIzq);
+        //recursiv
+
+    } else{
+
+    }
+}
+
 void mostrarListaRecur(tabla l){
     columna col;
     col = new _columna;
@@ -750,28 +838,28 @@ tabla eliminarTabla(tabla *tabl, tabla *aux, string name){
     tabla BorrarTabl =  *aux; //apun;
     tabla auxTable = *tabl;
 
-    cout << "buscando: " << BorrarTabl->nombre << endl;
+    //cout << "buscando: " << BorrarTabl->nombre << endl;
 
     if(BorrarTabl->nombre == name) {
 
             if(esVacia(BorrarTabl->ptrTablaDer) && esVacia(BorrarTabl->ptrTablaIzq)) {
-                cout << "hmm1: " << endl;
+                //cout << "hmm1: " << endl;
                 delete(BorrarTabl);
                 return auxTable;
 
             } else if (esVacia(BorrarTabl->ptrTablaDer)) {
-                cout << "hmm2: " << endl;
+                //cout << "hmm2: " << endl;
 
                BorrarTabl = BorrarTabl->ptrTablaIzq;
                return auxTable;
 
             } else if (esVacia(BorrarTabl->ptrTablaIzq)) {
-                cout << "hmm3: " << BorrarTabl->ptrTablaDer->nombre <<  endl;
-                cout << "antes: " << BorrarTabl->nombre <<  endl;
+                //cout << "hmm3: " << BorrarTabl->ptrTablaDer->nombre <<  endl;
+                //cout << "antes: " << BorrarTabl->nombre <<  endl;
                tabla tabRep = new _tabla;
                tabRep = BorrarTabl->ptrTablaDer;
                BorrarTabl = tabRep;
-               cout << "despues: " << BorrarTabl->nombre <<  endl;
+               //\\\\cout << "despues: " << BorrarTabl->nombre <<  endl;
                return auxTable;
 
             } else {
@@ -1469,6 +1557,7 @@ int buscoColumna(tabla tabl,string tablNom, string colNom){ //EncontramosColumna
     //arranca en esta colum de la tabla deseada
     col=tablaAux->columna;
     //Recorre columns hasta encontrar de donde el user quiere eliminar el dato
+    if(col!=NULL){
    while(col->nombreCol!=colNom){
         col=col->sgtColumna;
         i++;
@@ -1487,6 +1576,7 @@ int buscoColumna(tabla tabl,string tablNom, string colNom){ //EncontramosColumna
 
     return i;
 
+}
 }
 }
 
@@ -1663,7 +1753,7 @@ tipoRet eliminoDatoTupla(tabla *tabl, string nombreTabla, string condicion) {
                         //cout << comp << "KJDFJKSDFAKJDAFKJ" << endl;
                         tabla tabRes = new _tabla;
                         tabRes = eliminarDatoTupla(*tabl, tabAux, col, dato, comp);
-                        *tabl = tabRes;
+                        //*tabl = tabRes;
                         return ok;
                     }
 
@@ -1695,6 +1785,7 @@ tabla eliminarDatoTupla(tabla tabl, tabla tablaAux, string col, string dato, cha
         if(colAux->nombreCol == col) {
             int level = 0;
             fila filAux = colAux->fila;
+            string datoEliminar;
 
             while(!esVacia(filAux)) {
                 if(colAux->fila == filAux) {
@@ -1702,7 +1793,7 @@ tabla eliminarDatoTupla(tabla tabl, tabla tablaAux, string col, string dato, cha
                 }
 
                 elimina = false;
-                cout << "- level " << level << " dato " << filAux->dato << endl;
+                //cout << "- level " << level << " dato " << filAux->dato << endl;
                 if(comp == '=') {
                     if(dato.find('*') != std::string::npos) {
                         std::istringstream dd(dato);
@@ -1725,6 +1816,7 @@ tabla eliminarDatoTupla(tabla tabl, tabla tablaAux, string col, string dato, cha
                          }
                     } else if(filAux->dato == dato) {
                         //cout << "habeer " << filAux->dato << " == " << dato << endl;
+                        datoEliminar = filAux->dato;
                         elimina = true;
                     }
                 } else if (comp == '>') {
@@ -1747,87 +1839,92 @@ tabla eliminarDatoTupla(tabla tabl, tabla tablaAux, string col, string dato, cha
                 }
 
                 if(elimina == true) {
-                    //cout << "Va a eliminar " << filAux->dato << endl;
+                    //cout << "Va a eliminar " << filAux->dato << "datoEliminar " << datoEliminar << endl;
 
                     columna delCol;
                     delCol = tablaAux->columna;
+                    bool salir = false;
 
                     while(!esVacia(delCol)) {
 
                         fila delFil;
                         delFil = delCol->fila;
                         int contar = 0;
-
                         while(!esVacia(delFil)) {
                             //cout << "+ level " << level << " contar " << contar << " dato " << delFil->dato << endl;
 
-                            if(contar < level) {
-                                contar++;
-                            } else if (contar == level) {
-                                //cout << "XDD" << endl;
-
-                                if(!esVacia(delFil->sgtFila)){
-                                    if(!esVacia(delFil->sgtFila->sgtFila) && contar > 0) {
-                                        //cout << "opcion4" << endl;
-                                        // OP2: si existe un dato siguiente al que se va a eliminar
-                                        delFil->sgtFila = delFil->sgtFila->sgtFila;
-                                        break;
+                            //while(esVacia(delFil->dato)) {
+                                if(contar < level) {
+                                    contar++;
+                                } else if (contar == level) {
+                                    //cout << "XDD" << endl;
+                                    bool salir = false;
+                                    if(!esVacia(delFil->sgtFila)){
+                                        if(!esVacia(delFil->sgtFila->sgtFila) && contar > 0) {
+                                            //cout << "opcion4" << endl;
+                                            // OP2: si existe un dato siguiente al que se va a eliminar
+                                            delFil->sgtFila = delFil->sgtFila->sgtFila;
+                                            break;
+                                        } else if (contar == 0) {
+                                            // Si la fila esta al principio
+                                            if(esVacia(delFil->sgtFila)) {
+                                                // Se va a eliminar el unico item
+                                                //cout << "opcion1" << endl;
+                                                delCol->fila = NULL;
+                                                break;
+                                            } else {
+                                                // Se va a eliminar el primer item
+                                                //cout << "opcion2" << endl;
+                                                delCol->fila = delFil->sgtFila;
+                                                break;
+                                            }
+                                        }
                                     } else if (contar == 0) {
                                         // Si la fila esta al principio
                                         if(esVacia(delFil->sgtFila)) {
                                             // Se va a eliminar el unico item
-                                            //cout << "opcion1" << endl;
+                                            //cout << "opcion1xd" << endl;
                                             delCol->fila = NULL;
                                             break;
                                         } else {
                                             // Se va a eliminar el primer item
-                                            //cout << "opcion2" << endl;
+                                            //cout << "opcion2xd" << endl;
                                             delCol->fila = delFil->sgtFila;
                                             break;
                                         }
-                                    }
-                                } else if (contar == 0) {
-                                    //cout << "JFJKDSK" << endl;
-
-                                    // Si la fila esta al principio
-                                    if(esVacia(delFil->sgtFila)) {
-                                        // Se va a eliminar el unico item
-                                        //cout << "opcion1" << endl;
-                                        delCol->fila = NULL;
-                                        break;
                                     } else {
-                                        // Se va a eliminar el primer item
-                                        //cout << "opcion2" << endl;
-                                        delCol->fila = delFil->sgtFila;
+                                        // Si la fila a eliminar esta al final
+                                         //cout << "count " << contar << " level " << level << endl;
+
+                                        //cout << "opcion3 va a eliminar columna " << delFil->dato << endl;
+                                        delete(delFil);
+                                        salir = true;
                                         break;
                                     }
+
                                 } else {
-                                    // Si la fila a eliminar esta al final
-                                    //cout << "opcion3 va a eliminar columna " << delFil->dato << endl;
-                                    delete(delFil);
-                                    break;
+                                    //cout << "Error mistico del universo tramboliko" << endl;
                                 }
-                                break;
-                            } else {
-                                cout << "Error mistico del universo tramboliko" << endl;
-                            }
+
+
 
                             delFil = delFil->sgtFila;
                         }
 
                         delCol = delCol->sgtColumna;
                     }
-                    //mostrarListaRet(tabl);
-                }
+                    //cout << "termino" << endl;
 
+                    retornarTablaSilen(tabl);
+                }
+                elimina = false;
                 filAux = filAux->sgtFila;
                 level++;
             }
-            return tabl;
-
         }
         colAux = colAux->sgtColumna;
     }
+    //return tabl;
 
 }
 
@@ -1835,7 +1932,9 @@ tabla eliminarDatoTupla(tabla tabl, tabla tablaAux, string col, string dato, cha
 ///Una sola y ordenada no como la otra func que muestra todo
 tipoRet muestroTabla(tabla l, string nomtabl){
     if(!esVacia(l)){
-        mostrarTabla(l,nomtabl);
+        tabla table = l;
+        table = retornarTablaBusacada(table,nomtabl);
+        mostrarTablaDatos(table);
         // Finaliza
         cout << "Fin" << endl;
         return ok;
@@ -1844,7 +1943,7 @@ tipoRet muestroTabla(tabla l, string nomtabl){
         cout << "Empty";
     }
 }
-
+/*
 ///Mostrar y Reacomodar tabla UNA TABLA
 void mostrarTabla(tabla l,string nomTabl){
     tabla tabl;
@@ -2000,6 +2099,7 @@ void mostrarTabla(tabla l,string nomTabl){
 
           }
 ///ACA TERMINA
+*/
 
 ///InsertoABB
 tipoRet insertoTablaAbb(tabla &tabl, string nombre){
@@ -2046,24 +2146,28 @@ void insertaNodoArbol( tabla &A, string valor )
 
 
 void mostrarSim(tabla lista){
-    if (lista!=NULL){
-            mostrarSim(lista->ptrTablaIzq);
-            cout <<lista->nombre;
+    tabla auxTable = lista;
 
-            while(lista->columna!=NULL){
+    if (auxTable!=NULL){
+            mostrarSim(auxTable->ptrTablaIzq);
+            cout << auxTable->nombre;
+
+            columna colAux = auxTable->columna;
+            while(colAux!=NULL){
             cout << endl;
-            cout <<lista->columna->nombreCol;
+            cout <<colAux->nombreCol;
 
-                    while(lista->columna->fila!=NULL){
-                        cout <<lista->columna->fila->dato<< endl;
-                        lista->columna->fila=lista->columna->fila->sgtFila;
+                    fila auxFila = colAux->fila;
+                    while(auxFila!=NULL){
+                        cout <<auxFila->dato<< endl;
+                        auxFila=auxFila->sgtFila;
                     }
 
-            lista->columna=lista->columna->sgtColumna;
+            colAux=colAux->sgtColumna;
             }
             cout << endl;
             cout << endl;
-            mostrarSim(lista->ptrTablaDer);
+            mostrarSim(auxTable->ptrTablaDer);
 
     }
 }
@@ -2092,6 +2196,30 @@ void printMetadata(tabla lista){
             cout << endl;
             printMetadata(lista->ptrTablaDer);
 
+    }
+}
+
+void mostrarTablaDatos(tabla lista){
+    if (lista!=NULL){
+            cout <<lista->nombre;
+             cout << endl;
+        columna colAux = lista->columna;
+
+            while(colAux!=NULL){
+            cout << colAux->nombreCol;
+             cout << endl;
+
+                fila filAux = colAux->fila;
+                while(filAux!=NULL){
+                cout << " ";
+                cout << filAux->dato;
+                cout << " ";
+                filAux=filAux->sgtFila;
+                }
+             cout << endl;
+            colAux=colAux->sgtColumna;
+            }
+            cout << endl;
     }
 }
 
